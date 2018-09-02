@@ -7,40 +7,161 @@
 //
 
 import UIKit
+import IQKeyboardManagerSwift
+import Crashlytics
+
+import Fabric
+import GoogleSignIn
+import FBSDKCoreKit
+import TwitterKit
+
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
 
+    public var mainRootNav: UINavigationController?
+    static let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
     var window: UIWindow?
-
-
+    var entries : NSDictionary!
+    
+    
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        if let err = error {
+            print("Failed to log into Google: ", err)
+            return
+        }
+        
+        print("Successfully logged into Google", user)
+        
+        guard let idToken = user.authentication.idToken else { return }
+        guard let accessToken = user.authentication.accessToken else { return }
+        
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        
+        let sourceApplication = options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String
+            let annotation = options[UIApplicationOpenURLOptionsKey.annotation]
+            GIDSignIn.sharedInstance().handle(url, sourceApplication: sourceApplication, annotation: annotation)
+        
+        
+       FBSDKApplicationDelegate.sharedInstance().application(app, open: url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String!, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
+        
+        
+      TWTRTwitter.sharedInstance().application(app, open: url, options: options)
+        
+        return true
+    }
+    
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+
+        Fabric.with([Crashlytics.self])
+        Fabric.with([TWTRTwitter.self])
+
+        IQKeyboardManager.shared.enable = true
+        TWTRTwitter.sharedInstance().start(withConsumerKey:"wwy1mmNFz7xRm1a0eFyGqe8mJ", consumerSecret:"ptERx9F4XbgpFnmfvIGjC7HEacRlzQgtEA8gqDIdeLd8DqorRz")
+        
+       GIDSignIn.sharedInstance().clientID = "528735384539-htglau916o25oakkbvmeg10ggcco6nfa.apps.googleusercontent.com"
+       GIDSignIn.sharedInstance().delegate = self
+        
+        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        
+        self.setupView()
+        self.SetupConfig()
         return true
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
-        // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
-        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+
     }
-
-
+    
+    func setupView()
+    {
+        if ((UserDefaults.standard.object(forKey: "CurrentUser")) != nil)
+        {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let tabBarController = storyboard.instantiateViewController(withIdentifier: "rootNavigation") as? rootNavigation
+            if let window = self.window
+            {
+                window.rootViewController = tabBarController
+                self.window?.makeKeyAndVisible()
+            }
+        }
+        else
+        {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let rootController = storyboard.instantiateViewController(withIdentifier: "SARootBegin") as? SARootBegin
+            if let window = self.window {
+                window.rootViewController = rootController
+                //self.window?.makeKeyAndVisible()
+            }
+        }
+    }
+    
+    
+    func SetupConfig()
+    {
+        if MyTools.tools.connectedToNetwork()
+        {
+            MyApi.api.GetConfig(){(response, err) in
+                if((err) == nil)
+                {
+                    if let JSON = response.result.value as? NSDictionary
+                    {
+                        let status = JSON["status"] as? Bool
+                        if (status == true)
+                        {
+                            let items = JSON["items"] as! NSDictionary
+                            let Setting = items.value(forKey: "Setting") as! NSDictionary
+                            let Country = items.value(forKey: "Country") as! NSArray
+                            UserDefaults.standard.setValue(Country, forKey: "Country")
+                       
+                            for (key,value) in Setting {
+                                print("\(key) = \(value)")
+                                let val = value as? String ?? ""
+                                let ns = UserDefaults.standard
+                                ns.setValue(val, forKey: key as! String)
+                                ns.synchronize()
+                            }
+                        }
+                        else
+                        {
+                            
+                        }
+                    }
+                    else
+                    {
+                        
+                    }
+                    
+                }
+                else
+                {
+                    
+                }
+            }
+        }
+        else
+        {
+            
+        }
+    }
+    
 }
 

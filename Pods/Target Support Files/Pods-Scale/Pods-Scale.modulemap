@@ -1,0 +1,6 @@
+framework module Pods_Scale {
+  umbrella header "Pods-Scale-umbrella.h"
+
+  export *
+  module * { export * }
+}
