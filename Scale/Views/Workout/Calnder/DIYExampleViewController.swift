@@ -10,34 +10,37 @@ import UIKit
 import Foundation
 import FSCalendar
 import BIZPopupView
+import APJTextPickerView
 
-class DIYExampleViewController: UIViewController, FSCalendarDataSource, FSCalendarDelegate,SCPopDatePickerDelegate ,CodeProtocol {
+
+class DIYExampleViewController: UIViewController, FSCalendarDataSource, FSCalendarDelegate ,CodeProtocol , APJTextPickerViewDelegate , APJTextPickerViewDataSource {
     func SendCode(Code: String) {
         self.code = Code
     }
     
-    func scPopDatePickerDidSelectDate(_ date: Date)
-    {
-        let inputDateAsString = MyTools.tools.ConvertToTime(date: date)
-        var formatter = DateFormatter()
-        formatter.dateFormat = "hh:mm"
-        
-        if let date = formatter.date(from: inputDateAsString)
-        {
-            formatter.dateFormat = "hh:mm"
-            let outputDate = formatter.string(from: date)
-            
-            
-            print(outputDate)
-            self.txtTime.text = outputDate
-        }
-    }
+//    func scPopDatePickerDidSelectDate(_ date: Date)
+//    {
+//        let inputDateAsString = MyTools.tools.ConvertToTime(date: date)
+//        var formatter = DateFormatter()
+//        formatter.dateFormat = "hh:mm"
+//
+//        if let date = formatter.date(from: inputDateAsString)
+//        {
+//            formatter.dateFormat = "hh:mm"
+//            let outputDate = formatter.string(from: date)
+//
+//
+//            print(outputDate)
+//            self.txtTime.text = outputDate
+//        }
+//    }
     
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblFees: UILabel!
-    @IBOutlet weak var txtTime: UITextField!
+    @IBOutlet weak var txtTime: APJTextPickerView!
     @IBOutlet weak var calendar: FSCalendar!
     fileprivate let gregorian = Calendar(identifier: .gregorian)
+    var arrayTimes = ["13:00", "13:30", "14:00", "14:30", "15:00", "15:30" ,"16:00", "16:30", "17:00", "17:30", "18:00", "18:30","19:00", "19:30", "20:00", "20:30", "21:00", "21:30","22:00", "22:30", "23:00", "23:30", "24:00", "01:00","01:30", "02:00", "02:30", "03:00", "03:30", "04:00","04:30", "05:00", "05:30", "06:00", "06:30", "07:00","07:30", "08:00", "08:30", "09:00", "09:30", "10:00","10:30", "11:00", "11:30", "12:00"]
     fileprivate let formatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
@@ -45,24 +48,25 @@ class DIYExampleViewController: UIViewController, FSCalendarDataSource, FSCalend
     }()
     
     
-    let datePicker = SCPopDatePicker()
+//    let datePicker = SCPopDatePicker()
     let date = Date()
     var code = ""
+    var dt = ""
     var selectedDay = ""
     var type = 1
-    @objc func myTargetFunction(textField: UITextField)
-    {
-        textField.text = ""
-        self.datePicker.tapToDismiss = true
-        self.datePicker.datePickerType = SCDatePickerType.date
-        self.datePicker.showBlur = true
-        self.datePicker.datePickerStartDate = self.date
-        self.datePicker.btnFontColour = UIColor.white
-        self.datePicker.btnColour = "8FB952".color
-        self.datePicker.showCornerRadius = false
-        self.datePicker.delegate = self
-        self.datePicker.show(attachToView: self.view)
-    }
+//    @objc func myTargetFunction(textField: UITextField)
+//    {
+//        textField.text = ""
+//        self.datePicker.tapToDismiss = true
+//        self.datePicker.datePickerType = SCDatePickerType.date
+//        self.datePicker.showBlur = true
+//        self.datePicker.datePickerStartDate = self.date
+//        self.datePicker.btnFontColour = UIColor.white
+//        self.datePicker.btnColour = "8FB952".color
+//        self.datePicker.showCornerRadius = false
+//        self.datePicker.delegate = self
+//        self.datePicker.show(attachToView: self.view)
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,14 +78,33 @@ class DIYExampleViewController: UIViewController, FSCalendarDataSource, FSCalend
         //        // For UITest
         //        self.calendar.accessibilityIdentifier = "calendar"
         
-        self.datePicker.tapToDismiss = true
-        self.datePicker.datePickerType = SCDatePickerType.time
-        self.datePicker.showBlur = true
-        self.datePicker.datePickerStartDate = self.date
-        self.datePicker.btnFontColour = UIColor.white
-        self.datePicker.btnColour = "8FB952".color
-        self.datePicker.showCornerRadius = false
-        self.datePicker.delegate = self
+//        self.datePicker.tapToDismiss = true
+//        self.datePicker.datePickerType = SCDatePickerType.time
+//        self.datePicker.showBlur = true
+//        self.datePicker.datePickerStartDate = self.date
+//        self.datePicker.btnFontColour = UIColor.white
+//        self.datePicker.btnColour = "8FB952".color
+//        self.datePicker.showCornerRadius = false
+//        self.datePicker.delegate = self
+        
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        for (index,time) in arrayTimes.enumerated() {
+            dateFormatter.dateFormat = "H:mm"
+            if let inDate = dateFormatter.date(from: time) {
+                dateFormatter.dateFormat = "h:mm a"
+                let outTime = dateFormatter.string(from:inDate)
+                print("in \(time)")
+                print("out \(outTime)")
+                arrayTimes[index] = outTime
+            }
+        }
+        
+        
+        txtTime.type = .strings
+        txtTime.pickerDelegate = self
+        txtTime.dataSource = self
         
         self.selectedDay = self.formatter.string(from: self.date)
         print(selectedDay)
@@ -89,11 +112,11 @@ class DIYExampleViewController: UIViewController, FSCalendarDataSource, FSCalend
         if(self.type == 1)
         {
             self.lblFees.text = MyTools.tools.getConfigString("price_trainer")+" K.D".localized
-            self.lblTitle.text = "Arrange meeting with trainer"
+            self.lblTitle.text = "Arrange meeting with trainer".localized
         }
         else{
             self.lblFees.text = MyTools.tools.getConfigString("price_dietitian")+" K.D".localized
-            self.lblTitle.text = "Arrange meeting with dietitian"
+            self.lblTitle.text = "Arrange meeting with dietitian".localized
             
             
         }    }
@@ -102,13 +125,9 @@ class DIYExampleViewController: UIViewController, FSCalendarDataSource, FSCalend
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
         
-        //        txtTime.addTarget(self, action:  #selector(DIYExampleViewController.myTargetFunction(textField:)), for: UIControlEvents.touchDown)
-        
-        
         calendar.dataSource = self
         calendar.delegate = self
-        calendar.allowsMultipleSelection = true
-        calendar.reloadData()
+        calendar.allowsMultipleSelection = false
         
         calendar.backgroundColor = UIColor.clear
         calendar.calendarHeaderView.backgroundColor = UIColor.clear
@@ -120,38 +139,46 @@ class DIYExampleViewController: UIViewController, FSCalendarDataSource, FSCalend
         calendar.appearance.headerTitleColor = UIColor.white
         calendar.appearance.weekdayTextColor = "9CC45D".color
         
-        
         calendar.appearance.eventOffset = CGPoint(x: 0, y: -7)
         calendar.today = self.date // Hide the today circle
         calendar.register(DIYCalendarCell.self, forCellReuseIdentifier: "cell")
         calendar.swipeToChooseGesture.isEnabled = true // Swipe-To-Choose
         
-        
-        let scopeGesture = UIPanGestureRecognizer(target: calendar, action: #selector(calendar.handleScopeGesture(_:)));
-        calendar.addGestureRecognizer(scopeGesture)
-        
-        //        let dates = [
-        //            self.gregorian.date(byAdding: .day, value: -1, to: Date()),
-        //            Date(),
-        //            self.gregorian.date(byAdding: .day, value: 1, to: Date())
-        //        ]
         let dates = [Any]()
-        //        dates.forEach { (date) in
-        //            self.calendar.select(date, scrollToDate: false)
-        //        }
+
         
+        if(Language.currentLanguage().contains("ar"))
+        {
+            self.txtTime.textAlignment = .right
+            self.lblFees.textAlignment = .right
+            self.calendar.locale = Locale(identifier: "ar")
+            self.calendar.calendarHeaderView.calendar.locale = Locale(identifier: "ar")
+            
+        }
+        else
+        {
+            self.txtTime.textAlignment = .left
+            self.lblFees.textAlignment = .left
+            self.calendar.locale = Locale(identifier: "en_EN")
+            self.calendar.calendarHeaderView.calendar.locale =  Locale(identifier: "en_EN")
+        }
         
+        calendar.reloadData()
     }
     
     @IBAction func btnSelectTime(_ sender: UIButton)
     {
-        self.datePicker.show(attachToView: self.view)
-        
+        //self.datePicker.show(attachToView: self.view)
     }
     
     @IBAction func btnBack(_ sender: UIButton)
     {
         self.navigationController?.pop(animated: true)
+    }
+    
+    @IBAction func btnHome(_ sender: UIButton)
+    {
+        self.navigationController?.popToRoot(animated: true)
     }
     
     
@@ -209,7 +236,7 @@ class DIYExampleViewController: UIViewController, FSCalendarDataSource, FSCalend
         }
         else
         {
-            self.showOkAlert(title: "Error", message: "No Internet Connection")
+            self.showOkAlert(title: "Error".localized, message: "No Internet Connection".localized)
         }
     }
     
@@ -247,7 +274,6 @@ class DIYExampleViewController: UIViewController, FSCalendarDataSource, FSCalend
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
         return 0
     }
-    
     
     // MARK:- FSCalendarDelegate
     func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
@@ -289,6 +315,10 @@ class DIYExampleViewController: UIViewController, FSCalendarDataSource, FSCalend
         }
     }
     
+    func minimumDate(for calendar: FSCalendar) -> Date {
+        return Date()
+    }
+    
     private func configure(cell: FSCalendarCell, for date: Date, at position: FSCalendarMonthPosition) {
         
         let diyCell = (cell as! DIYCalendarCell)
@@ -303,18 +333,18 @@ class DIYExampleViewController: UIViewController, FSCalendarDataSource, FSCalend
                 let previousDate = self.gregorian.date(byAdding: .day, value: -1, to: date)!
                 let nextDate = self.gregorian.date(byAdding: .day, value: 1, to: date)!
                 if calendar.selectedDates.contains(date) {
-                    if calendar.selectedDates.contains(previousDate) && calendar.selectedDates.contains(nextDate) {
-                        selectionType = .middle
-                    }
-                    else if calendar.selectedDates.contains(previousDate) && calendar.selectedDates.contains(date) {
-                        selectionType = .rightBorder
-                    }
-                    else if calendar.selectedDates.contains(nextDate) {
-                        selectionType = .leftBorder
-                    }
-                    else {
+//                    if calendar.selectedDates.contains(previousDate) && calendar.selectedDates.contains(nextDate) {
+//                        selectionType = .middle
+//                    }
+//                    else if calendar.selectedDates.contains(previousDate) && calendar.selectedDates.contains(date) {
+//                        selectionType = .rightBorder
+//                    }
+//                    else if calendar.selectedDates.contains(nextDate) {
+//                        selectionType = .leftBorder
+//                    }
+//                    else {
                         selectionType = .single
-                    }
+                  //  }
                 }
             }
             else {
@@ -333,5 +363,22 @@ class DIYExampleViewController: UIViewController, FSCalendarDataSource, FSCalend
         }
     }
     
+    func textPickerView(_ textPickerView: APJTextPickerView, didSelectString row: Int)
+    {
+            self.dt = MyTools.tools.timeFormatter(date: self.arrayTimes[row])
+            self.txtTime.text = self.arrayTimes[row]
+    }
+    
+    func textPickerView(_ textPickerView: APJTextPickerView, titleForRow row: Int) -> String?
+    {
+            return self.arrayTimes[row]
+    }
+    
+    func numberOfRows(in pickerView: APJTextPickerView) -> Int {
+            return self.arrayTimes.count
+    }
 }
+
+
+
 
