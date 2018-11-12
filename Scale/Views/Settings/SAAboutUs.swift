@@ -53,14 +53,14 @@ class SAAboutUs: UIViewController {
                                 let translations = About_us.value(forKey: "translations") as! NSArray
                                 if(Language.currentLanguage().contains("ar"))
                                 {
-                                    let content = translations[0] as! NSDictionary
+                                    let content = translations[1] as! NSDictionary
                                     let title = content.value(forKey: "title") as! String
                                     let desc = content.value(forKey: "description") as! String
                                     self.lblTitle.text = title
                                     self.webView.loadHTMLString(desc, baseURL: nil)
                                 }
                                 else{
-                                    let content = translations[1] as! NSDictionary
+                                    let content = translations[0] as! NSDictionary
                                     let title = content.value(forKey: "title") as! String
                                     let desc = content.value(forKey: "description") as! String
                                     self.lblTitle.text = title
@@ -73,14 +73,14 @@ class SAAboutUs: UIViewController {
                                 let translations = termsOfUse.value(forKey: "translations") as! NSArray
                                 if(Language.currentLanguage().contains("ar"))
                                 {
-                                    let content = translations[0] as! NSDictionary
+                                    let content = translations[1] as! NSDictionary
                                     let title = content.value(forKey: "title") as! String
                                     let desc = content.value(forKey: "description") as! String
                                     self.lblTitle.text = title
                                     self.webView.loadHTMLString(desc, baseURL: nil)
                                 }
                                 else{
-                                    let content = translations[1] as! NSDictionary
+                                    let content = translations[0] as! NSDictionary
                                     let title = content.value(forKey: "title") as! String
                                     let desc = content.value(forKey: "description") as! String
                                     self.lblTitle.text = title
@@ -92,14 +92,14 @@ class SAAboutUs: UIViewController {
                                 let translations = privacyPolicy.value(forKey: "translations") as! NSArray
                                 if(Language.currentLanguage().contains("ar"))
                                 {
-                                    let content = translations[0] as! NSDictionary
+                                    let content = translations[1] as! NSDictionary
                                     let title = content.value(forKey: "title") as! String
                                     let desc = content.value(forKey: "description") as! String
                                     self.lblTitle.text = title
                                     self.webView.loadHTMLString(desc, baseURL: nil)
                                 }
                                 else{
-                                    let content = translations[1] as! NSDictionary
+                                    let content = translations[0] as! NSDictionary
                                     let title = content.value(forKey: "title") as! String
                                     let desc = content.value(forKey: "description") as! String
                                     self.lblTitle.text = title

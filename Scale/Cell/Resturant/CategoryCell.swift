@@ -16,7 +16,16 @@ class CategoryCell: UITableViewCell {
     @IBOutlet weak var lblTitle: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+      
+        if(Language.currentLanguage().contains("ar"))
+        {
+            self.lblTitle.textAlignment = .right
+        }
+        else
+        {
+            self.lblTitle.textAlignment = .left
+        }
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

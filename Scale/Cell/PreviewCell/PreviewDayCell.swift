@@ -55,16 +55,16 @@ class PreviewDayCell: UITableViewCell, UICollectionViewDelegate , UICollectionVi
         
         if (self.selectedCategory.contains(key))
         {
-            cell.view.layer.cornerRadius = 22.5
-            cell.view.layer.masksToBounds = true
-            cell.view.layer.borderWidth = 1
-            cell.view.layer.borderColor = UIColor.white.cgColor
+            cell.Allview.layer.cornerRadius = 22.5
+            cell.Allview.layer.masksToBounds = true
+            cell.Allview.layer.borderWidth = 1
+            cell.Allview.layer.borderColor = UIColor.white.cgColor
         }
         else{
-            cell.view.layer.cornerRadius = 22.5
-            cell.view.layer.masksToBounds = true
-            cell.view.layer.borderWidth = 1
-            cell.view.layer.borderColor = "9AC25B".color.cgColor
+            cell.Allview.layer.cornerRadius = 22.5
+            cell.Allview.layer.masksToBounds = true
+            cell.Allview.layer.borderWidth = 1
+            cell.Allview.layer.borderColor = "9AC25B".color.cgColor
         }
         
         
@@ -126,29 +126,29 @@ class PreviewDayCell: UITableViewCell, UICollectionViewDelegate , UICollectionVi
                         if (!selectedCategory.contains(key))
                         {
                             self.selectedCategory.add(id)
-                            cell.view.layer.cornerRadius = 22.5
-                            cell.view.layer.masksToBounds = true
-                            cell.view.layer.borderWidth = 1
-                            cell.view.layer.borderColor = UIColor.white.cgColor
+                            cell.Allview.layer.cornerRadius = 22.5
+                            cell.Allview.layer.masksToBounds = true
+                            cell.Allview.layer.borderWidth = 1
+                            cell.Allview.layer.borderColor = UIColor.white.cgColor
                         }
                         else
                         {
                             self.selectedCategory.remove(key)
                             self.selectedCategory.add(id)
-                            cell.view.layer.cornerRadius = 22.5
-                            cell.view.layer.masksToBounds = true
-                            cell.view.layer.borderWidth = 1
-                            cell.view.layer.borderColor = "9AC25B".color.cgColor
+                            cell.Allview.layer.cornerRadius = 22.5
+                            cell.Allview.layer.masksToBounds = true
+                            cell.Allview.layer.borderWidth = 1
+                            cell.Allview.layer.borderColor = "9AC25B".color.cgColor
                         }
                     }
                     else
                     {
                         cell.isSelected = true
                         self.selectedCategory.add(id)
-                        cell.view.layer.cornerRadius = 22.5
-                        cell.view.layer.masksToBounds = true
-                        cell.view.layer.borderWidth = 1
-                        cell.view.layer.borderColor = UIColor.white.cgColor
+                        cell.Allview.layer.cornerRadius = 22.5
+                        cell.Allview.layer.masksToBounds = true
+                        cell.Allview.layer.borderWidth = 1
+                        cell.Allview.layer.borderColor = UIColor.white.cgColor
                     }
                     self.col.reloadData()
                 }

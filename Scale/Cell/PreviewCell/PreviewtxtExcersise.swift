@@ -17,6 +17,16 @@ class PreviewtxtExcersise: UITableViewCell  {
     override func awakeFromNib() {
         super.awakeFromNib()
        
+        if(Language.currentLanguage().contains("ar"))
+        {
+            self.txtMsg.textAlignment = .right
+        }
+        else
+        {
+            self.txtMsg.textAlignment = .left
+        }
+        
+        
         self.txtMsg.placeholder = "Excersise Notes"
         self.txtMsg.placeholderColor = "FFFFFF".color
 

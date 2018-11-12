@@ -1,0 +1,510 @@
+
+/* Class = "UILabel"; text = "AR"; ObjectID = "02U-q2-Tf3"; */
+"02U-q2-Tf3.text" = "ع";
+
+"6Uh-6u-16D.text" = "بضغطك على انشاء فانت توافق على";
+
+"9D4-fF-KOw.text" = "اختر الجنس";
+"rec-F8-Wrh.placeholder" = "الاسم كاملا";
+"3fS-bf-tkZ.placeholder" = "اختر الدولة";
+"Rb3-7E-5Zn.placeholder" = "البريد الالكتروني";
+"7wk-ls-7oG.placeholder" = "رقم الجوال";
+"NSy-Xa-Hse.placeholder" = "كلمة المرور";
+"auc-Db-wgc.normalTitle" = "انشاء حساب";
+"Vmw-Ks-J3A.placeholder" = "تاريخ الميلاد";
+
+/* Class = "UILabel"; text = "Settings"; ObjectID = "0BX-XC-BDp"; */
+"0BX-XC-BDp.text" = "الاعدادات";
+
+/* Class = "UITextField"; placeholder = "Mobile"; ObjectID = "0IG-SW-8Rg"; */
+"0IG-SW-8Rg.placeholder" = "رفم الجوال";
+
+/* Class = "UILabel"; text = "Day"; ObjectID = "1MR-kT-jgD"; */
+"1MR-kT-jgD.text" = "اليوم";
+
+/* Class = "UILabel"; text = "Scale Restaurant"; ObjectID = "1Yg-8D-Qoq"; */
+"1Yg-8D-Qoq.text" = "قسم الغذاء";
+
+/* Class = "UILabel"; text = "Choose the plan"; ObjectID = "1yk-xO-A7l"; */
+"1yk-xO-A7l.text" = "اختر الخطة";
+
+/* Class = "UIButton"; normalTitle = "Puse Day"; ObjectID = "2Sz-F1-5y1"; */
+"2Sz-F1-5y1.normalTitle" = "ايقاف اليوم";
+
+/* Class = "UIButton"; normalTitle = "Online"; ObjectID = "2f1-R7-y6M"; */
+"2f1-R7-y6M.normalTitle" = "الدفع اونلاين";
+
+/* Class = "UILabel"; text = "Day Name"; ObjectID = "2lD-LB-3Oh"; */
+"2lD-LB-3Oh.text" = "اسم اليوم";
+
+/* Class = "UILabel"; text = "My Workout Plan"; ObjectID = "3Cn-Rf-r0U"; */
+"3Cn-Rf-r0U.text" = "خطة التدريب";
+
+/* Class = "UITextField"; placeholder = "Email Address"; ObjectID = "3d3-3h-5GI"; */
+"3d3-3h-5GI.placeholder" = "البريد الالكتروني";
+
+/* Class = "UILabel"; text = "Payment Method"; ObjectID = "47L-S4-Z15"; */
+"47L-S4-Z15.text" = "طريقة الدفع";
+
+/* Class = "UITextField"; placeholder = "REF #"; ObjectID = "4CG-4M-UXw"; */
+"4CG-4M-UXw.placeholder" = "رفم العضوية";
+
+/* Class = "UITextField"; text = "REF #"; ObjectID = "4CG-4M-UXw"; */
+"4CG-4M-UXw.text" = "رقم العضوية";
+
+/* Class = "UILabel"; text = "Plan Details"; ObjectID = "5G5-9G-wCm"; */
+"5G5-9G-wCm.text" = "تفاصيل الخطة";
+
+/* Class = "UILabel"; text = "WELCOME TO SCALE N MORE"; ObjectID = "5TB-Fb-wi9"; */
+"5TB-Fb-wi9.text" = "مرحبا بك في SCALE N MORE";
+
+/* Class = "UIButton"; normalTitle = "Call Us"; ObjectID = "6D6-fY-vOb"; */
+"6D6-fY-vOb.normalTitle" = "اتصل بنا";
+
+/* Class = "UILabel"; text = "Plan Details"; ObjectID = "6PL-3h-zsr"; */
+"6PL-3h-zsr.text" = "تفاصيل الخطة";
+
+/* Class = "UITextField"; placeholder = "Username"; ObjectID = "6nU-M5-jS8"; */
+"6nU-M5-jS8.placeholder" = "البريد الالكتروني";
+
+/* Class = "UILabel"; text = "Hamstring"; ObjectID = "75D-yV-iD4"; */
+"75D-yV-iD4.text" = "الأوتار";
+
+/* Class = "UILabel"; text = "Pause"; ObjectID = "7ON-uh-CPC"; */
+"7ON-uh-CPC.text" = "توقف";
+
+/* Class = "UILabel"; text = "Scale Restaurant"; ObjectID = "7Pm-e7-hlJ"; */
+"7Pm-e7-hlJ.text" = "قسم الغذاء";
+
+/* Class = "UITextField"; text = "Period"; ObjectID = "7bA-Ud-yDc"; */
+"7bA-Ud-yDc.text" = "الفترة";
+
+/* Class = "UILabel"; text = "Choose gender"; ObjectID = "7n8-4c-dWb"; */
+"7n8-4c-dWb.text" = "اختر الجنس";
+
+/* Class = "UILabel"; text = " Workout Plan"; ObjectID = "8Z1-CV-BXp"; */
+"8Z1-CV-BXp.text" = "خطة التدريب";
+
+/* Class = "UIButton"; normalTitle = " Register Now"; ObjectID = "9f4-1e-KuL"; */
+"9f4-1e-KuL.normalTitle" = " سجل من هنــا ";
+
+/* Class = "UILabel"; text = "Workout"; ObjectID = "AIV-Nq-pmP"; */
+"AIV-Nq-pmP.text" = "التدريب";
+
+/* Class = "UILabel"; text = "Get Premium Plan"; ObjectID = "CF7-ks-5hA"; */
+"CF7-ks-5hA.text" = "الحصول على خطة مدفوعه";
+
+/* Class = "UIButton"; normalTitle = "Add Muscle"; ObjectID = "CJ4-UT-m6q"; */
+"CJ4-UT-m6q.normalTitle" = "اضافة عضلة";
+
+/* Class = "UIButton"; normalTitle = "Privacy policy"; ObjectID = "CcK-Nh-W2w"; */
+"CcK-Nh-W2w.normalTitle" = "سياسة الخصوصية";
+
+/* Class = "UILabel"; text = "Forgot Password"; ObjectID = "D06-P6-1Ca"; */
+"D06-P6-1Ca.text" = "نسيت كلمة المرور";
+
+/* Class = "UILabel"; text = "Language"; ObjectID = "Dy0-jJ-acy"; */
+"Dy0-jJ-acy.text" = "اللغة";
+
+/* Class = "UILabel"; text = "Package Days"; ObjectID = "E9k-hc-yUd"; */
+"E9k-hc-yUd.text" = "خطة اليوم";
+
+/* Class = "UIButton"; normalTitle = "Terms & conditions"; ObjectID = "Ega-J3-OjN"; */
+"Ega-J3-OjN.normalTitle" = "الشروط والأحكام";
+
+/* Class = "UITextField"; placeholder = "Set Number"; ObjectID = "EmC-pN-kYZ"; */
+"EmC-pN-kYZ.placeholder" = "عدد المرات";
+
+/* Class = "UIButton"; normalTitle = "close"; ObjectID = "Emv-h9-8UC"; */
+"Emv-h9-8UC.normalTitle" = "اغلاق";
+
+/* Class = "UILabel"; text = "Chest"; ObjectID = "Exb-IL-blu"; */
+"Exb-IL-blu.text" = "Chest";
+
+/* Class = "UITextField"; placeholder = "Plan name"; ObjectID = "FLz-jk-fus"; */
+"FLz-jk-fus.placeholder" = "اسم الخطة";
+
+/* Class = "UILabel"; text = "74 KD"; ObjectID = "FVz-5s-gva"; */
+"FVz-5s-gva.text" = "74 ك.د";
+
+/* Class = "UILabel"; text = "Calves"; ObjectID = "FeE-me-JIk"; */
+"FeE-me-JIk.text" = "Calves";
+
+/* Class = "UITextField"; placeholder = "Weight"; ObjectID = "Fpj-CK-A9G"; */
+"Fpj-CK-A9G.placeholder" = "الوزن";
+
+/* Class = "UILabel"; text = "Renew"; ObjectID = "FtS-4Z-rmq"; */
+"FtS-4Z-rmq.text" = "تجديد";
+
+/* Class = "UILabel"; text = "CM"; ObjectID = "G0t-Sp-foO"; */
+"G0t-Sp-foO.text" = "سم";
+
+/* Class = "UIButton"; normalTitle = "Save"; ObjectID = "G2L-5T-ImW"; */
+"G2L-5T-ImW.normalTitle" = "حفظ";
+
+/* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "GDo-g6-9s8"; */
+"GDo-g6-9s8.normalTitle" = "حفظ";
+
+/* Class = "UITextField"; placeholder = "Plan Package"; ObjectID = "GHh-3N-ZYG"; */
+"GHh-3N-ZYG.placeholder" = "خطة جديدة";
+
+/* Class = "UITextField"; placeholder = "Day #1"; ObjectID = "GT5-OQ-MYY"; */
+"GT5-OQ-MYY.placeholder" = "اليوم الأول";
+
+/* Class = "UIButton"; normalTitle = "Discount Code"; ObjectID = "HhR-Nf-Hqf"; */
+"HhR-Nf-Hqf.normalTitle" = "كود الخصم";
+
+/* Class = "UIButton"; normalTitle = "Powered by line"; ObjectID = "IhT-mT-yOk"; */
+"IhT-mT-yOk.normalTitle" = "Powered by line";
+
+/* Class = "UILabel"; text = "Phone"; ObjectID = "ItX-ez-Mxu"; */
+"ItX-ez-Mxu.text" = "رقم الموبايل";
+
+/* Class = "UILabel"; text = "Back"; ObjectID = "JGO-ir-dR0"; */
+"JGO-ir-dR0.text" = "رجوع";
+
+/* Class = "UILabel"; text = "Need help ? "; ObjectID = "JSI-T6-heR"; */
+"JSI-T6-heR.text" = "تحتاج لمساعدة؟ ";
+
+/* Class = "UILabel"; text = "Day Name"; ObjectID = "JnU-nn-eYU"; */
+"JnU-nn-eYU.text" = "اسم اليوم";
+
+/* Class = "UILabel"; text = "Rate"; ObjectID = "KFT-pv-2pM"; */
+"KFT-pv-2pM.text" = "تقييم";
+
+/* Class = "UILabel"; text = "Edit Meals"; ObjectID = "KWo-nh-GAd"; */
+"KWo-nh-GAd.text" = "تعديل الوجبات";
+
+/* Class = "UITextField"; placeholder = "Plan Package"; ObjectID = "Ks1-ry-56S"; */
+"Ks1-ry-56S.placeholder" = "خطة جديدة";
+
+/* Class = "UILabel"; text = "Plan Name"; ObjectID = "Kvt-rn-AMt"; */
+"Kvt-rn-AMt.text" = "اسم الخطة";
+
+/* Class = "UILabel"; text = "Workout plan"; ObjectID = "LEq-HJ-2fZ"; */
+"LEq-HJ-2fZ.text" = "خطة التدريب";
+
+/* Class = "UILabel"; text = "Arrange a meeting with Trainer"; ObjectID = "LH9-gf-zAA"; */
+"LH9-gf-zAA.text" = "حجز يوم مع مدرب";
+
+/* Class = "UITextField"; text = "Start From"; ObjectID = "LTP-7X-cD2"; */
+"LTP-7X-cD2.text" = "البداية بتاريخ";
+
+/* Class = "UITextField"; placeholder = "Full Name"; ObjectID = "LXB-Fi-mQx"; */
+"LXB-Fi-mQx.placeholder" = "الاسم كاملا";
+
+/* Class = "UILabel"; text = "Need help ? "; ObjectID = "La8-Nr-YdS"; */
+"La8-Nr-YdS.text" = "تحتاج لمساعدة؟ ";
+
+/* Class = "UIButton"; normalTitle = "Add Category"; ObjectID = "MM7-40-lw4"; */
+"MM7-40-lw4.normalTitle" = "اضافة قسم";
+
+/* Class = "UITextField"; placeholder = "Day #1"; ObjectID = "MS7-8C-DEb"; */
+"MS7-8C-DEb.placeholder" = "اليوم الأول";
+
+/* Class = "UIButton"; normalTitle = "Arrange a meeting with dietition"; ObjectID = "Miq-U3-ddn"; */
+"Miq-U3-ddn.normalTitle" = "حجز موعد مع خبير تغذية";
+
+/* Class = "UIButton"; normalTitle = "Call Us"; ObjectID = "MlN-0x-hyt"; */
+"MlN-0x-hyt.normalTitle" = "اتصل بنا";
+
+/* Class = "UIButton"; normalTitle = "Discount Code"; ObjectID = "N3k-qI-7ii"; */
+"N3k-qI-7ii.normalTitle" = "كود الخصم";
+
+/* Class = "UILabel"; text = "KG"; ObjectID = "NCV-Ic-7Ah"; */
+"NCV-Ic-7Ah.text" = "كجم";
+
+/* Class = "UIButton"; normalTitle = "    Send"; ObjectID = "NSF-YW-3Cc"; */
+"NSF-YW-3Cc.normalTitle" = "ارسال";
+
+/* Class = "UITextField"; placeholder = "Food Allergies"; ObjectID = "Nez-1s-AOP"; */
+"Nez-1s-AOP.placeholder" = "أطعمة تسبب الحساسية";
+
+/* Class = "UILabel"; text = "Contact Us"; ObjectID = "Nlr-Eg-9Q2"; */
+"Nlr-Eg-9Q2.text" = "تواصل معنا";
+
+/* Class = "UILabel"; text = "Terms and Conditions"; ObjectID = "OQZ-JS-mXh"; */
+"OQZ-JS-mXh.text" = "الشروط والأحكام";
+
+/* Class = "UILabel"; text = "Contact Us"; ObjectID = "Og9-UR-dVb"; */
+"Og9-UR-dVb.text" = "تواصل معنا";
+
+/* Class = "UITextField"; placeholder = "Day Name"; ObjectID = "Pgd-LL-7jG"; */
+"Pgd-LL-7jG.placeholder" = "اسم اليوم";
+
+"uyi-B7-gA5.normalTitle" = "تخطي";
+/* Class = "UIButton"; normalTitle = "Add"; ObjectID = "PjB-Yi-zc7"; */
+"PjB-Yi-zc7.normalTitle" = "اضافة";
+
+/* Class = "UILabel"; text = "Dont’t have an account?"; ObjectID = "Pub-bB-r42"; */
+"Pub-bB-r42.text" = "لا يــوجد لديــك حســـاب؟ ";
+
+/* Class = "UILabel"; text = "Scale Restaurant"; ObjectID = "QgB-rC-Z1m"; */
+"QgB-rC-Z1m.text" = "قسم الغذاء";
+
+/* Class = "UIButton"; normalTitle = "SEND"; ObjectID = "RoJ-f9-x0v"; */
+"RoJ-f9-x0v.normalTitle" = "ارسال";
+
+/* Class = "UILabel"; text = "Workout"; ObjectID = "SR4-6w-Bjg"; */
+"SR4-6w-Bjg.text" = "تدريب";
+
+/* Class = "UILabel"; text = "No Plans"; ObjectID = "SfK-It-B3C"; */
+"SfK-It-B3C.text" = "لا يوجد خطط";
+
+/* Class = "UILabel"; text = "Shulder"; ObjectID = "THn-7i-fcd"; */
+"THn-7i-fcd.text" = "Shulder";
+
+/* Class = "UIButton"; normalTitle = "Call Us"; ObjectID = "Tbr-81-mGd"; */
+"Tbr-81-mGd.normalTitle" = "اتصل بنا";
+
+/* Class = "UIButton"; normalTitle = "PAY"; ObjectID = "Tpp-aZ-12X"; */
+"Tpp-aZ-12X.normalTitle" = "ادفع";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "Tsq-IE-YRc"; */
+"Tsq-IE-YRc.placeholder" = "كلمة المرور";
+
+/* Class = "UILabel"; text = "Arrange meeting with trainer"; ObjectID = "U9M-jM-Hai"; */
+"U9M-jM-Hai.text" = "حجز موعد مع مدرب";
+
+/* Class = "UILabel"; text = "My Diet Plan"; ObjectID = "UFZ-mf-cAF"; */
+"UFZ-mf-cAF.text" = "خطة الحمية";
+
+/* Class = "UITextField"; placeholder = "Email Address"; ObjectID = "VWo-r7-wph"; */
+"VWo-r7-wph.placeholder" = "البريد الالكتروني";
+
+/* Class = "UILabel"; text = "Please enter the discount code"; ObjectID = "W3e-FO-lXe"; */
+"W3e-FO-lXe.text" = "الرجاء ادخال كود الخصم";
+
+/* Class = "UILabel"; text = "Sign Up"; ObjectID = "WIh-s7-uhv"; */
+"WIh-s7-uhv.text" = "تسجيل جديد";
+
+/* Class = "UILabel"; text = "Quadriceps"; ObjectID = "WK4-x6-KYR"; */
+"WK4-x6-KYR.text" = "Quadriceps";
+
+/* Class = "UITextField"; placeholder = "Name"; ObjectID = "X2Y-ye-i1U"; */
+"X2Y-ye-i1U.placeholder" = "الاسم";
+
+/* Class = "UITextField"; placeholder = "Plan Package"; ObjectID = "XLA-VV-gFp"; */
+"XLA-VV-gFp.placeholder" = "خطة جديدة";
+
+/* Class = "UILabel"; text = "Address info"; ObjectID = "XU9-eu-9Bj"; */
+"XU9-eu-9Bj.text" = "تفاصيل العنوان";
+
+/* Class = "UIButton"; normalTitle = "Activation"; ObjectID = "Y1g-83-BSq"; */
+"Y1g-83-BSq.normalTitle" = "تفعيل";
+
+/* Class = "UILabel"; text = "Sign in"; ObjectID = "Y8C-M3-Tcx"; */
+"Y8C-M3-Tcx.text" = "تسجيل دخول";
+
+/* Class = "UITextField"; placeholder = "Select Country"; ObjectID = "YbM-Bg-qvi"; */
+"YbM-Bg-qvi.placeholder" = "اختر دولة";
+
+/* Class = "UILabel"; text = "Abdominal"; ObjectID = "Zrl-ii-g15"; */
+"Zrl-ii-g15.text" = "Abdominal";
+
+/* Class = "UITextField"; placeholder = "Date of Birth"; ObjectID = "amd-mw-EzX"; */
+"amd-mw-EzX.placeholder" = "تاريخ الميلاد";
+
+/* Class = "UITextField"; placeholder = "Phone Number"; ObjectID = "aoS-Y4-QgC"; */
+"aoS-Y4-QgC.placeholder" = "رقم الموبايل";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "b8u-SP-lp6"; */
+"b8u-SP-lp6.placeholder" = "كلمة المرور";
+
+/* Class = "UILabel"; text = "Plan Name"; ObjectID = "bmF-K8-6n1"; */
+"bmF-K8-6n1.text" = "اسم الخطة";
+
+/* Class = "UITextField"; placeholder = "Day Name"; ObjectID = "bpH-PX-pe8"; */
+"bpH-PX-pe8.placeholder" = "اسم اليوم";
+
+/* Class = "UILabel"; text = "Need help ? "; ObjectID = "c6Q-Zb-UTW"; */
+"c6Q-Zb-UTW.text" = "تحتاج مساعدة؟ ";
+
+/* Class = "UIButton"; normalTitle = "Discount Code"; ObjectID = "cR8-mv-wLc"; */
+"cR8-mv-wLc.normalTitle" = "كود الخصم";
+
+/* Class = "UILabel"; text = "Address info"; ObjectID = "d5D-El-INn"; */
+"d5D-El-INn.text" = "تفاصيل العنوان";
+
+/* Class = "UITextField"; placeholder = "# Of Days Left  "; ObjectID = "dFm-Fi-Tw1"; */
+"dFm-Fi-Tw1.placeholder" = "الايام المتبقية";
+
+/* Class = "UITextField"; text = "# Of Days Left  "; ObjectID = "dFm-Fi-Tw1"; */
+"dFm-Fi-Tw1.text" = "الايام المتبقية";
+
+/* Class = "UIButton"; normalTitle = "Add Muscle"; ObjectID = "dMs-i0-E1O"; */
+"dMs-i0-E1O.normalTitle" = "اضافة عضلة";
+
+/* Class = "UITextField"; placeholder = "Time"; ObjectID = "dQn-P8-lmy"; */
+"dQn-P8-lmy.placeholder" = "الوقت";
+
+/* Class = "UILabel"; text = "Plan Details"; ObjectID = "daj-f8-g44"; */
+"daj-f8-g44.text" = "تفاصيل الخطة";
+
+/* Class = "UILabel"; text = "About Us"; ObjectID = "dbK-Dj-acz"; */
+"dbK-Dj-acz.text" = "من نحن";
+
+/* Class = "UILabel"; text = "Address info"; ObjectID = "dmN-O5-01I"; */
+"dmN-O5-01I.text" = "تفاصيل العنوان";
+
+/* Class = "UITextField"; placeholder = "Select Muscle"; ObjectID = "dsk-H5-QNn"; */
+"dsk-H5-QNn.placeholder" = "اضافة عضلة";
+
+/* Class = "UITextField"; placeholder = "Day #1"; ObjectID = "dth-Av-GgF"; */
+"dth-Av-GgF.placeholder" = "اليوم الأول";
+
+/* Class = "UILabel"; text = "Choose Your Meals"; ObjectID = "e7r-74-YqM"; */
+"e7r-74-YqM.text" = "اختر وجبتك";
+
+/* Class = "UIButton"; normalTitle = "save"; ObjectID = "eD7-TI-Xxt"; */
+"eD7-TI-Xxt.normalTitle" = "حفظ";
+
+/* Class = "UILabel"; text = "Glutes"; ObjectID = "eJQ-SB-KL2"; */
+"eJQ-SB-KL2.text" = "Glutes";
+
+/* Class = "UITextField"; placeholder = "Day #1"; ObjectID = "edD-Wl-6bj"; */
+"edD-Wl-6bj.placeholder" = "اليوم الأول";
+
+/* Class = "UILabel"; text = "Welcome Back ,"; ObjectID = "fEh-4x-bNd"; */
+"fEh-4x-bNd.text" = "اهلا بك";
+
+/* Class = "UILabel"; text = "View Meals"; ObjectID = "fQS-aE-rmu"; */
+"fQS-aE-rmu.text" = "عرض الوجبات";
+
+/* Class = "UILabel"; text = "and"; ObjectID = "gCW-9i-Ciy"; */
+"gCW-9i-Ciy.text" = "و";
+
+/* Class = "UILabel"; text = "Logout"; ObjectID = "gcv-7R-rda"; */
+"gcv-7R-rda.text" = "تسجيل خروج";
+
+/* Class = "UIButton"; normalTitle = "Cash"; ObjectID = "gn0-de-pJ2"; */
+"gn0-de-pJ2.normalTitle" = "الدفع نقدا";
+
+/* Class = "UILabel"; text = "Trickeps"; ObjectID = "h2J-Sb-BHx"; */
+"h2J-Sb-BHx.text" = "Trickeps";
+
+/* Class = "UILabel"; text = "Training Videos"; ObjectID = "hOd-79-soG"; */
+"hOd-79-soG.text" = "فيديوهات التدريب";
+
+/* Class = "UILabel"; text = "Privacy Policy"; ObjectID = "hgp-in-GuG"; */
+"hgp-in-GuG.text" = "سياسة الخصوصية";
+
+/* Class = "UILabel"; text = "Excersise Notes"; ObjectID = "hsZ-Td-RrT"; */
+"hsZ-Td-RrT.text" = "ملاحظات التدريب";
+
+/* Class = "UILabel"; text = "Excersise Notes"; ObjectID = "j9b-O6-M3N"; */
+"j9b-O6-M3N.text" = "ملاحظات التدريب";
+
+/* Class = "UILabel"; text = "Trapezius"; ObjectID = "jg7-cT-Fgp"; */
+"jg7-cT-Fgp.text" = "Trapezius";
+
+/* Class = "UITextField"; placeholder = "Plan Package"; ObjectID = "kdj-kR-x57"; */
+"kdj-kR-x57.placeholder" = "خطة جديدة";
+
+/* Class = "UITextField"; placeholder = "Day Name"; ObjectID = "ktT-iQ-loV"; */
+"ktT-iQ-loV.placeholder" = "اسم اليوم";
+
+/* Class = "UIButton"; normalTitle = "SIGN IN"; ObjectID = "mBv-DV-79M"; */
+"mBv-DV-79M.normalTitle" = "تسجيل دخول";
+
+/* Class = "UILabel"; text = "About Us"; ObjectID = "mPs-Pe-4hW"; */
+"mPs-Pe-4hW.text" = "من نحن";
+
+/* Class = "UILabel"; text = "Workout Library"; ObjectID = "mQs-3b-YBD"; */
+"mQs-3b-YBD.text" = "مكتبة التدريب";
+
+/* Class = "UILabel"; text = "Forgot Password"; ObjectID = "mTJ-x9-gwy"; */
+"mTJ-x9-gwy.text" = "نسيت كلمة المرور";
+
+/* Class = "UILabel"; text = "Address info"; ObjectID = "mtY-F6-r2t"; */
+"mtY-F6-r2t.text" = "تفاصيل العنوان";
+
+/* Class = "UITextField"; placeholder = "Email"; ObjectID = "nNf-ne-OYD"; */
+"nNf-ne-OYD.placeholder" = "البريد الالكتروني";
+
+/* Class = "UITextField"; placeholder = "Day #1"; ObjectID = "oea-HY-5w3"; */
+"oea-HY-5w3.placeholder" = "اليوم الأول";
+
+/* Class = "UITextField"; placeholder = "Subscription end date"; ObjectID = "p36-6Y-buk"; */
+"p36-6Y-buk.placeholder" = "تاريخ انتهاء الاشتراك";
+
+/* Class = "UITextField"; text = "Subscription end date"; ObjectID = "p36-6Y-buk"; */
+"p36-6Y-buk.text" = "تاريخ انتهاء الاشتراك";
+
+/* Class = "UIButton"; normalTitle = "PAY"; ObjectID = "pZV-76-61N"; */
+"pZV-76-61N.normalTitle" = "ادفع";
+
+/* Class = "UIButton"; normalTitle = "SIGN UP"; ObjectID = "pcl-t2-5Yb"; */
+"pcl-t2-5Yb.normalTitle" = "تسجيل جديد";
+
+/* Class = "UILabel"; text = "Premium Plan"; ObjectID = "pdy-wX-y9X"; */
+"pdy-wX-y9X.text" = "خطة مدفوعه";
+
+/* Class = "UILabel"; text = "Total Fees"; ObjectID = "qJJ-7t-ctO"; */
+"qJJ-7t-ctO.text" = "المبلغ الاجمالي";
+
+/* Class = "UILabel"; text = "EN"; ObjectID = "qdE-kz-Tat"; */
+"qdE-kz-Tat.text" = "EN";
+
+/* Class = "UITextField"; placeholder = "Plan name"; ObjectID = "rNi-2O-osV"; */
+"rNi-2O-osV.placeholder" = "اسم الخطة";
+
+/* Class = "UITextField"; placeholder = "Height"; ObjectID = "s5Z-Cu-3fi"; */
+"s5Z-Cu-3fi.placeholder" = "الطول";
+
+/* Class = "UILabel"; text = "Email"; ObjectID = "sFm-aO-AAo"; */
+"sFm-aO-AAo.text" = "البريد الإلكتروني";
+
+/* Class = "UIButton"; normalTitle = "Forgot Password"; ObjectID = "sJE-gJ-jwc"; */
+"sJE-gJ-jwc.normalTitle" = "نسيت كلمة المرور";
+
+/* Class = "UILabel"; text = "Get Premium Plan"; ObjectID = "sTN-ha-lEO"; */
+"sTN-ha-lEO.text" = "الحصول على خطة مدفوعه";
+
+/* Class = "UITextField"; placeholder = "Search"; ObjectID = "tfB-au-Qoc"; */
+"tfB-au-Qoc.placeholder" = "بحث";
+
+/* Class = "UILabel"; text = "Sign in  to continue"; ObjectID = "toU-fG-l1C"; */
+"toU-fG-l1C.text" = "تسجيل دخول للاستمرار";
+
+/* Class = "UIButton"; normalTitle = "Add Day"; ObjectID = "tti-ox-1HM"; */
+"tti-ox-1HM.normalTitle" = "اضافة يوم";
+
+/* Class = "UIButton"; normalTitle = "save"; ObjectID = "tx5-uu-eeM"; */
+"tx5-uu-eeM.normalTitle" = "حفظ";
+
+/* Class = "UILabel"; text = "Biceps"; ObjectID = "uWl-gY-XKp"; */
+"uWl-gY-XKp.text" = "Biceps";
+
+/* Class = "UILabel"; text = "Choose your category"; ObjectID = "vjO-sz-5bN"; */
+"vjO-sz-5bN.text" = "اختر القسم";
+
+/* Class = "UIButton"; normalTitle = "PAY"; ObjectID = "wKd-ia-Ghh"; */
+"wKd-ia-Ghh.normalTitle" = "ادفع";
+
+/* Class = "UIButton"; normalTitle = "SKIP"; ObjectID = "wNz-Tr-3j8"; */
+"wNz-Tr-3j8.normalTitle" = "تخطي";
+
+/* Class = "UILabel"; text = "HOME"; ObjectID = "wTb-W1-mSA"; */
+"wTb-W1-mSA.text" = "الرئيسية";
+
+/* Class = "UIButton"; normalTitle = "save"; ObjectID = "weP-xt-f54"; */
+"weP-xt-f54.normalTitle" = "حفظ";
+
+/* Class = "UILabel"; text = "Workout Library"; ObjectID = "wrk-RM-yRa"; */
+"wrk-RM-yRa.text" = "مكتبة التدريب";
+
+/* Class = "UILabel"; text = "Choose Your Meals"; ObjectID = "xR1-8P-Gwe"; */
+"xR1-8P-Gwe.text" = "اختر وجبتك";
+
+/* Class = "UITextField"; placeholder = "Frequency Count"; ObjectID = "yPw-zV-ce9"; */
+"yPw-zV-ce9.placeholder" = "عدد تكرار التمرين";
+
+/* Class = "UILabel"; text = "Premium plan"; ObjectID = "ya9-pR-U0z"; */
+"ya9-pR-U0z.text" = "خطة مدفوعة";
+
+/* Class = "UIButton"; normalTitle = "Add Plan"; ObjectID = "zgQ-Td-mJ0"; */
+"zgQ-Td-mJ0.normalTitle" = "اضافة خطة";
+
+/* Class = "UIButton"; normalTitle = "CREATE AN ACCOUNT"; ObjectID = "zxZ-32-kzv"; */
+"zxZ-32-kzv.normalTitle" = "انشاء حساب";

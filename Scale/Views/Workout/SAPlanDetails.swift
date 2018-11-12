@@ -65,7 +65,7 @@ class SAPlanDetails: UIViewController, UITableViewDelegate , UITableViewDataSour
         let id = content.value(forKey: "id") as! Int
         let vedio_obj = content.value(forKey: "vedio_obj") as! NSDictionary
         let video = vedio_obj.value(forKey: "video") as! String
-        let img_vedio = vedio_obj.value(forKey: "img_vedio") as! String
+        let img_vedio = vedio_obj.value(forKey: "img_vedio") as? String ?? ""
         
         if(action == "deleteAction")
         {
@@ -204,7 +204,7 @@ class SAPlanDetails: UIViewController, UITableViewDelegate , UITableViewDataSour
             let fereq = content.value(forKey: "frequent") as! String
             let number = content.value(forKey: "number") as! String
             let vedio_obj = content.value(forKey: "vedio_obj") as! NSDictionary
-            let img = vedio_obj.value(forKey: "img_vedio") as! String
+            let img = vedio_obj.value(forKey: "img_vedio") as? String ?? ""
             
             let name = vedio_obj.value(forKey: "muscal_name") as! String
             let subName = vedio_obj.value(forKey: "submuscal_name") as! String
@@ -214,7 +214,7 @@ class SAPlanDetails: UIViewController, UITableViewDelegate , UITableViewDataSour
             cell.lblNumber.text = number
             cell.lblmuscle.text = name
             cell.lblSubmuscle.text = subName
-            cell.img.sd_setImage(with: URL(string: img)!, placeholderImage: UIImage(named: "10000-2")!, options: SDWebImageOptions.refreshCached)
+            cell.img.sd_setImage(with: URL(string: img), placeholderImage: UIImage(named: "10000-2")!, options: SDWebImageOptions.refreshCached)
            
             let wrapper = ActionCell()
             wrapper.delegate = self
@@ -359,7 +359,7 @@ class SAPlanDetails: UIViewController, UITableViewDelegate , UITableViewDataSour
         }
         else
         {
-            self.showOkAlert(title: "Error", message: "No Internet Connection")
+            self.showOkAlert(title: "Error".localized, message: "No Internet Connection".localized)
         }
     }
     
@@ -405,7 +405,7 @@ class SAPlanDetails: UIViewController, UITableViewDelegate , UITableViewDataSour
         }
         else
         {
-            self.showOkAlert(title: "Error", message: "No Internet Connection")
+            self.showOkAlert(title: "Error".localized, message: "No Internet Connection".localized)
         }
     }
     

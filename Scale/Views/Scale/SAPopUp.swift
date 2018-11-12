@@ -17,8 +17,21 @@ class SAPopUp: UIViewController {
     var date = ""
     var day = ""
     var id = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if(Language.currentLanguage().contains("ar"))
+        {
+            self.lblDate.textAlignment = .right
+            self.txtDay.textAlignment = .right
+        }
+        else
+        {
+            self.lblDate.textAlignment = .left
+            self.txtDay.textAlignment = .left
+        }
+        
         self.lblDate.text = self.date
         self.txtDay.text = self.day
     }
@@ -73,7 +86,7 @@ class SAPopUp: UIViewController {
         if MyTools.tools.connectedToNetwork()
         {
             self.showIndicator()
-            MyApi.api.editPlanMeals(day_id: self.id, category_id: 0, meal_id: 0, pause: 1)
+            MyApi.api.PauseDay(date: self.lblDate.text!, pause: 1)
             { (response, err) in
                 if((err) == nil)
                 {

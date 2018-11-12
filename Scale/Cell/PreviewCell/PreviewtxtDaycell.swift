@@ -15,7 +15,15 @@ class PreviewtxtDaycell: UITableViewCell  {
     var isEdit = false
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+      
+        if(Language.currentLanguage().contains("ar"))
+        {
+            self.txtDay.textAlignment = .right
+        }
+        else
+        {
+            self.txtDay.textAlignment = .left
+        }
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

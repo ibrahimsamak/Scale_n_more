@@ -26,6 +26,15 @@ class SAForgetPassowrd: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
+        
+        if(Language.currentLanguage().contains("ar"))
+        {
+            self.txtEmail.textAlignment = .right
+        }
+        else
+        {
+            self.txtEmail.textAlignment = .left
+        }
     }
     
     @IBAction func btnBack(_ sender: UIButton)
@@ -38,11 +47,11 @@ class SAForgetPassowrd: UIViewController {
         if MyTools.tools.connectedToNetwork()
         {
             if txtEmail.text?.count == 0{
-                self.showOkAlert(title: "Error".localized, message: "Please enter your email".localized)
+                self.showOkAlert(title: "Error".localized, message: "Please enter your email address".localized)
             }
             if !MyTools.tools.validateEmail(candidate: txtEmail.text!)
             {
-                self.showOkAlert(title: "Error".localized, message: "Please enter a valid email".localized)
+                self.showOkAlert(title: "Error".localized, message: "Please enter valid email address".localized)
             }
             else
             {

@@ -71,6 +71,17 @@ class SAAddPlan: UIViewController,UITableViewDelegate , UITableViewDataSource,  
             self.loadData()
             self.tableView.reloadData()
         }
+        
+        
+        if(Language.currentLanguage().contains("ar"))
+        {
+            self.txtPlan.textAlignment = .right
+        }
+        else
+        {
+            self.txtPlan.textAlignment = .left
+        }
+        
     }
     
     
@@ -150,7 +161,7 @@ class SAAddPlan: UIViewController,UITableViewDelegate , UITableViewDataSource,  
         }
         else
         {
-            self.showOkAlert(title: "Error", message: "No Internet Connection")
+            self.showOkAlert(title: "Error".localized, message: "No Internet Connection".localized)
         }
     }
     
@@ -175,24 +186,53 @@ class SAAddPlan: UIViewController,UITableViewDelegate , UITableViewDataSource,  
         let wrapper = ActionCell()
         wrapper.delegate = self
         wrapper.animationStyle = .concurrent
-        wrapper.wrap(cell: cell,
-                     actionsLeft: [],
-                     actionsRight:[
-                        {
-                            let action = IconAction(action: "deleteAction")
-                            action.icon.image  = #imageLiteral(resourceName: "DeleteCell")
-                            action.icon.tintColor = UIColor.white
-                            action.backgroundColor = UIColor.clear
-                            return action
-                        }(),
-                        {
-                            let action = IconAction(action: "editAction")
-                            action.icon.image = #imageLiteral(resourceName: "EditCell")
-                            action.icon.tintColor = UIColor.white
-                            action.backgroundColor = UIColor.clear
-                            return action
-                        }(),
-                        ])
+        if(Language.currentLanguage().contains("ar"))
+        {
+            wrapper.wrap(cell: cell,
+                         actionsLeft:[
+                            {
+                                let action = IconAction(action: "deleteAction")
+                                action.icon.image  = #imageLiteral(resourceName: "DeleteCell")
+                                action.icon.tintColor = UIColor.white
+                                action.backgroundColor = UIColor.clear
+                                wrapper.semanticContentAttribute = .forceLeftToRight
+                                return action
+                            }(),
+                            {
+                                let action = IconAction(action: "editAction")
+                                action.icon.image = #imageLiteral(resourceName: "EditCell")
+                                action.icon.tintColor = UIColor.white
+                                action.backgroundColor = UIColor.clear
+                                wrapper.semanticContentAttribute = .forceLeftToRight
+                                return action
+                            }(),
+                            ],
+                         actionsRight:[])
+        }
+        else{
+            wrapper.wrap(cell: cell,
+                         actionsLeft: [],
+                         actionsRight:[
+                            {
+                                let action = IconAction(action: "deleteAction")
+                                action.icon.image  = #imageLiteral(resourceName: "DeleteCell")
+                                action.icon.tintColor = UIColor.white
+                                action.backgroundColor = UIColor.clear
+                                wrapper.semanticContentAttribute = .forceLeftToRight
+                                return action
+                            }(),
+                            {
+                                let action = IconAction(action: "editAction")
+                                action.icon.image = #imageLiteral(resourceName: "EditCell")
+                                action.icon.tintColor = UIColor.white
+                                action.backgroundColor = UIColor.clear
+                                wrapper.semanticContentAttribute = .forceLeftToRight
+                                return action
+                            }(),
+                            ])
+        }
+            
+
         return cell
     }
     
@@ -255,7 +295,7 @@ class SAAddPlan: UIViewController,UITableViewDelegate , UITableViewDataSource,  
         }
         else
         {
-            self.showOkAlert(title: "Error", message: "No Internet Connection")
+            self.showOkAlert(title: "Error".localized, message: "No Internet Connection".localized)
         }
     }
     
@@ -310,7 +350,7 @@ class SAAddPlan: UIViewController,UITableViewDelegate , UITableViewDataSource,  
         }
         else
         {
-            self.showOkAlert(title: "Error", message: "No Internet Connection")
+            self.showOkAlert(title: "Error".localized, message: "No Internet Connection".localized)
         }
     }
 }

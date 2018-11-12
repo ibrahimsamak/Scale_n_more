@@ -336,6 +336,21 @@ class MyTools{
     }
     
     
+    func timeFormatter(date: String) -> String
+    {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "h:mm a"
+        
+        guard let date = dateFormatter.date(from: date) else {
+            return ""
+        }
+        
+        dateFormatter.dateFormat = "hh:mm"
+        let timeStamp = dateFormatter.string(from: date)
+        return timeStamp
+    }
+    
+    
     func convertDateToTime(date: String) -> String
     {
         let dateFormatter = DateFormatter()

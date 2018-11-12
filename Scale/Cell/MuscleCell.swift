@@ -16,7 +16,22 @@ class MuscleCell: UITableViewCell {
     @IBOutlet weak var img: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+       
+        if(Language.currentLanguage().contains("ar"))
+        {
+            self.lblFreq.textAlignment = .right
+            self.lblNumber.textAlignment = .right
+            self.lblSubmuscle.textAlignment = .right
+            self.lblmuscle.textAlignment = .right
+        }
+        else
+        {
+            self.lblFreq.textAlignment = .left
+            self.lblNumber.textAlignment = .left
+            self.lblSubmuscle.textAlignment = .left
+            self.lblmuscle.textAlignment = .left
+        }
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

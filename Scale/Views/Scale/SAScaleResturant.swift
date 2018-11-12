@@ -9,7 +9,12 @@
 import UIKit
 
 class SAScaleResturant: UIViewController {
-
+    
+    @IBOutlet weak var icon2: UIImageView!
+    @IBOutlet weak var icon1: UIImageView!
+    @IBOutlet weak var txt3: UITextField!
+    @IBOutlet weak var txt2: UITextField!
+    @IBOutlet weak var txt1: UITextField!
     @IBOutlet weak var lblDate: UILabel!
     @IBOutlet weak var lblCount: UILabel!
     @IBOutlet weak var lblId: UILabel!
@@ -18,9 +23,37 @@ class SAScaleResturant: UIViewController {
     var dict : NSDictionary!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if(Language.currentLanguage().contains("ar"))
+        {
+            self.lblDate.textAlignment = .right
+            self.lblCount.textAlignment = .right
+            self.lblId.textAlignment = .right
+            self.txtName.textAlignment = .right
+            self.txt1.textAlignment = .right
+            self.txt2.textAlignment = .right
+            self.txt3.textAlignment = .right
+            self.icon1.transform = CGAffineTransform(scaleX: -1, y: 1)
+            self.icon2.transform = CGAffineTransform(scaleX: -1, y: 1)
+            
+        }
+        else
+        {
+            self.lblDate.textAlignment = .left
+            self.lblCount.textAlignment = .left
+            self.lblId.textAlignment = .left
+            self.txtName.textAlignment = .left
+            
+            self.txt1.textAlignment = .left
+            
+            self.txt2.textAlignment = .left
+            
+            self.txt3.textAlignment = .left 
+        }
+        
         self.loadDate()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -44,7 +77,7 @@ class SAScaleResturant: UIViewController {
                             self.lblId.text = MyTools.tools.getMyId()
                             self.lblDate.text = self.dict.value(forKey: "date") as! String
                             self.lblCount.text = String(self.dict.value(forKey: "count") as! Int)
-
+                            
                         }
                         else
                         {
@@ -68,7 +101,7 @@ class SAScaleResturant: UIViewController {
         }
         else
         {
-            self.showOkAlert(title: "Error", message: "No Internet Connection")
+            self.showOkAlert(title: "Error".localized, message: "No Internet Connection".localized)
         }
     }
     

@@ -22,19 +22,19 @@ class SASignIn: UIViewController , FBSDKLoginButtonDelegate, GIDSignInDelegate, 
         }
         
         guard let authentication = user.authentication else { return }
-        
-        //        GIDSignIn.sharedInstance().signIn()
+        let accessToken = GIDSignIn.sharedInstance().currentUser.authentication.accessToken
+
+        self.GoogleLogin(token: accessToken!)
         print(user!.profile.email)
         print(user!.profile.name)
         print(user!.profile)
     }
     
-    
+    @IBOutlet weak var btnArrow: UIButton!
     @IBOutlet weak var txtPassword: UITextField!
     @IBOutlet weak var txtEmail: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // Do any additional setup after loading the view.
     }
     
@@ -49,6 +49,18 @@ class SASignIn: UIViewController , FBSDKLoginButtonDelegate, GIDSignInDelegate, 
         self.navigationController?.navigationBar.isHidden = true
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance().delegate = self
+     
+        if(Language.currentLanguage().contains("ar"))
+        {
+            self.txtEmail.textAlignment  = .right
+            self.txtPassword.textAlignment  = .right
+            self.btnArrow.imageView?.transform = CGAffineTransform(scaleX: -1, y: 1)
+        }
+        else
+        {
+            self.txtEmail.textAlignment  = .left
+            self.txtPassword.textAlignment  = .left
+        }
     }
     
     @IBAction func btnBack(_ sender: UIButton)
@@ -61,11 +73,11 @@ class SASignIn: UIViewController , FBSDKLoginButtonDelegate, GIDSignInDelegate, 
         if MyTools.tools.connectedToNetwork()
         {
             if txtEmail.text?.count == 0{
-                self.showOkAlert(title: "Error".localized, message: "Please enter your email".localized)
+                self.showOkAlert(title: "Error".localized, message: "Please enter your email address".localized)
             }
             if !MyTools.tools.validateEmail(candidate: txtEmail.text!)
             {
-                self.showOkAlert(title: "Error".localized, message: "Please enter a valid email".localized)
+                self.showOkAlert(title: "Error".localized, message: "Please enter a valid email address".localized)
             }
             else if (txtPassword.text?.count)! == 0
             {
@@ -74,11 +86,6 @@ class SASignIn: UIViewController , FBSDKLoginButtonDelegate, GIDSignInDelegate, 
             else
             {
                 self.showIndicator()
-                //                var deviceToken = MyTools.tools.getDeviceToken()
-                //                if deviceToken == nil
-                //                {
-                //                    deviceToken = InstanceID.instanceID().token()!
-                //                }
                 MyApi.api.PostLoginUser(email: txtEmail.text!, password: txtPassword.text!)
                 { (response, err) in
                     if((err) == nil)
@@ -127,7 +134,7 @@ class SASignIn: UIViewController , FBSDKLoginButtonDelegate, GIDSignInDelegate, 
         }
         else
         {
-            self.showOkAlert(title: "Error", message: "No Internet Connection")
+            self.showOkAlert(title: "Error".localized, message: "No Internet Connection".localized)
         }
     }
     
@@ -139,7 +146,11 @@ class SASignIn: UIViewController , FBSDKLoginButtonDelegate, GIDSignInDelegate, 
                 print("Custom FB Login failed:", err)
                 return
             }
-            
+           
+            let accessToken = FBSDKAccessToken.current()
+            let token = (result?.token.tokenString)!
+
+            self.FaceLogin(token:  (result?.token.tokenString)!)
             self.showEmailAddress()
         }
     }
@@ -173,12 +184,14 @@ class SASignIn: UIViewController , FBSDKLoginButtonDelegate, GIDSignInDelegate, 
             else
             {
                 print(error?.localizedDescription)
-                self.showOkAlert(title: "Error", message: "No Internet Connection")
+                self.showOkAlert(title: "Error".localized, message: "No Internet Connection".localized)
             }
         }
     }
     
-    @objc func handleCustomGoogleSign() {
+    @objc func handleCustomGoogleSign()
+    {
+        GIDSignIn.sharedInstance().currentUser
         GIDSignIn.sharedInstance().signIn()
     }
     
@@ -209,7 +222,7 @@ class SASignIn: UIViewController , FBSDKLoginButtonDelegate, GIDSignInDelegate, 
         
         showEmailAddress()
     }
-    
+
     func showEmailAddress()
     {
         let accessToken = FBSDKAccessToken.current()
@@ -231,5 +244,126 @@ class SASignIn: UIViewController , FBSDKLoginButtonDelegate, GIDSignInDelegate, 
             var facebookProfileUrl = "http://graph.facebook.com/\(userID)/picture?type=large"
             
         }
+    }
+    func FaceLogin(token:String){
+        if MyTools.tools.connectedToNetwork()
+        {
+
+                self.showIndicator()
+
+                MyApi.api.LoginFB(token: token)
+                { (response, err) in
+                    if((err) == nil)
+                    {
+                        if let JSON = response.result.value as? NSDictionary
+                        {
+                            let  status = JSON["status"] as? Bool
+                            if (status == true)
+                            {
+                                print("success")
+                                let UserArray = JSON["items"] as? NSDictionary
+                                let ns = UserDefaults.standard
+                                
+                                let CurrentUser:NSDictionary =
+                                    [
+                                        "id":UserArray?.value(forKey: "id") as! Int,
+                                        "access_token":UserArray?.value(forKey: "access_token") as? String ?? "",
+                                        "name":UserArray?.value(forKey: "name") as? String ?? "",
+                                        "check_meal": UserArray?.value(forKey: "check_meal") as? Int  ?? 0
+                                ]
+                                
+                                ns.setValue(CurrentUser, forKey: "CurrentUser")
+                                ns.synchronize()
+                                
+                                let vc : rootNavigation = AppDelegate.storyboard.instanceVC()
+                                let appDelegate = UIApplication.shared.delegate
+                                appDelegate?.window??.rootViewController = vc
+                                appDelegate?.window??.makeKeyAndVisible()
+                                
+                            }
+                            else
+                            {
+                                self.hideIndicator()
+                                self.showOkAlert(title: "Error".localized, message: JSON["message"] as? String ?? "")
+                            }
+                            self.hideIndicator()
+                        }
+                    }
+                    else
+                    {
+                        self.hideIndicator()
+                        self.showOkAlert(title: "Error".localized, message: "An Error occurred".localized)
+                    }
+              
+            }
+        }
+        else
+        {
+            self.showOkAlert(title: "Error".localized, message: "No Internet Connection".localized)
+        }
+    }
+    func GoogleLogin(token:String)
+    {
+        if MyTools.tools.connectedToNetwork()
+        {
+            self.showIndicator()
+            MyApi.api.LoginGoogle(token: token)
+            { (response, err) in
+                if((err) == nil)
+                {
+                    if let JSON = response.result.value as? NSDictionary
+                    {
+                        let  status = JSON["status"] as? Bool
+                        if (status == true)
+                        {
+                            print("success")
+                            let UserArray = JSON["items"] as? NSDictionary
+                            let ns = UserDefaults.standard
+                            
+                            let CurrentUser:NSDictionary =
+                                [
+                                    "id":UserArray?.value(forKey: "id") as! Int,
+                                    "access_token":UserArray?.value(forKey: "access_token") as? String ?? "",
+                                    "name":UserArray?.value(forKey: "name") as? String ?? "",
+                                    "check_meal": UserArray?.value(forKey: "check_meal") as? Int  ?? 0
+                                ]
+                            
+                            ns.setValue(CurrentUser, forKey: "CurrentUser")
+                            ns.synchronize()
+                            
+                            let vc : rootNavigation = AppDelegate.storyboard.instanceVC()
+                            let appDelegate = UIApplication.shared.delegate
+                            appDelegate?.window??.rootViewController = vc
+                            appDelegate?.window??.makeKeyAndVisible()
+                            
+                        }
+                        else
+                        {
+                            self.hideIndicator()
+                            self.showOkAlert(title: "Error".localized, message: JSON["message"] as? String ?? "")
+                        }
+                        self.hideIndicator()
+                    }
+                }
+                else
+                {
+                    self.hideIndicator()
+                    self.showOkAlert(title: "Error".localized, message: "An Error occurred".localized)
+                }
+                
+            }
+        }
+        else
+        {
+            self.showOkAlert(title: "Error".localized, message: "No Internet Connection".localized)
+        }
+    }
+    
+    @IBAction func btnSkip(_ sender: UIButton)
+    {
+        let vc : rootNavigation = AppDelegate.storyboard.instanceVC()
+        let appDelegate = UIApplication.shared.delegate
+        appDelegate?.window??.rootViewController = vc
+        appDelegate?.window??.makeKeyAndVisible()
     }
 }

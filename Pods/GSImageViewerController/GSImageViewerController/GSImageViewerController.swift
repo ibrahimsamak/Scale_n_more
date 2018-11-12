@@ -19,8 +19,8 @@ public struct GSImageInfo {
     public let imageMode : ImageMode
     public var imageHD   : URL?
     
-    public var contentMode : UIViewContentMode {
-        return UIViewContentMode(rawValue: imageMode.rawValue)!
+    public var contentMode : UIView.ContentMode {
+        return UIView.ContentMode(rawValue: imageMode.rawValue)!
     }
     
     public init(image: UIImage, imageMode: ImageMode) {
@@ -86,13 +86,19 @@ open class GSTransitionInfo {
 
 open class GSImageViewerController: UIViewController {
     
-    open let imageInfo      : GSImageInfo
+    public let imageInfo      : GSImageInfo
     open var transitionInfo : GSTransitionInfo?
     
-    open let imageView  = UIImageView()
-    open let scrollView = UIScrollView()
+    public let imageView  = UIImageView()
+    public let scrollView = UIScrollView()
     
     open var dismissCompletion: (() -> Void)?
+    
+    open var backgroundColor: UIColor = .black {
+        didSet {
+            view.backgroundColor = backgroundColor
+        }
+    }
     
     open lazy var session: URLSession = {
         let configuration = URLSessionConfiguration.ephemeral
@@ -120,7 +126,7 @@ open class GSImageViewerController: UIViewController {
         }
     }
     
-    public convenience init(image: UIImage, imageMode: UIViewContentMode, imageHD: URL?, fromView: UIView?) {
+    public convenience init(image: UIImage, imageMode: UIView.ContentMode, imageHD: URL?, fromView: UIView?) {
         let imageInfo = GSImageInfo(image: image, imageMode: GSImageInfo.ImageMode(rawValue: imageMode.rawValue)!, imageHD: imageHD)
         if let fromView = fromView {
             self.init(imageInfo: imageInfo, transitionInfo: GSTransitionInfo(fromView: fromView))
@@ -161,7 +167,7 @@ open class GSImageViewerController: UIViewController {
     // MARK: Setups
     
     fileprivate func setupView() {
-        view.backgroundColor = UIColor.black
+        view.backgroundColor = backgroundColor
     }
     
     fileprivate func setupScrollView() {
@@ -259,7 +265,7 @@ open class GSImageViewerController: UIViewController {
             
             scrollView.center = getChanged()
             panViewAlpha = 1 - getProgress()
-            view.backgroundColor = UIColor(white: 0.0, alpha: panViewAlpha)
+            view.backgroundColor = backgroundColor.withAlphaComponent(panViewAlpha)
             gesture.setTranslation(CGPoint.zero, in: nil)
 
         case .ended:
@@ -275,7 +281,7 @@ open class GSImageViewerController: UIViewController {
             UIView.animate(withDuration: 0.3,
                 animations: {
                     self.scrollView.center = self.panViewOrigin!
-                    self.view.backgroundColor = UIColor(white: 0.0, alpha: 1.0)
+                    self.view.backgroundColor = self.backgroundColor
                 },
                 completion: { _ in
                     self.panViewOrigin = nil
@@ -379,7 +385,7 @@ class GSImageViewerTransition: NSObject, UIViewControllerAnimatedTransitioning {
             
                 tempMask.alpha = imageViewer.panViewAlpha
                 tempMask.frame = imageViewer.view.bounds
-                tempImage.frame = imageViewer.scrollView.frame
+                tempImage.frame = CGRect(x: imageViewer.scrollView.contentOffset.x * -1, y: imageViewer.scrollView.contentOffset.y * -1, width: imageViewer.scrollView.contentSize.width, height: imageViewer.scrollView.contentSize.height)
             
             UIView.animate(withDuration: transitionInfo.duration,
                 animations: {

@@ -18,7 +18,8 @@ class SADayDetails: UIViewController ,UITableViewDelegate, UITableViewDataSource
     var date  = ""
     var TCategory :NSArray = []
     var TMeals : NSArray = []
-    
+    var unSelectedMeals : NSMutableArray = []
+    var SelectedMeals : NSMutableArray = []
     var TSelectedMeal :NSArray = []
     var selectedMealId = ""
     var day_id = ""
@@ -66,14 +67,14 @@ class SADayDetails: UIViewController ,UITableViewDelegate, UITableViewDataSource
         if(section == 0)
         {
             if(isView){
-                cell.titleLabel.text = "Select Category"     
+                cell.titleLabel.text = "Select Category".localized
             }
             else{
-                cell.titleLabel.text = "Category"
+                cell.titleLabel.text = "Category".localized
             }
         }
         else{
-            cell.titleLabel.text = "Meals Available"
+            cell.titleLabel.text = "Meals Available".localized
         }
         
         return cell
@@ -110,11 +111,9 @@ class SADayDetails: UIViewController ,UITableViewDelegate, UITableViewDataSource
             let selecetedid = self.selectedCategory?.value(forKey: "id") as! Int
             let id =  conent.value(forKey: "id") as! Int
             cell.icon.isHidden = (selecetedid != id)
-            
             cell.lblTitle.text = title
             cell.lblCount.text = String(count)
-            
-            
+
             return cell
         }
         else{
@@ -123,10 +122,11 @@ class SADayDetails: UIViewController ,UITableViewDelegate, UITableViewDataSource
             let title = conent.value(forKey: "name") as! String
             let category_id = conent.value(forKey: "category_id") as! String
             let id = conent.value(forKey: "id") as! String
-            let logo = conent.value(forKey: "logo") as! String
-
+            let logo = conent.value(forKey: "logo") as? String ?? ""
+            let prefix = "http://scalenmore.com/"
+         
             cell.lblTitle.text = title
-            cell.img.sd_setImage(with: URL(string: logo)!, placeholderImage: UIImage(named: "10000-2")!, options: SDWebImageOptions.refreshCached)
+            cell.img.sd_setImage(with: URL(string: prefix+logo), placeholderImage: UIImage(named: "10000-2")!, options: SDWebImageOptions.refreshCached)
           
             self.category_id = category_id
             self.meal_id = id
@@ -138,14 +138,25 @@ class SADayDetails: UIViewController ,UITableViewDelegate, UITableViewDataSource
             }
             else
             {
-                if(self.selectedMealId != id)
+                if(self.unSelectedMeals.contains(Int(id)))
                 {
-                    cell.img_circle.isHidden = false
-                    cell.iconDon.isHidden = false
-                }else{
                     cell.img_circle.isHidden = false
                     cell.iconDon.isHidden = true
                 }
+                else
+                {
+                    cell.img_circle.isHidden = false
+                    cell.iconDon.isHidden = false
+                }
+                
+//                if(self.selectedMealId != id)
+//                {
+//                    cell.img_circle.isHidden = false
+//                    cell.iconDon.isHidden = false
+//                }else{
+//                    cell.img_circle.isHidden = false
+//                    cell.iconDon.isHidden = true
+//                }
             }
             
             return cell
@@ -174,7 +185,21 @@ class SADayDetails: UIViewController ,UITableViewDelegate, UITableViewDataSource
             {
                 let content = self.TSelectedMeal.object(at:indexPath.row) as AnyObject
                 let id = content.value(forKey: "id") as! String
+                
+                
+                if(self.SelectedMeals.contains(Int(id)))
+                {
+                    //exsist meal
+                    self.SelectedMeals.remove(Int(id))
+                    self.unSelectedMeals.add(Int(id))
+                }
+                else{
+                    self.unSelectedMeals.remove(Int(id))
+                    self.SelectedMeals.add(Int(id))
+                }
                 self.selectedMealId = id
+                print("selected items:\(self.SelectedMeals)")
+                print("unselected items:\(self.unSelectedMeals)")
                 self.tbl.reloadData()
             }
         }
@@ -235,7 +260,7 @@ class SADayDetails: UIViewController ,UITableViewDelegate, UITableViewDataSource
         }
         else
         {
-            self.showOkAlert(title: "Error", message: "No Internet Connection")
+            self.showOkAlert(title: "Error".localized, message: "No Internet Connection".localized)
         }
     }
     
@@ -244,8 +269,19 @@ class SADayDetails: UIViewController ,UITableViewDelegate, UITableViewDataSource
         self.TSelectedMeal = self.TMeals.filter { (obj) -> Bool in
             let object = obj as AnyObject
             let category_id = object.value(forKey: "category_id") as! String
+            self.SelectedMeals = []
             return category_id == String(self.selectedCategory?.value(forKey: "id") as! Int)
             } as NSArray
+        
+        self.SelectedMeals = []
+        for index in 0..<self.TSelectedMeal.count
+        {
+            let conent = self.TSelectedMeal.object(at:index) as AnyObject
+            let id = conent.value(forKey: "id") as! String
+            let mealID = Int(id)
+            self.SelectedMeals.add(mealID!)
+        }
+        
         self.tbl.reloadData()
     }
     
@@ -254,7 +290,16 @@ class SADayDetails: UIViewController ,UITableViewDelegate, UITableViewDataSource
         if MyTools.tools.connectedToNetwork()
         {
             self.showIndicator()
-            MyApi.api.editPlanMeals(day_id: Int(self.day_id)!, category_id: Int(self.category_id)!, meal_id: Int(self.meal_id)!, pause: 0)
+            var arrselected : [Int] = []
+            
+            for index in 0..<self.SelectedMeals.count
+            {
+                let id = self.SelectedMeals.object(at: index) as! Int
+                arrselected.append(id)
+            }
+            
+            
+            MyApi.api.editPlanMeals(date: self.date, category_id: Int(self.category_id)!, meal_id: arrselected, pause: 0)
             { (response, err) in
                 if((err) == nil)
                 {

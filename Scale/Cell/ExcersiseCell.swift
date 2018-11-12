@@ -19,5 +19,13 @@ class ExcersiseCell: UICollectionViewCell {
         view.layer.borderWidth = 1
         view.layer.borderColor = "9AC25B".color.cgColor
         
+        if(Language.currentLanguage().contains("ar"))
+        {
+            self.lbl.textAlignment = .right
+        }
+        else
+        {
+            self.lbl.textAlignment = .left
+        }
     }
 }

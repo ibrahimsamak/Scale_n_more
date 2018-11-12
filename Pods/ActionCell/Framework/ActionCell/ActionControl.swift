@@ -55,7 +55,7 @@ open class ActionControl: UIControl {
         #endif
     }
     
-    func update(state: State) {
+    func update(state: state) {
         #if DEVELOPMENT
             print("\(#function) -- " + "state: \(state)")
         #endif
@@ -77,7 +77,7 @@ extension ActionControl {
         case open // action stands open of the cell
     }
     
-    enum State {
+    enum state {
         case active // action is to be triggered
         case inactive // other action is to be triggered, and this not
     }

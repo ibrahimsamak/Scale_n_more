@@ -83,7 +83,8 @@ class SAPackages: UIViewController,CodeProtocol , UICollectionViewDelegate , UIC
             cell.view.layer.masksToBounds = true
             cell.view.layer.borderWidth = 1
             cell.view.layer.borderColor = "6C9C35".color.cgColor
-            cell.view.backgroundColor = UIColor.clear
+            cell.view.backgroundColor = "6C9C35".color
+            
         }
         else
         {
@@ -91,7 +92,7 @@ class SAPackages: UIViewController,CodeProtocol , UICollectionViewDelegate , UIC
             cell.view.layer.masksToBounds = true
             cell.view.layer.borderWidth = 1
             cell.view.layer.borderColor = "6C9C35".color.cgColor
-            cell.view.backgroundColor = "6C9C35".color
+            cell.view.backgroundColor = UIColor.clear
         }
         
         
@@ -118,6 +119,17 @@ class SAPackages: UIViewController,CodeProtocol , UICollectionViewDelegate , UIC
             if (!selectedCategory.contains(id))
             {
                 self.selectedCategory.add(id)
+                cell.view.layer.cornerRadius = 10.0
+                cell.view.layer.masksToBounds = true
+                cell.view.layer.borderWidth = 1
+                cell.view.layer.borderColor = "6C9C35".color.cgColor
+                cell.view.backgroundColor = UIColor.clear
+          
+            }
+            else
+            {
+                self.selectedCategory.remove(id)
+                self.selectedCategory.add(id)
                 
                 cell.view.layer.cornerRadius = 10.0
                 cell.view.layer.masksToBounds = true
@@ -125,16 +137,6 @@ class SAPackages: UIViewController,CodeProtocol , UICollectionViewDelegate , UIC
                 cell.view.layer.borderColor = "6C9C35".color.cgColor
                 cell.view.backgroundColor = "6C9C35".color
                 
-            }
-            else
-            {
-                self.selectedCategory.remove(id)
-                self.selectedCategory.add(id)
-                cell.view.layer.cornerRadius = 10.0
-                cell.view.layer.masksToBounds = true
-                cell.view.layer.borderWidth = 1
-                cell.view.layer.borderColor = "6C9C35".color.cgColor
-                cell.view.backgroundColor = UIColor.clear
                 
             }
         }
@@ -200,7 +202,7 @@ class SAPackages: UIViewController,CodeProtocol , UICollectionViewDelegate , UIC
         }
         else
         {
-            self.showOkAlert(title: "Error", message: "No Internet Connection")
+            self.showOkAlert(title: "Error".localized, message: "No Internet Connection".localized)
         }
     }
     
@@ -268,7 +270,7 @@ class SAPackages: UIViewController,CodeProtocol , UICollectionViewDelegate , UIC
         }
         else
         {
-            self.showOkAlert(title: "Error", message: "No Internet Connection")
+            self.showOkAlert(title: "Error".localized, message: "No Internet Connection".localized)
         }
     }
     
@@ -289,5 +291,12 @@ class SAPackages: UIViewController,CodeProtocol , UICollectionViewDelegate , UIC
         popupViewController?.enableBackgroundFade = true
         self.present(popupViewController!, animated: true, completion: nil)
     }
+    
+    
+    @IBAction func btnHome(_ sender: UIButton)
+    {
+        self.navigationController?.popToRoot(animated: true)
+    }
+    
     
 }

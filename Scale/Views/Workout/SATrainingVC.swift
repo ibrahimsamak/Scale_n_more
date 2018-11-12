@@ -12,8 +12,14 @@ import AVFoundation
 import AVKit
 
 
-class SATrainingVC: UIViewController, UITableViewDelegate , UITableViewDataSource {
+class SATrainingVC: UIViewController, UITableViewDelegate , UITableViewDataSource  , UITextFieldDelegate{
     
+    @IBOutlet weak var lblTitle: UILabel!
+    
+    @IBOutlet weak var txtSearch: UITextField!
+    @IBOutlet weak var SearchView: UIView!
+    
+    @IBOutlet weak var ConentSearch: UIView!
     @IBOutlet weak var tbl: UITableView!
     var SubmuscleId = 0
     var isFromLibrary = false
@@ -22,11 +28,36 @@ class SATrainingVC: UIViewController, UITableViewDelegate , UITableViewDataSourc
     {
         super.viewDidLoad()
         
-        self.tbl.register(UINib(nibName: "ExcersiseCell2", bundle: nil), forCellReuseIdentifier: "ExcersiseCell2")
+        if(isFromLibrary)
+        {
+            txtSearch.delegate = self
+            txtSearch.returnKeyType = .search
+            
+            SearchView.layer.borderWidth = 1
+            SearchView.layer.borderColor = "979797".color.cgColor
+        }
+        else
+        {
+            ConentSearch.isHidden = true
+        }
+       
         
+        if(Language.currentLanguage().contains("ar"))
+        {
+            self.txtSearch.textAlignment = .right
+        }
+        else
+        {
+            self.txtSearch.textAlignment = .left
+        }
+        
+        
+        self.tbl.register(UINib(nibName: "ExcersiseCell2", bundle: nil), forCellReuseIdentifier: "ExcersiseCell2")
         self.loadDate()
         self.tbl.tableFooterView = UIView()
         
+        
+     
     }
     
     
@@ -53,12 +84,12 @@ class SATrainingVC: UIViewController, UITableViewDelegate , UITableViewDataSourc
         let content = self.TItems.object(at: indexPath.row) as AnyObject
         let submuscale = content.value(forKey: "submuscale") as! NSDictionary
         let title = submuscale.value(forKey: "title") as! String
-        let img = content.value(forKey: "img_vedio") as! String
+        let img = content.value(forKey: "img_vedio") as? String ?? ""
         
         cell.playBtn.tag = indexPath.row
         cell.playBtn.addTarget(self, action: #selector(self.playVideo(_:)), for: .touchUpInside)
         cell.lbl.text = title
-        cell.img.sd_setImage(with: URL(string: img)!, placeholderImage: UIImage(named: "10000-2")!, options: SDWebImageOptions.refreshCached)
+        cell.img.sd_setImage(with: URL(string: img), placeholderImage: UIImage(named: "10000-2")!, options: SDWebImageOptions.refreshCached)
         if(self.isFromLibrary == false)
         {
             cell.btn.tag = indexPath.row
@@ -143,7 +174,7 @@ class SATrainingVC: UIViewController, UITableViewDelegate , UITableViewDataSourc
         if MyTools.tools.connectedToNetwork()
         {
             self.showIndicator()
-            MyApi.api.GetVideos(submuscale_id: self.SubmuscleId)
+            MyApi.api.GetVideos(submuscale_id: self.SubmuscleId, name: "")
             {(response, err) in
                 if((err) == nil)
                 {
@@ -155,6 +186,12 @@ class SATrainingVC: UIViewController, UITableViewDelegate , UITableViewDataSourc
                             self.hideIndicator()
                             
                             let items = JSON["items"] as! NSArray
+                          
+                            if(items.count > 0){
+                                let title = items[0] as! NSDictionary
+                                self.lblTitle.text = title.value(forKey: "submuscal_name") as? String ?? ""
+                            }
+                            
                             self.TItems = items
                             
                             self.tbl.delegate = self
@@ -184,8 +221,82 @@ class SATrainingVC: UIViewController, UITableViewDelegate , UITableViewDataSourc
         }
         else
         {
-            self.showOkAlert(title: "Error", message: "No Internet Connection")
+            self.showOkAlert(title: "Error".localized, message: "No Internet Connection".localized)
         }
     }
+    
+    
+    func Search()
+    {
+        if MyTools.tools.connectedToNetwork()
+        {
+            self.showIndicator()
+            MyApi.api.GetVideos(submuscale_id: self.SubmuscleId, name: self.txtSearch.text!)
+            {(response, err) in
+                if((err) == nil)
+                {
+                    if let JSON = response.result.value as? NSDictionary
+                    {
+                        let status = JSON["status"] as? Bool
+                        if (status == true)
+                        {
+                            self.hideIndicator()
+                            
+                            let items = JSON["items"] as! NSArray
+                            
+                            if(items.count > 0){
+                                let title = items[0] as! NSDictionary
+                                self.lblTitle.text = title.value(forKey: "submuscal_name") as? String ?? ""
+                            }
+                            
+                            self.TItems = items
+                            
+                            self.tbl.delegate = self
+                            self.tbl.dataSource = self
+                            self.tbl.reloadData()
+                        }
+                        else
+                        {
+                            self.hideIndicator()
+                            self.showOkAlert(title: "Error".localized, message: JSON["message"] as? String ?? "")
+                            
+                        }
+                    }
+                    else
+                    {
+                        self.hideIndicator()
+                        self.showOkAlert(title: "Error".localized, message: "An Error occurred".localized)
+                    }
+                    
+                }
+                else
+                {
+                    self.hideIndicator()
+                    self.showOkAlert(title: "Error".localized, message: "An Error occurred".localized)
+                }
+            }
+        }
+        else
+        {
+            self.showOkAlert(title: "Error".localized, message: "No Internet Connection".localized)
+        }
+    }
+    
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool
+    {
+        if((textField.text?.count)! > 0)
+        {
+            self.Search()
+        }
+        else
+        {
+            self.loadDate()
+        }
+        
+        self.txtSearch.resignFirstResponder()
+        return true
+    }
+    
     
 }

@@ -18,7 +18,15 @@ class ExcersiseCell2: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        if(Language.currentLanguage().contains("ar"))
+        {
+            self.lbl.textAlignment = .right
+        }
+        else
+        {
+            self.lbl.textAlignment = .left
+        }
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

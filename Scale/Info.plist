@@ -23,8 +23,8 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb2008973932480733</string>
-                <string>twitterkit-wwy1mmNFz7xRm1a0eFyGqe8mJ</string>
+				<string>fb231427407553917</string>
+				<string>twitterkit-wwy1mmNFz7xRm1a0eFyGqe8mJ</string>
 			</array>
 		</dict>
 		<dict>
@@ -37,7 +37,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>0.7</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -53,7 +53,7 @@
 		</array>
 	</dict>
 	<key>FacebookAppID</key>
-	<string>2008973932480733</string>
+	<string>231427407553917</string>
 	<key>FacebookDisplayName</key>
 	<string>Scale's first app</string>
 	<key>LSApplicationQueriesSchemes</key>
@@ -62,8 +62,8 @@
 		<string>fb-messenger-share-api</string>
 		<string>fbauth2</string>
 		<string>fbshareextension</string>
-        <string>twitter</string>
-        <string>twitterauth</string>
+		<string>twitter</string>
+		<string>twitterauth</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
@@ -76,6 +76,11 @@
 	<string>App want to access your Camera to get awesome photo</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>App want to access your Photo Library to change your profile picture</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Bahij_TheSansArabic-Bold.ttf</string>
+		<string>Bahij_TheSansArabic-Plain.ttf</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

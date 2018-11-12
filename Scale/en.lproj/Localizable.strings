@@ -1,0 +1,50 @@
+/* 
+  Localize.strings
+  Scale
+
+  Created by ibrahim M. samak on 9/8/18.
+  Copyright © 2018 ibrahim M. samak. All rights reserved.
+*/
+
+"Done" = "Done";
+"Error" = "Error";
+"Success" = "Success";
+"Warning"  =  "Warning";
+"Logout" = "Logout";
+"login"  = "login";
+"Cancel" = "Cancel";
+"No Internet Connection" = "No Internet Connection";
+"An Error occurred" = "An Error occurred";
+"Are you sure you want logout?" = "Are you sure you want logout?";
+"Please fill time field" = "Please fill time field";
+"All fields are required" = "All fields are required";
+"Please enter your name" = "Please enter your name";
+"Please enter your phone number" = "Please enter your phone number";
+"Please enter your email address" = "Please enter your email address";
+"Please enter valid email address" = "Please enter valid email address";
+"Please enter your password" = "Please enter your password";
+"Please enter your Date of Birth" = "Please enter your Date of Birth";
+"Please select your country" = "Please select your country";
+"Please enter your message" = "Please enter your message";
+"Please select one of packages" = "Please select one of packages";
+"Please enter your weight" = "Please enter your weight";
+"Please enter your height" = "Please enter your height";
+"please you have to sign in" = "please you have to sign in";
+"Are you sure you want to delete video?" = "Are you sure you want to delete video?";
+"Please enter note" = "Please enter note";
+"Please enter day name" =  "Please enter day name";
+"Please Enter the discount code" = "Please Enter the discount code";
+"Please select one video at least" = "Please select one video at least";
+"Please enter plan name" = "Please enter plan name";
+"Please enter repetitions number" = "Please enter repetitions number";
+"Delete" = "Delete";
+"Day # "= "Day # ";
+" Days" = " Days";
+"Select Category" = "Select Category" ;
+"Category" = "Category";
+"Meals Available" = "Meals Available";
+"Notes " = "Notes ";
+"Health Conditions " = "Health Conditions ";
+" K.D" = " K.D";
+"Arrange meeting with trainer" = "Arrange meeting with trainer";
+"Arrange meeting with dietitian" = "Arrange meeting with dietitian";

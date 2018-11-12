@@ -102,7 +102,7 @@ class SAPreviewPlan: UIViewController,UITableViewDelegate , UITableViewDataSourc
                 let fereq = content.value(forKey: "frequent") as! String
                 let number = content.value(forKey: "number") as! String
                 let vedio_obj = content.value(forKey: "vedio_obj") as! NSDictionary
-                let img = vedio_obj.value(forKey: "img_vedio") as! String
+                let img = vedio_obj.value(forKey: "img_vedio") as? String ?? ""
                 
                 let name = vedio_obj.value(forKey: "muscal_name") as! String
                 let subName = vedio_obj.value(forKey: "submuscal_name") as! String
@@ -112,7 +112,7 @@ class SAPreviewPlan: UIViewController,UITableViewDelegate , UITableViewDataSourc
                 cell.lblNumber.text = number
                 cell.lblmuscle.text = name
                 cell.lblSubmuscle.text = subName
-                cell.img.sd_setImage(with: URL(string: img)!, placeholderImage: UIImage(named: "10000-2")!, options: SDWebImageOptions.refreshCached)
+                cell.img.sd_setImage(with: URL(string: img), placeholderImage: UIImage(named: "10000-2")!, options: SDWebImageOptions.refreshCached)
             }
             return cell
         }
@@ -151,11 +151,11 @@ class SAPreviewPlan: UIViewController,UITableViewDelegate , UITableViewDataSourc
         }
         else if(indexPath.row == 1)
         {
-            return 60.0
+            return 80.0
         }
         else if(indexPath.row == 2)
         {
-            return 115.0
+            return 135.0
         }
         else
         {
@@ -223,7 +223,7 @@ class SAPreviewPlan: UIViewController,UITableViewDelegate , UITableViewDataSourc
         }
         else
         {
-            self.showOkAlert(title: "Error", message: "No Internet Connection")
+            self.showOkAlert(title: "Error".localized, message: "No Internet Connection".localized)
         }
     }
     

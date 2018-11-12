@@ -35,9 +35,11 @@ internal extension PopupDialog {
     /*! Add obserservers for UIKeyboard notifications */
     internal func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(orientationChanged),
-                                                         name: NSNotification.Name.UIDeviceOrientationDidChange,
+                                               name: NSNotification.Name.UIDeviceOrientationDidChange,
                                                          object: nil)
 
+        
+        
         NotificationCenter.default.addObserver(self,
                                                          selector: #selector(keyboardWillShow),
                                                          name: NSNotification.Name.UIKeyboardWillShow,
@@ -57,19 +59,19 @@ internal extension PopupDialog {
     /*! Remove observers */
     internal func removeObservers() {
         NotificationCenter.default.removeObserver(self,
-                                                            name: NSNotification.Name.UIDeviceOrientationDidChange,
+                                                  name: NSNotification.Name.UIDeviceOrientationDidChange,
                                                             object: nil)
 
         NotificationCenter.default.removeObserver(self,
-                                                            name: NSNotification.Name.UIKeyboardWillShow,
+                                                  name: NSNotification.Name.UIKeyboardWillShow,
                                                             object: nil)
 
         NotificationCenter.default.removeObserver(self,
-                                                            name: NSNotification.Name.UIKeyboardWillHide,
+                                                  name: NSNotification.Name.UIKeyboardWillHide,
                                                             object: nil)
 
         NotificationCenter.default.removeObserver(self,
-                                                            name: NSNotification.Name.UIKeyboardWillChangeFrame,
+                                                  name: NSNotification.Name.UIKeyboardWillChangeFrame,
                                                             object: nil)
     }
 

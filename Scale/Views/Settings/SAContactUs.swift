@@ -40,7 +40,7 @@ class SAContactUs: UIViewController,MFMessageComposeViewControllerDelegate ,MFMa
             self.txtName.textAlignment = .right
             self.txtEmail.textAlignment = .right
             self.lblAddress.textAlignment = .right
-            
+            self.txtMobile.textAlignment = .right
             self.txtMsg.placeholder = "الرسالة"
             self.txtMsg.placeholderColor = UIColor.white
         }
@@ -52,7 +52,8 @@ class SAContactUs: UIViewController,MFMessageComposeViewControllerDelegate ,MFMa
             self.txtName.textAlignment = .left
             self.txtEmail.textAlignment = .left
             self.lblAddress.textAlignment = .left
-            
+            self.txtMobile.textAlignment = .left
+
             self.txtMsg.placeholder = "Message"
             self.txtMsg.placeholderColor = UIColor.white
         }

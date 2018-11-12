@@ -43,4 +43,26 @@ class SAWorkout: UIViewController {
         
     }
     
+    @IBAction func btnWorkoutPlan(_ sender: UIButton)
+    {
+     
+        if ((UserDefaults.standard.object(forKey: "CurrentUser")) != nil)
+        {
+            let vc: SAWorkoutPlan = AppDelegate.storyboard.instanceVC()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        else{
+            self.showCustomAlert(okFlag: false, title: "Warning".localized, message: "please you have to sign in".localized, okTitle: "login".localized, cancelTitle: "Cancel".localized)
+            {(success) in
+                if(success)
+                {
+                    let vc : LoginNav = AppDelegate.storyboard.instanceVC()
+                    let appDelegate = UIApplication.shared.delegate
+                    appDelegate?.window??.rootViewController = vc
+                    appDelegate?.window??.makeKeyAndVisible()
+                }
+            }
+        }
+        
+    }
 }

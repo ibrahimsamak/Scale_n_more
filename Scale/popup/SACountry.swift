@@ -57,6 +57,12 @@ class SACountry: UIViewController , UITableViewDelegate , UITableViewDataSource
         
         let content = self.TCategory.object(at: indexPath.row) as AnyObject
         let Title = content.value(forKey: "name") as! String
+        if(Language.currentLanguage().contains("ar")){
+            cell.textLabel?.textAlignment = .right
+        }
+        else{
+            cell.textLabel?.textAlignment = .left
+        }
         cell.textLabel?.text = Title
         
         

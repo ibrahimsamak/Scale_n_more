@@ -17,6 +17,7 @@ protocol ExcersiseProtocol {
 class SAAddExersise: UIViewController,UICollectionViewDelegate , UICollectionViewDelegateFlowLayout ,  UICollectionViewDataSource,UIScrollViewDelegate 
 {
     
+    @IBOutlet weak var lblSelectMuscle: UITextField!
     @IBOutlet weak var btn: UIButton!
     @IBOutlet weak var col: UICollectionView!
     @IBOutlet weak var txtNubmer: UITextField!
@@ -54,7 +55,7 @@ class SAAddExersise: UIViewController,UICollectionViewDelegate , UICollectionVie
             let submuscale_id = self.content?.value(forKey: "submuscale_id") as! String
             let submuscale = self.content?.value(forKey: "submuscale") as! NSDictionary
             self.VideoName = submuscale.value(forKey: "title") as! String
-            self.VideoThumb = self.content?.value(forKey: "img_vedio") as! String
+            self.VideoThumb = self.content?.value(forKey: "img_vedio") as? String ?? ""
             self.url = self.content?.value(forKey: "video") as! String
             
             
@@ -62,6 +63,24 @@ class SAAddExersise: UIViewController,UICollectionViewDelegate , UICollectionVie
             self.col.delegate = self
             self.col.dataSource = self
             self.col.reloadData()
+        }
+        
+        
+        
+        if(Language.currentLanguage().contains("ar"))
+        {
+            self.txtNubmer.textAlignment = .right
+            self.txtFrequanty.textAlignment = .right
+            self.lblSelectMuscle.textAlignment = .right
+
+        }
+        else
+        {
+            self.txtNubmer.textAlignment = .left
+            self.txtFrequanty.textAlignment = .left
+            
+            self.lblSelectMuscle.textAlignment = .left
+            
         }
     }
     
@@ -112,7 +131,7 @@ class SAAddExersise: UIViewController,UICollectionViewDelegate , UICollectionVie
         if(self.isEdit)
         {
             cell.lbl.text = "VideoName"
-            cell.img.sd_setImage(with: URL(string: self.VideoThumb)!, placeholderImage: UIImage(named: "10000-2")!, options: SDWebImageOptions.refreshCached)
+            cell.img.sd_setImage(with: URL(string: self.VideoThumb), placeholderImage: UIImage(named: "10000-2")!, options: SDWebImageOptions.refreshCached)
         }
         else
         {
@@ -188,7 +207,7 @@ class SAAddExersise: UIViewController,UICollectionViewDelegate , UICollectionVie
                 }
                 else if txtFrequanty.text?.count == 0
                 {
-                    self.showOkAlert(title: "Error".localized, message: "Please enter frequency count".localized)
+                    self.showOkAlert(title: "Error".localized, message: "Please enter repetitions number".localized)
                 }
                 else{
                     self.showIndicator()
@@ -297,7 +316,7 @@ class SAAddExersise: UIViewController,UICollectionViewDelegate , UICollectionVie
         }
         else
         {
-            self.showOkAlert(title: "Error", message: "No Internet Connection")
+            self.showOkAlert(title: "Error".localized, message: "No Internet Connection".localized)
         }
     }
 }

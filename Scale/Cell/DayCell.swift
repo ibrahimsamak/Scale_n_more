@@ -27,6 +27,7 @@ class DayCell: UITableViewCell, UICollectionViewDelegate , UICollectionViewDeleg
     override func awakeFromNib()
     {
         super.awakeFromNib()
+        
     }
     
     func config()

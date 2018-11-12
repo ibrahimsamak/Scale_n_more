@@ -15,14 +15,23 @@ class txtDaycell: UITableViewCell , UITextFieldDelegate {
     var isEdit = false
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+       
+        if(Language.currentLanguage().contains("ar"))
+        {
+            self.txtDay.textAlignment = .right
+        }
+        else
+        {
+            self.txtDay.textAlignment = .left
+        }
+   
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool)
+    {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
+    
     func config()
     {
         self.txtDay.delegate = self

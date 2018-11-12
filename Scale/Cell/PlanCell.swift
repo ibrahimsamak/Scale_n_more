@@ -14,7 +14,17 @@ class PlanCell: UITableViewCell {
     @IBOutlet weak var lblPlanName: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        if(Language.currentLanguage().contains("ar"))
+        {
+            self.lblDay.textAlignment = .right
+            self.lblPlanName.textAlignment = .right
+        }
+        else
+        {
+            self.lblDay.textAlignment = .left
+            self.lblPlanName.textAlignment = .left
+        }
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

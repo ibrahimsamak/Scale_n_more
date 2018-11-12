@@ -86,4 +86,10 @@ class SAHumanBody: UIViewController {
         }
     }
 
+    
+    @IBAction func btnHome(_ sender: UIButton)
+    {
+        self.navigationController?.popToRoot(animated: true)
+    }
+    
 }

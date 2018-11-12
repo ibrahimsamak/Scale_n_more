@@ -157,12 +157,7 @@ extension UIViewController
     func showOkAlert(title:String,message:String) {
         
         // Create the dialog
-        let popup = PopupDialog(title: title,
-                                message: message,
-                                buttonAlignment: .horizontal,
-                                transitionStyle: .zoomIn,
-                                gestureDismissal: false,
-                                hideStatusBar: false) {
+        let popup = PopupDialog(title: title,message: message) {
         }
         
         let okButton = DefaultButton(title: "Done".localized) {
@@ -178,11 +173,7 @@ extension UIViewController
         
         // Create the dialog
         let popup = PopupDialog(title: title,
-                                message: message,
-                                buttonAlignment: .horizontal,
-                                transitionStyle: .zoomIn,
-                                gestureDismissal: false,
-                                hideStatusBar: false) {
+                                message: message) {
         }
         
         let cancelButton = CancelButton(title: cancelTitle) {
@@ -207,14 +198,7 @@ extension UIViewController
     
     func showOkAlertWithComp(title:String,message:String,completion:@escaping (Bool) -> Void)
     {
-        
-        // Create the dialog
-        let popup = PopupDialog(title: title,
-                                message: message,
-                                buttonAlignment: .horizontal,
-                                transitionStyle: .zoomIn,
-                                gestureDismissal: false,
-                                hideStatusBar: false) {
+        let popup = PopupDialog(title: title,message: message) {
         }
         
         let okButton = DefaultButton(title: "Done".localized) {

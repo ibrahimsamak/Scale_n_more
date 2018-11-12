@@ -20,11 +20,13 @@ target 'Scale' do
     pod 'DLRadioButton'
     pod 'FSCalendar'
     pod 'ActionCell', '~> 2.0.0'
-    
+    pod 'CLImageViewPopup'
+
     #notifications
     pod 'Firebase'
     pod 'Firebase/Messaging'
     pod 'Firebase/Auth'
+    pod 'Firebase/Database'
     pod 'UITextView+Placeholder'
     #social
     pod 'GoogleSignIn'
@@ -34,5 +36,5 @@ target 'Scale' do
     pod 'FBSDKCoreKit'
     pod 'FBSDKShareKit'
     pod 'FBSDKLoginKit'
-
+    pod 'APJTextPickerView'
 end

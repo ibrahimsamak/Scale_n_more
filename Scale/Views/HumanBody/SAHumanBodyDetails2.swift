@@ -41,6 +41,6 @@ class SAHumanBodyDetails2: UIViewController {
         let vc:SATrainingVC = AppDelegate.storyboard.instanceVC()
         vc.SubmuscleId = sender.tag
         vc.isFromLibrary = self.isFromLibrary
-        self.present(vc, animated: true, completion: nil)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }

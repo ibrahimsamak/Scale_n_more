@@ -38,19 +38,37 @@ class SAResturantPackages: UIViewController,CodeProtocol , UICollectionViewDeleg
         self.col.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         self.col.register(UINib(nibName: "RPackageCell", bundle: nil), forCellWithReuseIdentifier: "RPackageCell")
         
-        self.txtHealthCondition.placeholder = "Health Conditions "
+        self.txtHealthCondition.placeholder = "Health Conditions ".localized
         self.txtHealthCondition.placeholderColor = "FFFFFF".color
         
-        self.txtNote.placeholder = "Notes "
+        self.txtNote.placeholder = "Notes ".localized
         self.txtNote.placeholderColor = "FFFFFF".color
         
         self.loadDate()
+        
+        
+        if(Language.currentLanguage().contains("ar"))
+        {
+            self.txtNote.textAlignment = .right
+            self.txtFood.textAlignment = .right
+            self.txtHeight.textAlignment = .right
+            self.txtWeight.textAlignment = .right
+            self.txtHealthCondition.textAlignment = .right
+        }
+        else
+        {
+            self.txtNote.textAlignment = .left
+            self.txtFood.textAlignment = .left
+            self.txtHeight.textAlignment = .left
+            self.txtWeight.textAlignment = .left
+            self.txtHealthCondition.textAlignment = .left
+        }
     }
     
     
-    override func didReceiveMemoryWarning() {
+    override func didReceiveMemoryWarning()
+    {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     override func viewWillAppear(_ animated: Bool)
@@ -72,7 +90,7 @@ class SAResturantPackages: UIViewController,CodeProtocol , UICollectionViewDeleg
         let id = content.value(forKey: "id") as! Int
         let price = content.value(forKey: "price") as! String
         
-        cell.lblPrice.text = price+" K.D"
+        cell.lblPrice.text = price+" K.D".localized
         cell.lblPackage.text = name
      
         cell.btn.tag = indexPath.row
@@ -105,8 +123,22 @@ class SAResturantPackages: UIViewController,CodeProtocol , UICollectionViewDeleg
     @objc func Details(_ sender: UIButton)
     {
         let index = sender.tag
-        let vc: SAResturantPackageDetails = AppDelegate.storyboard.instanceVC()
-        self.present(vc, animated: true, completion: nil)
+//        let vc: SAResturantPackageDetails = AppDelegate.storyboard.instanceVC()
+//        self.present(vc, animated: true, completion: nil)
+//
+        
+        let content = self.TItems.object(at: index) as AnyObject
+        let descriptions = content.value(forKey: "descriptions") as! String
+        
+        let vc:SAResturantPackageDetails = AppDelegate.storyboard.instanceVC()
+        vc.details = descriptions
+        let screenSize = UIScreen.main.bounds
+        let screenWidth = 300
+        let screenHeight = 400
+        let popupViewController = BIZPopupViewController(contentViewController: vc, contentSize: CGSize(width: screenWidth, height: screenHeight))
+        popupViewController?.showDismissButton = true
+        popupViewController?.enableBackgroundFade = true
+        self.present(popupViewController!, animated: true, completion: nil)
     }
     
     
@@ -165,8 +197,8 @@ class SAResturantPackages: UIViewController,CodeProtocol , UICollectionViewDeleg
         let vc:SAResturantPackageDetails = AppDelegate.storyboard.instanceVC()
         vc.details = descriptions
         let screenSize = UIScreen.main.bounds
-        let screenWidth = screenSize.width - 50
-        let screenHeight = screenSize.height - 100
+        let screenWidth = 300
+        let screenHeight = 400
         let popupViewController = BIZPopupViewController(contentViewController: vc, contentSize: CGSize(width: screenWidth, height: screenHeight))
         popupViewController?.showDismissButton = true
         popupViewController?.enableBackgroundFade = true
@@ -232,7 +264,7 @@ class SAResturantPackages: UIViewController,CodeProtocol , UICollectionViewDeleg
         }
         else
         {
-            self.showOkAlert(title: "Error", message: "No Internet Connection")
+            self.showOkAlert(title: "Error".localized, message: "No Internet Connection".localized)
         }
     }
     
@@ -290,7 +322,7 @@ class SAResturantPackages: UIViewController,CodeProtocol , UICollectionViewDeleg
                                     let ns = UserDefaults.standard
                                     let CurrentUser:NSDictionary =
                                         [
-                                            "id":MyTools.tools.getMyId(),
+                                            "id":Int(MyTools.tools.getMyId()),
                                             "access_token":MyTools.tools.getMyToken(),
                                             "check_meal": 1,
                                             "name":MyTools.tools.getMyname(),
@@ -327,7 +359,7 @@ class SAResturantPackages: UIViewController,CodeProtocol , UICollectionViewDeleg
         }
         else
         {
-            self.showOkAlert(title: "Error", message: "No Internet Connection")
+            self.showOkAlert(title: "Error".localized, message: "No Internet Connection".localized)
         }
     }
     
@@ -355,4 +387,11 @@ class SAResturantPackages: UIViewController,CodeProtocol , UICollectionViewDeleg
         vc.type = 2
         self.navigationController?.pushViewController(vc, animated: true)
     }
+    
+    @IBAction func btnHome(_ sender: UIButton)
+    {
+        self.navigationController?.popToRoot(animated: true)
+    }
+    
+    
 }

@@ -7,7 +7,12 @@
 		<key>Scale.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>29</integer>
+			<integer>32</integer>
+		</dict>
+		<key>Scale.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>34</integer>
 		</dict>
 	</dict>
 </dict>

@@ -13,9 +13,10 @@ class PackageCell: UICollectionViewCell {
     @IBOutlet weak var view: UIView!
     @IBOutlet weak var lblPackage: UILabel!
     @IBOutlet weak var lblPrice: UILabel!
-    override func awakeFromNib() {
+    override func awakeFromNib()
+    {
         super.awakeFromNib()
-        // Initialization code
+        self.view.layer.borderColor = "587D30".color.cgColor
+        self.view.layer.borderWidth = 1
     }
-
 }

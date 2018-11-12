@@ -17,7 +17,16 @@ class MealsCell: UITableViewCell {
     @IBOutlet weak var iconDon: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+      
+        if(Language.currentLanguage().contains("ar"))
+        {
+            self.lblTitle.textAlignment = .right
+        }
+        else
+        {
+            self.lblTitle.textAlignment = .left
+        }
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -38,6 +38,7 @@ class SAPlanDetailsNew: UIViewController ,UIScrollViewDelegate,ActionCellDelegat
     }
     var planDetailsType : SAPlanDetailsType = .add
     var Days:[Int:String] = [1:"Saturday" ,2:"Sunday" ,3:"Monday" ,4:"Tuesday" ,5:"Wednesday" ,6:"Thursday" ,7:"Friday"]
+    var DaysAr:[Int:String] = [1:"السبت" ,2:"الأحد" ,3:"الاثنين" ,4:"الثلاثاء" ,5:"الاربعا" ,6:"الخميس" ,7:"الجمعة"]
     var currentDayObject : AnyObject? = nil {
         didSet{
             self.fullViewData()
@@ -79,6 +80,22 @@ class SAPlanDetailsNew: UIViewController ,UIScrollViewDelegate,ActionCellDelegat
             self.selectededDayIndex = Int(currentDayObjectTemp?.value(forKey: "day_id") as! String)!
         }
         
+        if(Language.currentLanguage().contains("ar"))
+        {
+            self.txtName.textAlignment = .right
+            self.txtNote.textAlignment = .right
+            
+            self.txtNote.placeholder = "ملاحظات"
+            self.txtNote.placeholderColor = UIColor.white
+        }
+        else
+        {
+            self.txtName.textAlignment = .left
+            self.txtNote.textAlignment = .left
+            
+            self.txtNote.placeholder = "Exercise note"
+            self.txtNote.placeholderColor = UIColor.white
+        }
     }
     func updateTableViewHeight(){
         self.tbl_height.constant =  CGFloat(self.FilteredVideo.count * 157)
@@ -101,10 +118,10 @@ class SAPlanDetailsNew: UIViewController ,UIScrollViewDelegate,ActionCellDelegat
         {
             self.showOkAlert(title: "Error".localized, message: "Please enter day name".localized)
         }
-        else  if(txtNote.text?.count == 0)
-        {
-            self.showOkAlert(title: "Error".localized, message: "Please enter note".localized)
-        }
+//        else  if(txtNote.text?.count == 0)
+//        {
+//            self.showOkAlert(title: "Error".localized, message: "Please enter note".localized)
+//        }
         else
         {
             let vc : SAAddExersise = AppDelegate.storyboard.instanceVC()
@@ -170,7 +187,7 @@ class SAPlanDetailsNew: UIViewController ,UIScrollViewDelegate,ActionCellDelegat
         }
         else
         {
-            self.showOkAlert(title: "Error", message: "No Internet Connection")
+            self.showOkAlert(title: "Error".localized, message: "No Internet Connection".localized)
         }
         
     }
@@ -217,8 +234,15 @@ extension SAPlanDetailsNew : UICollectionViewDelegate , UICollectionViewDelegate
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DayCollection", for: indexPath) as! DayCollection
         
         let id = indexPath.row + 1
-        let title = self.Days[indexPath.row + 1]
-        cell.lbl.text = title
+       
+        if(Language.currentLanguage().contains("ar")){
+            let title = self.DaysAr[indexPath.row + 1]
+            cell.lbl.text = title
+        }
+        else{
+            let title = self.Days[indexPath.row + 1]
+            cell.lbl.text = title
+        }
         
         if (self.selectededDayIndex == id)
         {
@@ -269,14 +293,12 @@ extension SAPlanDetailsNew : UITableViewDelegate,UITableViewDataSource {
         let id = content.value(forKey: "id") as! Int
         let vedio_obj = content.value(forKey: "vedio_obj") as! NSDictionary
         let video = vedio_obj.value(forKey: "video") as! String
-        let img_vedio = vedio_obj.value(forKey: "img_vedio") as! String
+        let img_vedio = vedio_obj.value(forKey: "img_vedio") as? String ?? ""
         let videoName = vedio_obj.value(forKey: "submuscal_name") as! String
         let plan_day_id = (self.currentDayObject?.value(forKey: "id") as? NSNumber ?? NSNumber(value:0)).intValue
         
         if(action == "deleteAction")
         {
-            print("delete")
-            
             self.showCustomAlert(okFlag: false, title: "Warning".localized, message: "Are you sure you want to delete video?".localized, okTitle: "Delete".localized, cancelTitle: "Cancel".localized)
             {(success) in
                 if(success)
@@ -303,7 +325,7 @@ extension SAPlanDetailsNew : UITableViewDelegate,UITableViewDataSource {
         let fereq = content.value(forKey: "frequent") as? String
         let number = content.value(forKey: "number") as? String
         let vedio_obj = content.value(forKey: "vedio_obj") as! NSDictionary
-        let img = vedio_obj.value(forKey: "img_vedio") as! String
+        let img = vedio_obj.value(forKey: "img_vedio") as? String ?? ""
         let name = vedio_obj.value(forKey: "muscal_name") as! String
         let subName = vedio_obj.value(forKey: "submuscal_name") as! String
         let url = vedio_obj.value(forKey: "video") as! String
@@ -312,32 +334,62 @@ extension SAPlanDetailsNew : UITableViewDelegate,UITableViewDataSource {
         cell.lblNumber.text = number
         cell.lblmuscle.text = name
         cell.lblSubmuscle.text = subName
-        cell.img.sd_setImage(with: URL(string: img)!, placeholderImage: UIImage(named: "10000-2")!, options: SDWebImageOptions.refreshCached)
+        cell.img.sd_setImage(with: URL(string: img), placeholderImage: UIImage(named: "10000-2")!, options: SDWebImageOptions.refreshCached)
         
         
         let wrapper = ActionCell()
         wrapper.delegate = self
         wrapper.animationStyle = .concurrent
-        wrapper.wrap(cell: cell,
-                     actionsLeft: [],
-                     actionsRight:[
-                        {
-                            let action = IconAction.init(action: "deleteAction", height: CGFloat(80.0), width: CGFloat(80.0), iconSize: CGSize.init(width: 80.0, height: 157.0))
-                            action.icon.image  = #imageLiteral(resourceName: "DeleteCell")
-                            action.icon.contentMode = .scaleAspectFit
-                            action.icon.tintColor = UIColor.white
-                            action.backgroundColor = UIColor.clear
-                            return action
-                        }(),
-                        {
-                            let action = IconAction.init(action: "editAction", height: CGFloat(80.0), width: CGFloat(80.0), iconSize: CGSize.init(width: 80.0, height: 157.0))
-                            action.icon.image = #imageLiteral(resourceName: "EditCell")
-                            action.icon.contentMode = .scaleAspectFit
-                            action.icon.tintColor = UIColor.white
-                            action.backgroundColor = UIColor.clear
-                            return action
-                        }(),
-                        ])
+        if(Language.currentLanguage().contains("ar"))
+        {
+            wrapper.wrap(cell: cell,
+                         actionsLeft:[
+                            {
+                                let action = IconAction.init(action: "deleteAction", height: CGFloat(80.0), width: CGFloat(80.0), iconSize: CGSize.init(width: 80.0, height: 157.0))
+                                action.icon.image  = #imageLiteral(resourceName: "DeleteCell")
+                                action.icon.contentMode = .scaleAspectFit
+                                action.icon.tintColor = UIColor.white
+                                action.backgroundColor = UIColor.clear
+                                wrapper.semanticContentAttribute = .forceLeftToRight
+                                return action
+                            }(),
+                            {
+                                let action = IconAction.init(action: "editAction", height: CGFloat(80.0), width: CGFloat(80.0), iconSize: CGSize.init(width: 80.0, height: 157.0))
+                                action.icon.image = #imageLiteral(resourceName: "EditCell")
+                                action.icon.contentMode = .scaleAspectFit
+                                action.icon.tintColor = UIColor.white
+                                action.backgroundColor = UIColor.clear
+                                wrapper.semanticContentAttribute = .forceLeftToRight
+                                return action
+                            }(),
+                            ],
+                         actionsRight:[])
+        }
+        else{
+            wrapper.wrap(cell: cell,
+                         actionsLeft: [],
+                         actionsRight:[
+                            {
+                                let action = IconAction.init(action: "deleteAction", height: CGFloat(80.0), width: CGFloat(80.0), iconSize: CGSize.init(width: 80.0, height: 157.0))
+                                action.icon.image  = #imageLiteral(resourceName: "DeleteCell")
+                                action.icon.contentMode = .scaleAspectFit
+                                action.icon.tintColor = UIColor.white
+                                action.backgroundColor = UIColor.clear
+                                wrapper.semanticContentAttribute = .forceLeftToRight
+                                return action
+                            }(),
+                            {
+                                let action = IconAction.init(action: "editAction", height: CGFloat(80.0), width: CGFloat(80.0), iconSize: CGSize.init(width: 80.0, height: 157.0))
+                                action.icon.image = #imageLiteral(resourceName: "EditCell")
+                                action.icon.contentMode = .scaleAspectFit
+                                action.icon.tintColor = UIColor.white
+                                action.backgroundColor = UIColor.clear
+                                wrapper.semanticContentAttribute = .forceLeftToRight
+                                return action
+                            }(),
+                            ])
+        }
+     
         return cell
     }
     
@@ -409,7 +461,7 @@ extension SAPlanDetailsNew : UITableViewDelegate,UITableViewDataSource {
         }
         else
         {
-            self.showOkAlert(title: "Error", message: "No Internet Connection")
+            self.showOkAlert(title: "Error".localized, message: "No Internet Connection".localized)
         }
     }
     

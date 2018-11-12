@@ -12,9 +12,11 @@ import SDWebImage
 class SAAds: UIViewController {
 
     @IBOutlet weak var img: UIImageView!
+    
+    var timer: Timer!
+
     override func viewDidLoad() {
         super.viewDidLoad()
- 
         self.SetupConfig()
     }
 
@@ -23,15 +25,36 @@ class SAAds: UIViewController {
 
     }
     
-
+    override func viewWillDisappear(_ animated: Bool) {
+        UIApplication.shared.isStatusBarHidden = false
+        super.viewWillDisappear(animated)
+        timer.invalidate()
+    }
+    
+    @objc func runTimedCode()
+    {
+        if ((UserDefaults.standard.object(forKey: "CurrentUser")) != nil)
+        {
+            let vc : rootNavigation = AppDelegate.storyboard.instanceVC()
+            let appDelegate = UIApplication.shared.delegate
+            appDelegate?.window??.rootViewController = vc
+            appDelegate?.window??.makeKeyAndVisible()
+        }
+        else{
+            let vc:SAChoose = AppDelegate.storyboard.instanceVC()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        
+    }
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
         UIApplication.shared.isStatusBarHidden = true
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        UIApplication.shared.isStatusBarHidden = false
+        
+        timer = Timer.scheduledTimer(timeInterval: 7, target: self, selector: #selector(runTimedCode), userInfo: nil, repeats: true)
+
     }
     
     func SetupConfig()
@@ -77,6 +100,20 @@ class SAAds: UIViewController {
         {
             self.showOkAlert(title: "Error".localized, message: "No Internet Connection".localized)
 
+        }
+    }
+    @IBAction func btnSkip(_ sender: UIButton)
+    {
+        if ((UserDefaults.standard.object(forKey: "CurrentUser")) != nil)
+        {
+            let vc : rootNavigation = AppDelegate.storyboard.instanceVC()
+            let appDelegate = UIApplication.shared.delegate
+            appDelegate?.window??.rootViewController = vc
+            appDelegate?.window??.makeKeyAndVisible()
+        }
+        else{
+            let vc:SAChoose = AppDelegate.storyboard.instanceVC()
+            self.navigationController?.pushViewController(vc, animated: true)
         }
     }
     

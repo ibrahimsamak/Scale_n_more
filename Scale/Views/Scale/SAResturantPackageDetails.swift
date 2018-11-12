@@ -13,9 +13,16 @@ class SAResturantPackageDetails: UIViewController  {
     @IBOutlet weak var txtNote: UILabel!
 
     var details = ""
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
         self.txtNote.text = details
+        if(Language.currentLanguage().contains("ar")){
+            self.txtNote.textAlignment = .right
+        }
+        else{
+            self.txtNote.textAlignment = .left
+        }
     }
 
     override func didReceiveMemoryWarning() {

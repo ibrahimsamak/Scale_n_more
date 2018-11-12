@@ -1,0 +1,51 @@
+/*
+ Localize.strings
+ Scale
+ 
+ Created by ibrahim M. samak on 9/8/18.
+ Copyright © 2018 ibrahim M. samak. All rights reserved.
+ */
+
+"Done" = "تم";
+"Error" = "خطأ";
+"Success" = "تم بنجاح";
+"Warning"  =  "تحذير";
+"Logout" = "تسجيل خروج";
+"login"  = "تسجيل دخول";
+"Cancel" = "الغاء";
+"No Internet Connection" = "لا يوجد اتصال بالانترنت";
+"An Error occurred" = "حدث خطأ";
+"Are you sure you want logout?" = "هل انت متاكد من تسجيل الخروج من التطبيق؟";
+"All fields are required" = "جميع الحقول مطلوبة";
+"Please enter your name" = "الرجاء ادخال الاسم";
+"Please enter your phone number" = "الرجاء ادخال رقم الموبايل";
+"Please enter your email address" = "الرجاء ادخال البريد الإلكتروني";
+"Please enter valid email address" = "الرجاء ادخال بريد إلكتروني صحيح";
+"Please enter your password" = "الرجاء ادخال كلمة المرور";
+"Please enter your Date of Birth" = "الرجاء ادخال تاريخ الميلاد";
+"Please select your country" = "الرجاء اختيار الدولة";
+"Please enter your message" = "الرجاء ادخال رسالتك";
+"Please select one of packages" = "الرجاء اختيار واحد من الأقسام";
+"Please enter your weight" = "الرجاء ادخال وزنك";
+"Please enter your height" = "الرجاء ادخال طولك";
+"please you have to sign in" = "يرجى تسجيل الدخول";
+"Are you sure you want to delete video?" = "هل انت متاكد من حذف هذا الفيديو؟";
+"Please enter note" = "الرجاء ادخال الملاحظات";
+"Please enter day name" =  "الرجاء ادخال اسم اليوم";
+"Please fill time field" = "الرجاء اختر الوقت";
+"Please Enter the discount code" = "الرجاء ادخل كود الخصم";
+"Please select one video at least" = "الرجاء اختر فيديو واحد على الأقل";
+"Please enter repetitions number" = "الرجاء ادخل عدد تكرار التمرين";
+"Delete" = "حذف";
+"Day # "= " اليوم ";
+" Days" = " أيام ";
+"Select Category" = "اختر القسم" ;
+"Category" = "قسم";
+"Meals Available" = "وجبات متاحة";
+"Notes " = "ملاحظات";
+"Health Conditions " = "الشروط الصحية ";
+" K.D" = " ك.د ";
+"Arrange meeting with trainer" = "ترتيب لقاء مع المدرب";
+"Arrange meeting with dietitian" = "ترتيب لقاء مع اختصاصي تغذية";
+
+"Please enter plan name" = "الرجاء ادخال اسم الخطة";

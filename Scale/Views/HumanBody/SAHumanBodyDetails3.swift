@@ -36,5 +36,11 @@ class SAHumanBodyDetails3: UIViewController {
         self.navigationController?.pop(animated: true)
     }
     
-    
+    @IBAction func btnAction(_ sender: UIButton)
+    {
+        let vc:SATrainingVC = AppDelegate.storyboard.instanceVC()
+        vc.SubmuscleId = sender.tag
+        vc.isFromLibrary = self.isFromLibrary
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 }

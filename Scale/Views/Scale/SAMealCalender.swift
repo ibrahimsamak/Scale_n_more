@@ -47,9 +47,20 @@ class SAMealCalender: UIViewController, FSCalendarDataSource, FSCalendarDelegate
         
         self.loadDate()
 
-        let scopeGesture = UIPanGestureRecognizer(target: calendar, action: #selector(calendar.handleScopeGesture(_:)));
-        calendar.addGestureRecognizer(scopeGesture)
-
+        if(Language.currentLanguage().contains("ar"))
+        {
+            self.txtTo.textAlignment = .right
+            self.txtFrom.textAlignment = .right
+            self.calendar.locale = Locale(identifier: "ar")
+            self.calendar.calendarHeaderView.calendar.locale = Locale(identifier: "ar")
+        }
+        else
+        {
+            self.txtTo.textAlignment = .left
+            self.txtFrom.textAlignment = .left
+            self.calendar.locale = Locale(identifier: "en_EN")
+            self.calendar.calendarHeaderView.calendar.locale =  Locale(identifier: "en_EN")
+        }
     }
     
     
@@ -93,37 +104,38 @@ class SAMealCalender: UIViewController, FSCalendarDataSource, FSCalendarDelegate
     func calendar(_ calendar: FSCalendar, shouldDeselect date: Date, at monthPosition: FSCalendarMonthPosition) -> Bool {
         return monthPosition == .current
     }
+
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+    
         print("did select date \(self.formatter.string(from: date))")
         self.selectedDay = self.formatter.string(from: date)
         //self.configureVisibleCells()
     }
     
-    func calendar(_ calendar: FSCalendar, didDeselect date: Date) {
-        print("did deselect date \(self.formatter.string(from: date))")
-      
-        let truedate = self.formatter.date(from: self.formatter.string(from: date))
+    func calendar(_ calendar: FSCalendar, didDeselect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        
         let index = self.selectedDateString.index(of: self.formatter.string(from: date))
-
-        let dayObj = self.dates.object(at: index!) as AnyObject
-        let id = dayObj.value(forKey: "id") as! Int
-        let date = dayObj.value(forKey: "date") as! String
-        
-        let vc:SAPopUp = AppDelegate.storyboard.instanceVC()
-        vc.date = date
-        vc.day = "Day #"+String(index!+1)
-        vc.id = id
-        let screenSize = UIScreen.main.bounds
-        let screenWidth = screenSize.width
-        let screenHeight = screenSize.height
-        let popupViewController = BIZPopupViewController(contentViewController: vc, contentSize: CGSize(width: screenWidth, height: screenHeight))
-        popupViewController?.showDismissButton = true
-        popupViewController?.enableBackgroundFade = true
-        self.present(popupViewController!, animated: true, completion: nil)
-        
-        
-        // self.configureVisibleCells()
+        if(index != nil)
+        {
+            let dayObj = self.dates.object(at: index!) as AnyObject
+            let id = dayObj.value(forKey: "id") as! Int
+            let date = dayObj.value(forKey: "date") as! String
+            
+            let vc:SAPopUp = AppDelegate.storyboard.instanceVC()
+            vc.date = date
+            vc.day = "Day # ".localized+String(index!+1)
+            vc.id = id
+            let screenSize = UIScreen.main.bounds
+            let screenWidth = screenSize.width
+            let screenHeight = screenSize.height
+            let popupViewController = BIZPopupViewController(contentViewController: vc, contentSize: CGSize(width: screenWidth, height: screenHeight))
+            popupViewController?.showDismissButton = true
+            popupViewController?.enableBackgroundFade = true
+            self.present(popupViewController!, animated: true, completion: nil)
+        }
+        self.calendar.reloadData()
+         //self.configureVisibleCells()
     }
     
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, eventDefaultColorsFor date: Date) -> [UIColor]? {
@@ -145,13 +157,9 @@ class SAMealCalender: UIViewController, FSCalendarDataSource, FSCalendarDelegate
     private func configure(cell: FSCalendarCell, for date: Date, at position: FSCalendarMonthPosition) {
         
         let diyCell = (cell as! DIYCalendarCell)
-        // Custom today circle
         diyCell.circleImageView.isHidden = !self.gregorian.isDateInToday(date)
-        // Configure selection layer
         if position == .current {
-            
             var selectionType = SelectionType.none
-            
             if calendar.selectedDates.contains(date) {
                 let previousDate = self.gregorian.date(byAdding: .day, value: -1, to: date)!
                 let nextDate = self.gregorian.date(byAdding: .day, value: 1, to: date)!
@@ -165,7 +173,7 @@ class SAMealCalender: UIViewController, FSCalendarDataSource, FSCalendarDelegate
                 return
             }
             diyCell.selectionLayer.isHidden = false
-            diyCell.selectionType = selectionType
+            diyCell.selectionType = .single
             
         } else {
             diyCell.circleImageView.isHidden = true
@@ -215,7 +223,6 @@ class SAMealCalender: UIViewController, FSCalendarDataSource, FSCalendarDelegate
                             self.calendar.dataSource = self
                             self.calendar.delegate = self
                             self.calendar.allowsMultipleSelection = true
-                            self.calendar.reloadData()
                             
                             self.calendar.backgroundColor = UIColor.clear
                             self.calendar.calendarHeaderView.backgroundColor = UIColor.clear
@@ -230,10 +237,13 @@ class SAMealCalender: UIViewController, FSCalendarDataSource, FSCalendarDelegate
                             self.calendar.appearance.eventOffset = CGPoint(x: 0, y: -7)
                             self.calendar.swipeToChooseGesture.isEnabled = true
                             self.calendar.today = nil
-                            
+
                             self.selectedDate.forEach { (date) in
                                 self.calendar.select(date, scrollToDate: true)
                             }
+                            
+                            print(self.selectedDate)
+                            self.calendar.reloadData()
                         }
                         else
                         {
@@ -257,8 +267,14 @@ class SAMealCalender: UIViewController, FSCalendarDataSource, FSCalendarDelegate
         }
         else
         {
-            self.showOkAlert(title: "Error", message: "No Internet Connection")
+            self.showOkAlert(title: "Error".localized, message: "No Internet Connection".localized)
         }
     }
+    
+    @IBAction func btnHome(_ sender: UIButton)
+    {
+        self.navigationController?.popToRoot(animated: true)
+    }
+    
 }
 

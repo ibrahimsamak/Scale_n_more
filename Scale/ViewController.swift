@@ -25,6 +25,5 @@ class ViewController: UIViewController {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
     }
-    
 }
 

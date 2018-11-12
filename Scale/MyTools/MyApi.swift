@@ -157,7 +157,7 @@ class MyApi
     {
         let headers: HTTPHeaders = [
             "Accept": "application/json",
-            "Accept-Language" :  "en"
+            "Accept-Language" :  MyTools.tools.getMyLang()
             ]
         
         Alamofire.request(String(format:"%@%@",MyApi.apiMainURL,"signUp"), method: .post, parameters:["email":email , "name":name, "mobile":mobile,"password":password,"confirm_password":confirm_password, "gender":gender,"country_id":country_id,"date_of_birth":date_of_birth],encoding: JSONEncoding.default , headers:headers).responseJSON { response in
@@ -191,12 +191,57 @@ class MyApi
             }
         }
     }
+    
+    func LoginGoogle(token:String,completion:((DataResponse<Any>,Error?)->Void)!)
+    {
+        
+        let headers: HTTPHeaders = [
+            "Accept": "application/json",
+            "Accept-Language" : MyTools.tools.getMyLang()
+        ]
+        
+        Alamofire.request(String(format:"%@%@",MyApi.apiMainURL,"google_login"), method: .post,
+                          parameters:["token":token,"type":"ios"],encoding: JSONEncoding.default , headers:headers).responseJSON { response in
+                            if(response.result.isSuccess)
+                            {
+                                completion(response,nil)
+                            }
+                            else
+                            {
+                                completion(response,response.result.error)
+                            }
+        }
+    }
+    
+    
+    func LoginFB(token:String ,completion:((DataResponse<Any>,Error?)->Void)!)
+    {
+        
+        let headers: HTTPHeaders = [
+            "Accept": "application/json",
+            "Accept-Language" :  MyTools.tools.getMyLang()
+        ]
+        
+        Alamofire.request(String(format:"%@%@",MyApi.apiMainURL,"facebook_login"), method: .post,
+                          parameters:["token":token],encoding: JSONEncoding.default , headers:headers).responseJSON { response in
+                            if(response.result.isSuccess)
+                            {
+                                completion(response,nil)
+                            }
+                            else
+                            {
+                                completion(response,response.result.error)
+                            }
+        }
+    }
+    
+    
     func PostLoginUser(email:String ,password:String  ,completion:((DataResponse<Any>,Error?)->Void)!)
     {
         
         let headers: HTTPHeaders = [
             "Accept": "application/json",
-            "Accept-Language" :  "en"
+            "Accept-Language" :  MyTools.tools.getMyLang()
         ]
         
         Alamofire.request(String(format:"%@%@",MyApi.apiMainURL,"login"), method: .post,
@@ -220,7 +265,7 @@ class MyApi
         let headers: HTTPHeaders =
             [
                 "Accept": "application/json",
-                "Accept-Language" :  "en",
+                "Accept-Language" :  MyTools.tools.getMyLang(),
                 "Authorization" :  "Bearer "+MyTools.tools.getMyToken()
         ]
         
@@ -243,7 +288,7 @@ class MyApi
         let headers: HTTPHeaders =
             [
                 "Accept": "application/json",
-                "Accept-Language" :  "en",
+                "Accept-Language" :  MyTools.tools.getMyLang(),
                 "Authorization" :  "Bearer "+MyTools.tools.getMyToken()
         ]
         
@@ -266,7 +311,7 @@ class MyApi
         let headers: HTTPHeaders =
             [
                 "Accept": "application/json",
-                "Accept-Language" :  "en",
+                "Accept-Language" :  MyTools.tools.getMyLang(),
                 "Authorization" :  "Bearer "+MyTools.tools.getMyToken()
             ]
         
@@ -289,7 +334,7 @@ class MyApi
         let headers: HTTPHeaders =
             [
                 "Accept": "application/json",
-                "Accept-Language" :  "en",
+                "Accept-Language" :  MyTools.tools.getMyLang(),
                 "Authorization" :  "Bearer "+MyTools.tools.getMyToken()
         ]
         
@@ -314,7 +359,7 @@ class MyApi
         let headers: HTTPHeaders =
             [
             "Accept": "application/json",
-            "Accept-Language" :  "en",
+            "Accept-Language" :  MyTools.tools.getMyLang(),
             "Authorization" :  "Bearer "+MyTools.tools.getMyToken()
             ]
     
@@ -481,7 +526,7 @@ class MyApi
     {
         let headers: HTTPHeaders = [
             "Accept": "application/json",
-            "Accept-Language" : "en"
+            "Accept-Language" : MyTools.tools.getMyLang()
         ]
         Alamofire.request(String(format:"%@%@",MyApi.apiMainURL,"forgetpassword"), method: .post,parameters:["email":email],encoding: JSONEncoding.default,headers:headers).responseJSON { response in
             if(response.result.isSuccess)
@@ -606,7 +651,7 @@ class MyApi
     {
         let headers: HTTPHeaders = [
             "Accept": "application/json",
-            "Accept-Language" :  "en"
+            "Accept-Language" :  MyTools.tools.getMyLang()
         ]
         
         Alamofire.request(String(format:"%@%@",MyApi.apiMainURL,"contact"), method: .post,parameters:["fullname":fullname , "email":email , "comment":comment , "mobile":mobile],encoding: JSONEncoding.default,headers:headers).responseJSON { response in
@@ -628,7 +673,7 @@ class MyApi
         let headers: HTTPHeaders = [
             "Accept": "application/json",
             "Accept-Language" :  MyTools.tools.getMyLang(),
-            "Authorization" :  "Bearer "+MyTools.tools.getMyToken(),
+            "Authorization" :  "Bearer "+MyTools.tools.getMyToken()
         ]
         
         Alamofire.request(String(format:"%@%@",MyApi.apiMainURL,"user/deleteImage/"+ID), method: .post,encoding: JSONEncoding.default,headers:headers).responseJSON { response in
@@ -648,7 +693,7 @@ class MyApi
     {
         let headers: HTTPHeaders = [
             "Accept": "application/json",
-            "Accept-Language" :  "en",
+            "Accept-Language" :  MyTools.tools.getMyLang(),
             "Authorization" :  "Bearer "+MyTools.tools.getMyToken()
         ]
         
@@ -668,7 +713,7 @@ class MyApi
     {
         let headers: HTTPHeaders = [
             "Accept": "application/json",
-            "Accept-Language" :  "en",
+            "Accept-Language" :  MyTools.tools.getMyLang(),
             "Authorization" :  "Bearer "+MyTools.tools.getMyToken()
         ]
         
@@ -688,7 +733,7 @@ class MyApi
     {
         let headers: HTTPHeaders = [
             "Accept": "application/json",
-            "Accept-Language" :  "en",
+            "Accept-Language" :  MyTools.tools.getMyLang(),
             "Authorization" :  "Bearer "+MyTools.tools.getMyToken()
         ]
         
@@ -709,7 +754,7 @@ class MyApi
     {
         let headers: HTTPHeaders = [
             "Accep": "application/json",
-            "Accept-Language" :  "en",
+            "Accept-Language" :  MyTools.tools.getMyLang(),
             "Authorization" :  "Bearer "+MyTools.tools.getMyToken()
         ]
         
@@ -729,7 +774,7 @@ class MyApi
     {
         let headers: HTTPHeaders = [
             "Accep": "application/json",
-            "Accept-Language" :  "en",
+            "Accept-Language" :  MyTools.tools.getMyLang(),
             "Authorization" :  "Bearer "+MyTools.tools.getMyToken()
         ]
         
@@ -749,7 +794,7 @@ class MyApi
     {
         let headers: HTTPHeaders = [
             "Accep": "application/json",
-            "Accept-Language" :  "en",
+            "Accept-Language" :  MyTools.tools.getMyLang(),
             "Authorization" :  "Bearer "+MyTools.tools.getMyToken()
         ]
         
@@ -769,7 +814,7 @@ class MyApi
     {
         let headers: HTTPHeaders = [
             "Accep": "application/json",
-            "Accept-Language" :  "en",
+            "Accept-Language" : MyTools.tools.getMyLang(),
             "Authorization" :  "Bearer "+MyTools.tools.getMyToken()
         ]
         
@@ -785,15 +830,36 @@ class MyApi
         }
     }
     
-    func GetVideos(submuscale_id:Int,completion:((DataResponse<Any>,Error?)->Void)!)
+    
+//    func GetSearchVideos(submuscale_id:Int,completion:((DataResponse<Any>,Error?)->Void)!)
+//    {
+//        let headers: HTTPHeaders = [
+//            "Accep": "application/json",
+//            "Accept-Language" :  "en",
+//            "Authorization" :  "Bearer "+MyTools.tools.getMyToken()
+//        ]
+//
+//        Alamofire.request(String(format:"%@%@",MyApi.apiMainURL,"getVideo?video_id=&submuscale_id="+String(submuscale_id)), method: .get,encoding: JSONEncoding.default , headers:headers).responseJSON { response in
+//            if(response.result.isSuccess)
+//            {
+//                completion(response,nil)
+//            }
+//            else
+//            {
+//                completion(response,response.result.error)
+//            }
+//        }
+//    }
+//
+    func GetVideos(submuscale_id:Int,name:String,completion:((DataResponse<Any>,Error?)->Void)!)
     {
         let headers: HTTPHeaders = [
             "Accep": "application/json",
-            "Accept-Language" :  "en",
-            "Authorization" :  "Bearer "+MyTools.tools.getMyToken()
+            "Accept-Language" :  MyTools.tools.getMyLang()
+//            "Authorization" :  "Bearer "+MyTools.tools.getMyToken()
         ]
         
-        Alamofire.request(String(format:"%@%@",MyApi.apiMainURL,"getVideo?video_id=&submuscale_id="+String(submuscale_id)), method: .get,encoding: JSONEncoding.default , headers:headers).responseJSON { response in
+        Alamofire.request(String(format:"%@%@",MyApi.apiMainURL,"getVideo?video_id=&submuscale_id="+String(submuscale_id)+"&name="+name), method: .get,encoding: JSONEncoding.default , headers:headers).responseJSON { response in
             if(response.result.isSuccess)
             {
                 completion(response,nil)
@@ -810,7 +876,7 @@ class MyApi
     {
         let headers: HTTPHeaders = [
             "Accep": "application/json",
-            "Accept-Language" :  "en",
+            "Accept-Language" :  MyTools.tools.getMyLang(),
             "Authorization" :  "Bearer "+MyTools.tools.getMyToken()
         ]
         
@@ -829,7 +895,7 @@ class MyApi
     {
         let headers: HTTPHeaders = [
             "Accep": "application/json",
-            "Accept-Language" :  "en",
+            "Accept-Language" :  MyTools.tools.getMyLang(),
             "Authorization" :  "Bearer "+MyTools.tools.getMyToken()
             ]
         
@@ -849,7 +915,7 @@ class MyApi
     {
         let headers: HTTPHeaders = [
             "Accep": "application/json",
-            "Accept-Language" :  "en",
+            "Accept-Language" :  MyTools.tools.getMyLang(),
             "Authorization" :  "Bearer "+MyTools.tools.getMyToken()
         ]
         
@@ -869,7 +935,7 @@ class MyApi
     {
         let headers: HTTPHeaders = [
             "Accept": "application/json",
-            "Accept-Language" :  "en",
+            "Accept-Language" :  MyTools.tools.getMyLang(),
             "Authorization" :  "Bearer "+MyTools.tools.getMyToken()
         ]
         
@@ -885,15 +951,15 @@ class MyApi
         }
     }
     
-    func editPlanMeals(day_id:Int,category_id:Int,meal_id:Int,pause:Int,completion:((DataResponse<Any>,Error?)->Void)!)
+    func PauseDay(date:String,pause:Int,completion:((DataResponse<Any>,Error?)->Void)!)
     {
         let headers: HTTPHeaders = [
             "Accept": "application/json",
-            "Accept-Language" :  "en",
+            "Accept-Language" :  MyTools.tools.getMyLang(),
             "Authorization" :  "Bearer "+MyTools.tools.getMyToken()
         ]
         
-        Alamofire.request(String(format:"%@%@",MyApi.apiMainURL,"editPlanMeals"), method: .post, parameters:["day_id":day_id , "category_id":category_id, "meal_id":meal_id,"pause":pause],encoding: JSONEncoding.default , headers:headers).responseJSON { response in
+        Alamofire.request(String(format:"%@%@",MyApi.apiMainURL,"editPlanMeals"), method: .post, parameters:["date":date , "pause":pause],encoding: JSONEncoding.default , headers:headers).responseJSON { response in
             if(response.result.isSuccess)
             {
                 completion(response,nil)
@@ -905,11 +971,55 @@ class MyApi
         }
     }
     
+    
+    func editPlanMeals(date:String,category_id:Int,meal_id:[Int],pause:Int,completion:((DataResponse<Any>,Error?)->Void)!)
+    {
+        let headers: HTTPHeaders = [
+            "Accept": "application/json",
+            "Accept-Language" :  MyTools.tools.getMyLang(),
+            "Authorization" :  "Bearer "+MyTools.tools.getMyToken()
+        ]
+        
+        Alamofire.upload(
+            multipartFormData:
+            {
+                multipartFormData in
+                
+                multipartFormData.append(date.data(using: String.Encoding.utf8, allowLossyConversion: false)!, withName: "date")
+
+                multipartFormData.append("\(category_id)".data(using: String.Encoding.utf8, allowLossyConversion: false)!, withName: "category_id")
+
+                
+                multipartFormData.append("\(meal_id)".data(using: String.Encoding.utf8, allowLossyConversion: false)!, withName: "meal_id")
+                
+                multipartFormData.append("\(pause)".data(using: String.Encoding.utf8, allowLossyConversion: false)!, withName: "pause")
+        },
+            to: String(format:"%@%@",MyApi.apiMainURL,"editPlanMeals"),
+            headers:headers,
+            encodingCompletion: { encodingResult in
+                switch encodingResult {
+                case .success(let upload, _, _):
+                    upload.responseJSON { response in
+                        if(response.result.isSuccess)
+                        {
+                            completion(response,nil)
+                        }
+                        else
+                        {
+                            completion(response,response.result.error)
+                        }
+                    }
+                case .failure(_): break
+                }
+        })
+    }
+        
+    
     func getPlanMeals(completion:((DataResponse<Any>,Error?)->Void)!)
     {
         let headers: HTTPHeaders = [
             "Accep": "application/json",
-            "Accept-Language" :  "en",
+            "Accept-Language" :  MyTools.tools.getMyLang(),
             "Authorization" :  "Bearer "+MyTools.tools.getMyToken()
         ]
         
@@ -930,7 +1040,7 @@ class MyApi
     {
         let headers: HTTPHeaders = [
             "Accep": "application/json",
-            "Accept-Language" :  "en",
+            "Accept-Language" :  MyTools.tools.getMyLang(),
             "Authorization" :  "Bearer "+MyTools.tools.getMyToken()
         ]
         
@@ -951,7 +1061,7 @@ class MyApi
     {
         let headers: HTTPHeaders = [
             "Accep": "application/json",
-            "Accept-Language" :  "en"
+            "Accept-Language" :  MyTools.tools.getMyLang()
         ]
         
         Alamofire.request(String(format:"%@%@",MyApi.apiMainURL,"getPackages?type="+String(ID)), method: .get,encoding: JSONEncoding.default , headers:headers).responseJSON { response in
@@ -1093,7 +1203,8 @@ class MyApi
     {
         let headers: HTTPHeaders = [
             "Accept": "application/json",
-            "Accept-Language" : "en"
+            "Accept-Language" : MyTools.tools.getMyLang()
+            
         ]
         Alamofire.request(String(format:"%@%@",MyApi.apiMainURL,"getConfig"), method: .get,encoding: JSONEncoding.default,headers:headers).responseJSON { response in
             if(response.result.isSuccess)

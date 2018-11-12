@@ -10,13 +10,27 @@ import UIKit
 
 class PreviewDayCollection: UICollectionViewCell {
 
-    @IBOutlet weak var view: UIView!
+    @IBOutlet weak var icon: UIImageView!
+    @IBOutlet weak var Allview: UIView!
     @IBOutlet weak var lbl: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
-        view.layer.cornerRadius = 22.5
-        view.layer.masksToBounds = true
-        view.layer.borderWidth = 1
-        view.layer.borderColor = "9AC25B".color.cgColor
+       
+        Allview.layer.cornerRadius = 22.5
+        Allview.layer.masksToBounds = true
+        Allview.layer.borderWidth = 1
+        Allview.layer.borderColor = "9AC25B".color.cgColor
+        
+        
+        if(Language.currentLanguage().contains("ar"))
+        {
+            self.lbl.textAlignment = .right
+            self.icon.transform = CGAffineTransform(scaleX: -1, y: 1)
+        }
+        else
+        {
+            self.lbl.textAlignment = .left
+        }
+        
     }
 }

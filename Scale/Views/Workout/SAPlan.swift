@@ -37,6 +37,7 @@ class SAPlan: UIViewController, UITableViewDelegate , UITableViewDataSource , Ac
         }
     }
     
+    @IBOutlet weak var lblHint: UILabel!
     @IBOutlet weak var tableView: UITableView!
     var TItems :NSArray = []
     var id = 0
@@ -88,28 +89,59 @@ class SAPlan: UIViewController, UITableViewDelegate , UITableViewDataSource , Ac
         
         let wrapper = ActionCell()
         wrapper.delegate = self
-        wrapper.animationStyle = .concurrent
-        wrapper.wrap(cell: cell,
-                     actionsLeft: [],
-                     actionsRight:[
-                        {
-                            let action = IconAction(action: "deleteAction")
-                            action.icon.image  = #imageLiteral(resourceName: "DeleteCell")
-                            action.icon.tintColor = UIColor.white
-                            action.backgroundColor = UIColor.clear
-                            self.id = id
-                            return action
-                        }(),
-                        {
-                            let action = IconAction(action: "editAction")
-                            action.icon.image = #imageLiteral(resourceName: "EditCell")
-                            action.icon.tintColor = UIColor.white
-                            action.backgroundColor = UIColor.clear
-                            self.id = id
-                            self.planName = name
-                            return action
-                        }(),
-                        ])
+        wrapper.animationStyle = .ladder
+        if(Language.currentLanguage().contains("ar")){
+            wrapper.wrap(cell: cell,
+                         actionsLeft:[
+                            {
+                                let action = IconAction(action: "deleteAction")
+                                action.icon.image  = #imageLiteral(resourceName: "DeleteCell")
+                                action.icon.tintColor = UIColor.white
+                                action.backgroundColor = UIColor.clear
+                                self.id = id
+                                wrapper.semanticContentAttribute = .forceLeftToRight
+                                return action
+                            }(),
+                            {
+                                let action = IconAction(action: "editAction")
+                                action.icon.image = #imageLiteral(resourceName: "EditCell")
+                                action.icon.tintColor = UIColor.white
+                                action.backgroundColor = UIColor.clear
+                                self.id = id
+                                self.planName = name
+                                wrapper.semanticContentAttribute = .forceLeftToRight
+                                return action
+                            }(),
+                            ],
+                         actionsRight:[])
+        }
+        else{
+            wrapper.wrap(cell: cell,
+                         actionsLeft: [],
+                         actionsRight:[
+                            {
+                                let action = IconAction(action: "deleteAction")
+                                action.icon.image  = #imageLiteral(resourceName: "DeleteCell")
+                                action.icon.tintColor = UIColor.white
+                                action.backgroundColor = UIColor.clear
+                                self.id = id
+                                wrapper.semanticContentAttribute = .forceLeftToRight
+                                return action
+                            }(),
+                            {
+                                let action = IconAction(action: "editAction")
+                                action.icon.image = #imageLiteral(resourceName: "EditCell")
+                                action.icon.tintColor = UIColor.white
+                                action.backgroundColor = UIColor.clear
+                                self.id = id
+                                self.planName = name
+                                wrapper.semanticContentAttribute = .forceLeftToRight
+                                
+                                return action
+                            }(),
+                            ])
+        }
+        
         return cell
     }
     
@@ -128,7 +160,7 @@ class SAPlan: UIViewController, UITableViewDelegate , UITableViewDataSource , Ac
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
         return 100.0
@@ -153,6 +185,14 @@ class SAPlan: UIViewController, UITableViewDelegate , UITableViewDataSource , Ac
                             let items = JSON["items"] as! NSArray
                             self.TItems = items
                             
+                            if(self.TItems.count > 0 ){
+                                self.lblHint.isHidden = true
+                                self.tableView.isHidden = false
+                            }
+                            else{
+                                self.lblHint.isHidden = false
+                                self.tableView.isHidden = true
+                            }
                             self.tableView.delegate = self
                             self.tableView.dataSource = self
                             self.tableView.reloadData()
@@ -180,7 +220,7 @@ class SAPlan: UIViewController, UITableViewDelegate , UITableViewDataSource , Ac
         }
         else
         {
-            self.showOkAlert(title: "Error", message: "No Internet Connection")
+            self.showOkAlert(title: "Error".localized, message: "No Internet Connection".localized)
         }
     }
     
@@ -230,7 +270,7 @@ class SAPlan: UIViewController, UITableViewDelegate , UITableViewDataSource , Ac
         }
         else
         {
-            self.showOkAlert(title: "Error", message: "No Internet Connection")
+            self.showOkAlert(title: "Error".localized, message: "No Internet Connection".localized)
         }
     }
     
@@ -239,7 +279,7 @@ class SAPlan: UIViewController, UITableViewDelegate , UITableViewDataSource , Ac
         let vc :SAAddPlan = AppDelegate.storyboard.instanceVC()
         vc.name = name
         vc.id = planID
-//        vc.TItems = DaysArr
+        //        vc.TItems = DaysArr
         vc.isEdit = true
         self.navigationController?.pushViewController(vc, animated: true)
     }

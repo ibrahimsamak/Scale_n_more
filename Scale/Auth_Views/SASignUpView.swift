@@ -87,6 +87,24 @@ class SASignUpView: UIViewController, CategoryProtocol,SCPopDatePickerDelegate
     {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
+        
+        if(Language.currentLanguage().contains("ar"))
+        {
+            self.txtPassword.textAlignment = .right
+            self.txtEmail.textAlignment = .right
+            self.txtDob.textAlignment  = .right
+            self.txtName.textAlignment = .right
+            self.txtPhone.textAlignment = .right
+            self.txtCountry.textAlignment = .right
+        }
+        else{
+            self.txtPassword.textAlignment = .left
+            self.txtEmail.textAlignment = .left
+            self.txtDob.textAlignment  = .left
+            self.txtName.textAlignment = .left
+            self.txtPhone.textAlignment = .left
+            self.txtCountry.textAlignment = .left
+        }
     }
     
     override func didReceiveMemoryWarning()
@@ -161,9 +179,9 @@ class SASignUpView: UIViewController, CategoryProtocol,SCPopDatePickerDelegate
             {
                 self.showOkAlert(title: "Error".localized, message: "Please enter your name".localized)
             }
-            else if txtPhone.text?.count == 0{
-                self.showOkAlert(title: "Error".localized, message: "Please enter your phone number".localized)
-            }
+//            else if txtPhone.text?.count == 0{
+//                self.showOkAlert(title: "Error".localized, message: "Please enter your phone number".localized)
+//            }
             else if txtEmail.text?.count == 0{
                 self.showOkAlert(title: "Error".localized, message: "Please enter your email address".localized)
             }

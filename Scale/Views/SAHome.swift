@@ -26,12 +26,10 @@ class SAHome: UIViewController {
         self.navigationController?.navigationBar.isHidden = true
     }
     
-    @IBAction func btnWorkout(_ sender: UIButton) {
-        
-    }
-    
-    @IBAction func btnResturant(_ sender: UIButton) {
-        
+    @IBAction func btnWorkout(_ sender: UIButton)
+    {
+        let vc:SAWorkout = AppDelegate.storyboard.instanceVC()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction func btnSettings(_ sender: UIButton)
@@ -43,14 +41,30 @@ class SAHome: UIViewController {
     
     @IBAction func btnScale(_ sender: UIButton)
     {
-        let checkMealPackage = MyTools.tools.checkMealPackage()
-        if(checkMealPackage == 0){
-            let vc:SAResturantPackages = AppDelegate.storyboard.instanceVC()
-            self.navigationController?.pushViewController(vc, animated: true)
+        if ((UserDefaults.standard.object(forKey: "CurrentUser")) != nil)
+        {
+            let checkMealPackage = MyTools.tools.checkMealPackage()
+            if(checkMealPackage == 0){
+                let vc:SAResturantPackages = AppDelegate.storyboard.instanceVC()
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+            else{
+                let vc:SAScaleResturant = AppDelegate.storyboard.instanceVC()
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
         }
-        else{
-            let vc:SAScaleResturant = AppDelegate.storyboard.instanceVC()
-            self.navigationController?.pushViewController(vc, animated: true)
+        else
+        {
+            self.showCustomAlert(okFlag: false, title: "Warning".localized, message: "please you have to sign in".localized, okTitle: "login".localized, cancelTitle: "Cancel".localized)
+            {(success) in
+                if(success)
+                {
+                    let vc : LoginNav = AppDelegate.storyboard.instanceVC()
+                    let appDelegate = UIApplication.shared.delegate
+                    appDelegate?.window??.rootViewController = vc
+                    appDelegate?.window??.makeKeyAndVisible()
+                }
+            }
         }
     }
 }
