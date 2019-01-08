@@ -128,7 +128,7 @@ class SASignUpView: UIViewController, CategoryProtocol,SCPopDatePickerDelegate
             self.women.layer.masksToBounds = true
             self.women.layer.borderWidth = 1
             self.women.layer.borderColor = "E2E2E2".color.cgColor
-            self.gender = 0
+            self.gender = 1
         }
         else{
             //female
@@ -142,7 +142,7 @@ class SASignUpView: UIViewController, CategoryProtocol,SCPopDatePickerDelegate
             self.women.layer.masksToBounds = true
             self.women.layer.borderWidth = 3
             self.women.layer.borderColor = "8FB952".color.cgColor
-            self.gender = 1
+            self.gender = 2
         }
     }
     
@@ -227,6 +227,12 @@ class SASignUpView: UIViewController, CategoryProtocol,SCPopDatePickerDelegate
                                 
                                 ns.setValue(CurrentUser, forKey: "CurrentUser")
                                 ns.synchronize()
+                                
+                                let deviceToken = MyTools.tools.getDeviceToken()
+                                
+                                self.PostFcmToken(token: deviceToken!,type: "ios")
+                                print(deviceToken)
+
                                 let vc : rootNavigation = AppDelegate.storyboard.instanceVC()
                                 let appDelegate = UIApplication.shared.delegate
                                 appDelegate?.window??.rootViewController = vc
@@ -252,6 +258,48 @@ class SASignUpView: UIViewController, CategoryProtocol,SCPopDatePickerDelegate
             self.showOkAlert(title: "Error".localized, message: "No Internet Connection".localized)
         }
     }
+    
+    func PostFcmToken(token:String,type:String){
+        
+        if MyTools.tools.connectedToNetwork()
+        {
+                self.showIndicator()
+                MyApi.api.PostFcmToken(token: token, type: "ios")
+                { (response, err) in
+                    if((err) == nil)
+                    {
+                        if let JSON = response.result.value as? NSDictionary
+                        {
+                            let  status = JSON["status"] as? Bool
+                            if (status == true)
+                            {
+                                print("success")
+                                
+                                
+                            }
+                            else
+                            {
+                                self.hideIndicator()
+                                self.showOkAlert(title: "Error".localized, message: JSON["message"] as? String ?? "")
+                            }
+                            self.hideIndicator()
+                        }
+                    }
+                    else
+                    {
+                        self.hideIndicator()
+                        self.showOkAlert(title: "Error".localized, message: "An Error occurred".localized)
+                    }
+                }
+            
+        }
+        else
+        {
+            self.showOkAlert(title: "Error".localized, message: "No Internet Connection".localized)
+        }
+        
+    }
+    
     
     @IBAction func btnStaticPage(_ sender: UIButton)
     {

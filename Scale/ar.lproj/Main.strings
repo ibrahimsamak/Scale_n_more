@@ -51,6 +51,9 @@
 
 /* Class = "UITextField"; text = "REF #"; ObjectID = "4CG-4M-UXw"; */
 "4CG-4M-UXw.text" = "رقم العضوية";
+"a4v-OV-D2m.text" = "الرجاء التواصل مع ادارة التطبيق للبدء في اجراءات شراء الخطة";
+
+"fhB-Pn-SSr.text" = "تواصل معنا";
 
 /* Class = "UILabel"; text = "Plan Details"; ObjectID = "5G5-9G-wCm"; */
 "5G5-9G-wCm.text" = "تفاصيل الخطة";

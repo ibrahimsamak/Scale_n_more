@@ -7,7 +7,7 @@
 //
 
 import UIKit
-//import PulsingHalo
+
 import MMPulseView
 class SAPulsView: UIViewController {
 

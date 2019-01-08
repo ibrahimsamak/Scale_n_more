@@ -9,7 +9,8 @@
 import UIKit
 
 class MealsCell: UITableViewCell {
-
+    @IBOutlet weak var btnZoom: UIButton!
+    
     @IBOutlet weak var img: UIImageView!
     @IBOutlet weak var lblDesc: UILabel!
     @IBOutlet weak var lblTitle: UILabel!

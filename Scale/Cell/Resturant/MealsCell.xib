@@ -68,13 +68,19 @@
                                     <constraint firstAttribute="width" constant="16" id="NnE-8e-gsj"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f5f-Rv-WV6">
+                                <rect key="frame" x="15" y="3" width="88" height="73.5"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="7Yw-od-Hyw" firstAttribute="top" secondItem="4Sf-qB-5GW" secondAttribute="bottom" constant="-21" id="25C-jJ-d90"/>
                             <constraint firstItem="vKD-YA-gJf" firstAttribute="leading" secondItem="eTr-dM-H5C" secondAttribute="leading" constant="15" id="4mj-t0-Fo5"/>
+                            <constraint firstItem="f5f-Rv-WV6" firstAttribute="leading" secondItem="vKD-YA-gJf" secondAttribute="trailing" constant="-88" id="Ilm-Z7-1Cp"/>
                             <constraint firstItem="iNs-vv-cQJ" firstAttribute="leading" secondItem="eTr-dM-H5C" secondAttribute="leading" id="LJa-I3-AsL"/>
                             <constraint firstItem="7Yw-od-Hyw" firstAttribute="leading" secondItem="4Sf-qB-5GW" secondAttribute="trailing" constant="-23" id="MLU-av-yUA"/>
+                            <constraint firstItem="f5f-Rv-WV6" firstAttribute="width" secondItem="vKD-YA-gJf" secondAttribute="width" id="PfC-ua-m3x"/>
+                            <constraint firstItem="f5f-Rv-WV6" firstAttribute="centerY" secondItem="vKD-YA-gJf" secondAttribute="centerY" id="QKO-Wm-lrt"/>
                             <constraint firstItem="jKE-hK-vEy" firstAttribute="top" secondItem="vKD-YA-gJf" secondAttribute="bottom" constant="2" id="RxC-d4-YD7"/>
                             <constraint firstAttribute="bottom" secondItem="jKE-hK-vEy" secondAttribute="bottom" id="T0n-Jc-qC4"/>
                             <constraint firstItem="jKE-hK-vEy" firstAttribute="leading" secondItem="eTr-dM-H5C" secondAttribute="leading" id="TPl-sp-PSw"/>
@@ -85,6 +91,7 @@
                             <constraint firstItem="wgV-LF-STO" firstAttribute="top" secondItem="iNs-vv-cQJ" secondAttribute="bottom" constant="19" id="hdC-SB-rr9"/>
                             <constraint firstItem="vKD-YA-gJf" firstAttribute="top" secondItem="iNs-vv-cQJ" secondAttribute="bottom" constant="2" id="keK-gY-uAF"/>
                             <constraint firstAttribute="trailing" secondItem="iNs-vv-cQJ" secondAttribute="trailing" id="lsk-CB-5MR"/>
+                            <constraint firstItem="f5f-Rv-WV6" firstAttribute="height" secondItem="vKD-YA-gJf" secondAttribute="height" id="swt-8R-YPv"/>
                             <constraint firstAttribute="trailing" secondItem="7Yw-od-Hyw" secondAttribute="trailing" constant="5" id="uX2-99-Idk"/>
                             <constraint firstAttribute="trailing" secondItem="jKE-hK-vEy" secondAttribute="trailing" id="zmM-UG-4qz"/>
                         </constraints>
@@ -101,12 +108,13 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="btnZoom" destination="f5f-Rv-WV6" id="nzh-X4-6Qg"/>
                 <outlet property="iconDon" destination="4Sf-qB-5GW" id="9qt-0y-4x7"/>
                 <outlet property="img" destination="vKD-YA-gJf" id="yRy-Mi-8s2"/>
                 <outlet property="img_circle" destination="7Yw-od-Hyw" id="Rta-To-K3X"/>
                 <outlet property="lblTitle" destination="wgV-LF-STO" id="tBd-Oc-2Zq"/>
             </connections>
-            <point key="canvasLocation" x="40" y="66"/>
+            <point key="canvasLocation" x="40" y="65.667166416791616"/>
         </tableViewCell>
     </objects>
     <resources>

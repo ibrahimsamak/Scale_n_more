@@ -240,12 +240,12 @@ extension AppDelegate : MessagingDelegate {
         Messaging.messaging().apnsToken = deviceToken
         Messaging.messaging().subscribe(toTopic: "/topics/scalenmore")
         
-//        if InstanceID.instanceID().token() != nil
-//        {
-//            let fcmToken = InstanceID.instanceID().token() as! String
-//            UserDefaults.standard.setValue(fcmToken, forKey: "deviceToken")
-//            print(fcmToken)
-//        }
+        if InstanceID.instanceID().token() != nil
+        {
+            let fcmToken = InstanceID.instanceID().token() as! String
+            UserDefaults.standard.setValue(fcmToken, forKey: "deviceToken")
+            print(fcmToken)
+        }
     }
     
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {

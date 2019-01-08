@@ -8,7 +8,7 @@
 
 import UIKit
 import SDWebImage
-
+import BIZPopupView
 class SADayDetails: UIViewController ,UITableViewDelegate, UITableViewDataSource
 {
     @IBOutlet weak var tbl: UITableView!
@@ -20,7 +20,7 @@ class SADayDetails: UIViewController ,UITableViewDelegate, UITableViewDataSource
     var TMeals : NSArray = []
     var unSelectedMeals : NSMutableArray = []
     var SelectedMeals : NSMutableArray = []
-    var TSelectedMeal :NSArray = []
+    var TSelectedMeal : NSArray = []
     var selectedMealId = ""
     var day_id = ""
     var meal_id = ""
@@ -60,6 +60,9 @@ class SADayDetails: UIViewController ,UITableViewDelegate, UITableViewDataSource
     {
         return 37.0
     }
+    
+
+    
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let cell = tableView.dequeueReusableHeaderFooterView(withIdentifier: "SACategoryHeader") as! SACategoryHeader
@@ -126,8 +129,10 @@ class SADayDetails: UIViewController ,UITableViewDelegate, UITableViewDataSource
             let prefix = "http://scalenmore.com/"
          
             cell.lblTitle.text = title
-            cell.img.sd_setImage(with: URL(string: prefix+logo), placeholderImage: UIImage(named: "10000-2")!, options: SDWebImageOptions.refreshCached)
-          
+           cell.img.sd_setImage(with: URL(string: prefix+logo), placeholderImage: UIImage(named: "10000-2")!, options: SDWebImageOptions.refreshCached)
+       
+            cell.btnZoom.tag = indexPath.row
+            cell.btnZoom.addTarget(self, action: #selector(didZoomImg), for: .touchUpInside)
             self.category_id = category_id
             self.meal_id = id
             
@@ -161,6 +166,24 @@ class SADayDetails: UIViewController ,UITableViewDelegate, UITableViewDataSource
             
             return cell
         }
+    }
+    
+    @objc func didZoomImg(_ sender: UIButton){
+        
+            let smallViewController = AppDelegate.storyboard.instantiateViewController(withIdentifier: "NSZoomImg") as! NSZoomImg
+        
+        let conent = self.TSelectedMeal.object(at:sender.tag) as AnyObject
+        
+        smallViewController.objPass3 = conent
+        
+        let popupViewController = BIZPopupViewController(contentViewController: smallViewController, contentSize: CGSize(width: CGFloat(320), height: CGFloat(600)))
+       
+            popupViewController?.showDismissButton = true
+            popupViewController?.enableBackgroundFade = true
+        self.present(popupViewController!, animated: true)
+        
+        
+       
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {

@@ -216,6 +216,14 @@ class MyTools{
         let access_token = dict.value(forKey: "access_token") as! String
         return access_token
     }
+    func getDeviceToken() -> String? {
+        
+        let ns = UserDefaults.standard
+        let deviceToken = ns.value(forKey: "deviceToken") as? String ?? ""
+        
+        return deviceToken
+    }
+    
     
     func getUserType() -> String
     {
@@ -294,12 +302,6 @@ class MyTools{
         
     }
     
-    func getDeviceToken() -> String? {
-        
-        let ns = UserDefaults.standard
-        let deviceToken = ns.value(forKey: "deviceToken") as? String ?? ""
-        return deviceToken
-    }
     
     
     func isStudent(b_student:String) -> Bool{

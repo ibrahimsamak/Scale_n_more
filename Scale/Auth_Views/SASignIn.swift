@@ -29,7 +29,7 @@ class SASignIn: UIViewController , FBSDKLoginButtonDelegate, GIDSignInDelegate, 
         print(user!.profile.name)
         print(user!.profile)
     }
-    
+   // let token = MyTools.tools.getMyToken()
     @IBOutlet weak var btnArrow: UIButton!
     @IBOutlet weak var txtPassword: UITextField!
     @IBOutlet weak var txtEmail: UITextField!
@@ -70,6 +70,7 @@ class SASignIn: UIViewController , FBSDKLoginButtonDelegate, GIDSignInDelegate, 
     
     @IBAction func btnLogin(_ sender: UIButton)
     {
+        
         if MyTools.tools.connectedToNetwork()
         {
             if txtEmail.text?.count == 0{
@@ -101,20 +102,25 @@ class SASignIn: UIViewController , FBSDKLoginButtonDelegate, GIDSignInDelegate, 
                                 
                                 let CurrentUser:NSDictionary =
                                     [
-                                        "id":UserArray?.value(forKey: "id") as! Int,
-                                        "access_token":UserArray?.value(forKey: "access_token") as! String,
-                                        "name":UserArray?.value(forKey: "name") as! String,
-                                        "check_meal": UserArray?.value(forKey: "check_meal") as! Int
+        "id":UserArray?.value(forKey: "id") as! Int,
+        "access_token":UserArray?.value(forKey: "access_token") as! String,
+            "name":UserArray?.value(forKey: "name") as! String,
+            "check_meal": UserArray?.value(forKey: "check_meal") as! Int
                                     ]
                                 
                                 ns.setValue(CurrentUser, forKey: "CurrentUser")
                                 ns.synchronize()
+                let deviceToken = MyTools.tools.getDeviceToken()
+                            
+                                self.PostFcmToken(token: deviceToken!,type: "ios")
+                                print(deviceToken)
+
+    let vc : rootNavigation = AppDelegate.storyboard.instanceVC()
+    let appDelegate = UIApplication.shared.delegate
+    appDelegate?.window??.rootViewController = vc
+    appDelegate?.window??.makeKeyAndVisible()
                                 
-                                let vc : rootNavigation = AppDelegate.storyboard.instanceVC()
-                                let appDelegate = UIApplication.shared.delegate
-                                appDelegate?.window??.rootViewController = vc
-                                appDelegate?.window??.makeKeyAndVisible()
-                                
+                            
                             }
                             else
                             {
@@ -136,6 +142,47 @@ class SASignIn: UIViewController , FBSDKLoginButtonDelegate, GIDSignInDelegate, 
         {
             self.showOkAlert(title: "Error".localized, message: "No Internet Connection".localized)
         }
+    }
+    
+    func PostFcmToken(token:String,type:String){
+        
+        if MyTools.tools.connectedToNetwork()
+        {
+                self.showIndicator()
+                MyApi.api.PostFcmToken(token: token, type: "ios")
+                { (response, err) in
+                    if((err) == nil)
+                    {
+                        if let JSON = response.result.value as? NSDictionary
+                        {
+                            let  status = JSON["status"] as? Bool
+                            if (status == true)
+                            {
+                                print("success")
+                                
+                                
+                            }
+                            else
+                            {
+                                self.hideIndicator()
+                                self.showOkAlert(title: "Error".localized, message: JSON["message"] as? String ?? "")
+                            }
+                            self.hideIndicator()
+                        }
+                    }
+                    else
+                    {
+                        self.hideIndicator()
+                        self.showOkAlert(title: "Error".localized, message: "An Error occurred".localized)
+                    }
+                }
+            
+        }
+        else
+        {
+            self.showOkAlert(title: "Error".localized, message: "No Internet Connection".localized)
+        }
+        
     }
     
     @IBAction func btnFacebook(_ sender: UIButton)

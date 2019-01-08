@@ -132,6 +132,8 @@
 		20FF85B5212AB972000A20F9 /* RPackageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FF85B3212AB972000A20F9 /* RPackageCell.swift */; };
 		20FF85B8212ABC8D000A20F9 /* SAResturantPackageDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FF85B7212ABC8D000A20F9 /* SAResturantPackageDetails.swift */; };
 		6071DFF6F7E90DA149DE4EAA /* Pods_Scale.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEEC259155C4400CCF02CF06 /* Pods_Scale.framework */; };
+		BB7408D621E4756B009F9830 /* NoMealVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7408D521E4756B009F9830 /* NoMealVC.swift */; };
+		BBC3E98021B541A00062CCFF /* NSZoomImg.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC3E97F21B541A00062CCFF /* NSZoomImg.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -293,6 +295,8 @@
 		20FF85B1212AAF82000A20F9 /* SAResturantPackages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SAResturantPackages.swift; sourceTree = "<group>"; };
 		20FF85B3212AB972000A20F9 /* RPackageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPackageCell.swift; sourceTree = "<group>"; };
 		20FF85B7212ABC8D000A20F9 /* SAResturantPackageDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SAResturantPackageDetails.swift; sourceTree = "<group>"; };
+		BB7408D521E4756B009F9830 /* NoMealVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoMealVC.swift; sourceTree = "<group>"; };
+		BBC3E97F21B541A00062CCFF /* NSZoomImg.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSZoomImg.swift; sourceTree = "<group>"; };
 		C2841EDD6B2884A7AC6A5B56 /* Pods-Scale.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Scale.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Scale/Pods-Scale.debug.xcconfig"; sourceTree = "<group>"; };
 		FEEC259155C4400CCF02CF06 /* Pods_Scale.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Scale.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -358,6 +362,7 @@
 				207328982115B3B900E542FF /* MyTools */,
 				2073289E2115B3B900E542FF /* rootNavigation.swift */,
 				20286A0A211F3BB0003F4F0F /* SARootBegin.swift */,
+				BB7408D521E4756B009F9830 /* NoMealVC.swift */,
 				2016A1F321139A8D00F3234B /* AppDelegate.swift */,
 				2016A1F521139A8D00F3234B /* ViewController.swift */,
 				20175B7821402FE500CF4BA7 /* LoginNav.swift */,
@@ -521,6 +526,7 @@
 		207328B62115B3F500E542FF /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				BBC3E97F21B541A00062CCFF /* NSZoomImg.swift */,
 				20AD6DD72129CF3400EDAA58 /* HumanBody */,
 				205370F5211DD26C006A5AD5 /* Settings */,
 				205370EE211DD124006A5AD5 /* Scale */,
@@ -928,6 +934,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB7408D621E4756B009F9830 /* NoMealVC.swift in Sources */,
 				2041BB1021235375007D6F23 /* SAAddPlan.swift in Sources */,
 				2024E1E92135DF28001C3143 /* customRoundedView.swift in Sources */,
 				20696A132136675B00AF282A /* SAPopUp.swift in Sources */,
@@ -941,6 +948,7 @@
 				20AD6DE92129D1FF00EDAA58 /* SAHumanBodyDetails10.swift in Sources */,
 				20AD6DE22129D1FF00EDAA58 /* SAHumanBodyDetails7.swift in Sources */,
 				2016A1F621139A8D00F3234B /* ViewController.swift in Sources */,
+				BBC3E98021B541A00062CCFF /* NSZoomImg.swift in Sources */,
 				20175B7921402FE500CF4BA7 /* LoginNav.swift in Sources */,
 				2041BB0E21232BB4007D6F23 /* SADiscount.swift in Sources */,
 				2003F22F211A0016003B6D41 /* txtDaycell.swift in Sources */,

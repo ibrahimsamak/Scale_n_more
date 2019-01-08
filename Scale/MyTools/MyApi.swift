@@ -49,7 +49,7 @@ class MyApi
                 {
 //                    var myData = category_id.withUnsafeBufferPointer {Data(buffer: $0)}
 //                    multipartFormData.append(myData, withName: "category_id")
-                    
+                
                     multipartFormData.append("\(category_id)".data(using: String.Encoding.utf8, allowLossyConversion: false)!, withName: "category_id")
 
                     
@@ -60,7 +60,8 @@ class MyApi
                         multipartFormData.append(image!, withName: name,fileName: "img.png", mimeType: "image/png")
                     }
                     
-                    multipartFormData.append(video, withName: "video",fileName: "video.mp4", mimeType: "video/mp4")
+    multipartFormData.append(video, withName: "video",fileName: "video.mp4", mimeType: "video/mp4")
+                    
                 }
                 
                 if(MyTools.tools.getUserType() == "contractor")
@@ -380,6 +381,32 @@ class MyApi
     }
     
     //
+    
+    
+    func PostFcmToken(token:String ,type:String  ,completion:((DataResponse<Any>,Error?)->Void)!)
+    {
+        
+        let headers: HTTPHeaders = [
+            "Accept": "application/json",
+            "Accept-Language" :  MyTools.tools.getMyLang(),
+            "Authorization" :  "Bearer "+MyTools.tools.getMyToken()
+
+        ]
+        
+        Alamofire.request(String(format:"%@%@",MyApi.apiMainURL,"fcm_token"), method: .post,
+                          parameters:["token":token , "type":"ios"],encoding: JSONEncoding.default , headers:headers).responseJSON { response in
+                            if(response.result.isSuccess)
+                            {
+                                completion(response,nil)
+                            }
+                            else
+                            {
+                                completion(response,response.result.error)
+                            }
+        }
+    }
+
+    
     func postAcceptorRejectByHandyMan(job_id:Int,offer_id:Int ,status:String ,completion:((DataResponse<Any>,Error?)->Void)!)
     {
         
