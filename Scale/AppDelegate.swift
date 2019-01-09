@@ -15,6 +15,7 @@ import FBSDKCoreKit
 import TwitterKit
 import Firebase
 import UserNotifications
+import BRYXBanner
 
 
 @UIApplicationMain
@@ -61,7 +62,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
         return true
     }
     
-    
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
         
@@ -200,19 +201,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
 extension AppDelegate : UNUserNotificationCenterDelegate {
     
     // Receive displayed notifications for iOS 10 devices.
+
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 willPresent notification: UNNotification,
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        
+        
         let userInfo = notification.request.content.userInfo
         
         //clicked
+        
         let state = UIApplication.shared.applicationState
+        
         if state == .active {
             if let aps = userInfo["aps"] as? [String:Any] {
-                
+                if let alert = aps["alert"] as? [String:Any] {
+                    let body = alert["body"] as? String ?? ""
+                    let title = alert["title"] as? String ?? ""
+                    let banner = Banner(title: title, subtitle: body, image: nil, backgroundColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
+                    banner.dismissesOnSwipe = true
+                    
+                    //                    print(convertToDictionary(text: alert["loc-key"] as! String) as Any)
+                    
+                    if alert["loc-key"] == nil {
+                        banner.show(duration: 3.0)
+                        return
+                    }
+                    
+                }
             }
         }
-        completionHandler([])
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter,

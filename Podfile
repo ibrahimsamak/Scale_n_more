@@ -28,6 +28,8 @@ target 'Scale' do
     pod 'Firebase/Auth'
     pod 'Firebase/Database'
     pod 'UITextView+Placeholder'
+        pod 'BRYXBanner'
+
     #social
     pod 'GoogleSignIn'
     

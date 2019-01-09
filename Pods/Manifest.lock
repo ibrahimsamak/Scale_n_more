@@ -10,6 +10,7 @@ PODS:
   - Bolts/AppLinks (1.9.0):
     - Bolts/Tasks
   - Bolts/Tasks (1.9.0)
+  - BRYXBanner (0.8.3)
   - CLImageViewPopup (0.1.1)
   - Crashlytics (3.11.1):
     - Fabric (~> 1.8.1)
@@ -144,6 +145,7 @@ DEPENDENCIES:
   - Alamofire
   - APJTextPickerView
   - BIZPopupView
+  - BRYXBanner
   - CLImageViewPopup
   - Crashlytics
   - DGElasticPullToRefresh
@@ -175,6 +177,7 @@ SPEC REPOS:
     - APJTextPickerView
     - BIZPopupView
     - Bolts
+    - BRYXBanner
     - CLImageViewPopup
     - Crashlytics
     - DGElasticPullToRefresh
@@ -221,6 +224,7 @@ SPEC CHECKSUMS:
   APJTextPickerView: 4c6e9addfe05d1cca3fabb06575b1d791590bca1
   BIZPopupView: 2f16ecbc852baa16e1ef20b67abaa831909ec994
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
+  BRYXBanner: 8cf1b119792e1cee8d7ba107297ef89f7409bc53
   CLImageViewPopup: 66e459b179084dbcc8cf56749c27078b73640af6
   Crashlytics: ca7ab4bc304aa216bdc2e4c1a96389ee77252203
   DGElasticPullToRefresh: 28f11a6026302a90f8ffebbc6e24748e584dddd3
@@ -261,6 +265,6 @@ SPEC CHECKSUMS:
   TwitterKit: 5e4f41d70b9abdb41df5467f52d7aa2c0fd26ebb
   "UITextView+Placeholder": 0c3efd97f37ea64bde7f34cc6e90fe02e87b3909
 
-PODFILE CHECKSUM: 429ad4df515359322a929af1a03b4c461bfc2a37
+PODFILE CHECKSUM: f7dd5b477cd5bb0d27116b9c7e797e7c8b6ad445
 
 COCOAPODS: 1.5.0
