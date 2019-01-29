@@ -674,14 +674,14 @@ class MyApi
     }
     
     
-    func PostContact(fullname:String ,email:String , comment:String, mobile:String ,completion:((DataResponse<Any>,Error?)->Void)!)
+    func PostContact(fullname:String ,email:String , comment:String, mobile:String , type:Int ,completion:((DataResponse<Any>,Error?)->Void)!)
     {
         let headers: HTTPHeaders = [
             "Accept": "application/json",
             "Accept-Language" :  MyTools.tools.getMyLang()
         ]
         
-        Alamofire.request(String(format:"%@%@",MyApi.apiMainURL,"contact"), method: .post,parameters:["fullname":fullname , "email":email , "comment":comment , "mobile":mobile],encoding: JSONEncoding.default,headers:headers).responseJSON { response in
+        Alamofire.request(String(format:"%@%@",MyApi.apiMainURL,"contact2"), method: .post,parameters:["fullname":fullname , "email":email , "type":type , "comment":comment , "mobile":mobile],encoding: JSONEncoding.default,headers:headers).responseJSON { response in
             if(response.result.isSuccess)
             {
                 completion(response,nil)
@@ -1225,7 +1225,45 @@ class MyApi
         }
     }
     
-    
+    func Logout(completion:((DataResponse<Any>,Error?)->Void)!)
+    {
+        let headers: HTTPHeaders = [
+            "Accept": "application/json",
+            "Accept-Language" : MyTools.tools.getMyLang(),
+            "Authorization" :  "Bearer "+MyTools.tools.getMyToken()
+            
+        ]
+        Alamofire.request(String(format:"%@%@",MyApi.apiMainURL,"logout"), method: .get,encoding: JSONEncoding.default,headers:headers).responseJSON { response in
+            if(response.result.isSuccess)
+            {
+                completion(response,nil)
+            }
+            else
+            {
+                completion(response,response.result.error)
+            }
+        }
+    }
+
+    func GetProfile(completion:((DataResponse<Any>,Error?)->Void)!)
+    {
+        let headers: HTTPHeaders = [
+            "Accept": "application/json",
+            "Accept-Language" : MyTools.tools.getMyLang(),
+            "Authorization" :  "Bearer "+MyTools.tools.getMyToken()
+
+        ]
+        Alamofire.request(String(format:"%@%@",MyApi.apiMainURL,"profile"), method: .get,encoding: JSONEncoding.default,headers:headers).responseJSON { response in
+            if(response.result.isSuccess)
+            {
+                completion(response,nil)
+            }
+            else
+            {
+                completion(response,response.result.error)
+            }
+        }
+    }
     func GetConfig(completion:((DataResponse<Any>,Error?)->Void)!)
     {
         let headers: HTTPHeaders = [

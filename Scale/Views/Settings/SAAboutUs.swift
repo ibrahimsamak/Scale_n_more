@@ -15,7 +15,6 @@ class SAAboutUs: UIViewController {
     var type = ""
     override func viewDidLoad() {
         super.viewDidLoad()
-
         self.SetupConfig()
     }
     

@@ -171,7 +171,7 @@ class SASignUpView: UIViewController, CategoryProtocol,SCPopDatePickerDelegate
     {
         if MyTools.tools.connectedToNetwork()
         {
-            if(txtName.text?.count == 0 || txtPhone.text?.count == 0 || txtEmail.text?.count == 0 || txtPassword.text?.count == 0 )
+            if(txtName.text?.count == 0  || txtEmail.text?.count == 0 || txtPassword.text?.count == 0 )
             {
                 self.showOkAlert(title: "Error".localized, message: "All fields are required".localized)
             }

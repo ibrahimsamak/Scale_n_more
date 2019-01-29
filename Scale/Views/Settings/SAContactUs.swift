@@ -24,7 +24,7 @@ class SAContactUs: UIViewController,MFMessageComposeViewControllerDelegate ,MFMa
     @IBOutlet weak var txtMsg: UITextView!
     
     var entries : NSDictionary!
-
+    var type = 0
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -82,6 +82,14 @@ class SAContactUs: UIViewController,MFMessageComposeViewControllerDelegate ,MFMa
             else if txtMobile.text?.count == 0{
                 self.showOkAlert(title: "Error".localized, message: "Please enter your phone number".localized)
             }
+            if (txtMobile.text?.count)! > 16 {
+                self.showOkAlert(title: "Error".localized, message: "please enter phone number between 8 and 16 in the field".localized)
+            }
+            if (txtMobile.text?.count)! < 8 {
+                self.showOkAlert(title: "Error".localized, message: "please enter phone number between 8 and 16 in the field".localized)
+            }
+                
+                
             else if txtEmail.text?.count == 0{
                 self.showOkAlert(title: "Error".localized, message: "Please enter your email address".localized)
             }
@@ -93,7 +101,7 @@ class SAContactUs: UIViewController,MFMessageComposeViewControllerDelegate ,MFMa
             }
             else{
                 self.showIndicator()
-                MyApi.api.PostContact(fullname: txtName.text!, email: txtEmail.text!, comment: txtMsg.text!, mobile: txtMobile.text!) { (response, error) in
+                MyApi.api.PostContact(fullname: txtName.text!, email: txtEmail.text!, comment: txtMsg.text!, mobile: txtMobile.text!, type:type) { (response, error) in
                     if(response.result.value != nil)
                     {
                         if let JSON = response.result.value as? NSDictionary

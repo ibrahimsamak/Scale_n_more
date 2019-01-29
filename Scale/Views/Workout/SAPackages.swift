@@ -239,7 +239,10 @@ class SAPackages: UIViewController,CodeProtocol , UICollectionViewDelegate , UIC
                                 }
                                 else{
                                     //online link
-                                        let link = ""
+                                    self.hideIndicator()
+                                    let items = JSON["items"] as! NSDictionary
+
+                                        let link = items["link"] as? String ?? ""
                                         guard let url = URL(string: link) else {
                                             return
                                         }

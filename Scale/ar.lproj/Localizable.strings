@@ -18,6 +18,7 @@
 "Are you sure you want logout?" = "هل انت متاكد من تسجيل الخروج من التطبيق؟";
 "All fields are required" = "جميع الحقول مطلوبة";
 "Please enter your name" = "الرجاء ادخال الاسم";
+"please enter phone number between 8 and 16 in the field" = "الرجاء ادخال رقم الموبايل بين ٨ الي ١٦ خانة";
 "Please enter your phone number" = "الرجاء ادخال رقم الموبايل";
 "Please enter your email address" = "الرجاء ادخال البريد الإلكتروني";
 "Please enter valid email address" = "الرجاء ادخال بريد إلكتروني صحيح";

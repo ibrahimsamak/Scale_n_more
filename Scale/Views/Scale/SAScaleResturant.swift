@@ -19,6 +19,8 @@ class SAScaleResturant: UIViewController {
     @IBOutlet weak var lblCount: UILabel!
     @IBOutlet weak var lblId: UILabel!
     @IBOutlet weak var txtName: UITextField!
+    @IBOutlet weak var renwView: UIView!
+
     var TItems :NSArray = []
     var dict : NSDictionary!
     override func viewDidLoad() {
@@ -77,7 +79,10 @@ class SAScaleResturant: UIViewController {
                             self.lblId.text = MyTools.tools.getMyId()
                             self.lblDate.text = self.dict.value(forKey: "date") as! String
                             self.lblCount.text = String(self.dict.value(forKey: "count") as! Int)
-                            
+                            let count = self.dict.value(forKey: "count") as! Int
+                            if count == 0{
+                                self.renwView.isHidden = true
+                            }
                         }
                         else
                         {

@@ -17,13 +17,15 @@ class SASettings: UIViewController {
     @IBOutlet weak var icon4: UIImageView!
     @IBOutlet weak var icon5: UIImageView!
     @IBOutlet weak var logoutView: UIView!
-    
+    @IBOutlet weak var logoutlable: UILabel!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         if ((UserDefaults.standard.object(forKey: "CurrentUser")) == nil)
         {
-            logoutView.isHidden = true
+//            logoutView.isHidden = true
+            self.logoutlable.text = "login".localized
         }
         else{
             logoutView.isHidden = false
@@ -88,9 +90,56 @@ class SASettings: UIViewController {
             self.rootnavigationController()
             print(Language.currentLanguage())
         }
+        self.SetupConfig()
     }
     
-    
+    func SetupConfig()
+    {
+        if MyTools.tools.connectedToNetwork()
+        {
+            MyApi.api.GetConfig(){(response, err) in
+                if((err) == nil)
+                {
+                    if let JSON = response.result.value as? NSDictionary
+                    {
+                        let status = JSON["status"] as? Bool
+                        if (status == true)
+                        {
+                            let items = JSON["items"] as! NSDictionary
+                            let Setting = items.value(forKey: "Setting") as! NSDictionary
+                            let Country = items.value(forKey: "Country") as! NSArray
+                            UserDefaults.standard.setValue(Country, forKey: "Country")
+                            
+                            for (key,value) in Setting {
+                                print("\(key) = \(value)")
+                                let val = value as? String ?? ""
+                                let ns = UserDefaults.standard
+                                ns.setValue(val, forKey: key as! String)
+                                ns.synchronize()
+                            }
+                        }
+                        else
+                        {
+                            
+                        }
+                    }
+                    else
+                    {
+                        
+                    }
+                    
+                }
+                else
+                {
+                    
+                }
+            }
+        }
+        else
+        {
+            
+        }
+    }
     func rootnavigationController()
     {
         guard let window = UIApplication.shared.keyWindow else { return }
@@ -101,17 +150,55 @@ class SASettings: UIViewController {
     
     @IBAction func btnLogout(_ sender: UIButton)
     {
-        
+        if ((UserDefaults.standard.object(forKey: "CurrentUser")) == nil)
+        {
+            let vc : LoginNav = AppDelegate.storyboard.instanceVC()
+            let appDelegate = UIApplication.shared.delegate
+            appDelegate?.window??.rootViewController = vc
+            appDelegate?.window??.makeKeyAndVisible()
+
+            return
+        }
         self.showCustomAlert(okFlag: false, title: "Warning".localized, message: "Are you sure you want logout?".localized, okTitle: "Logout".localized, cancelTitle: "Cancel".localized)
         {(success) in
             if(success)
             {
-                let ns = UserDefaults.standard
-                ns.removeObject(forKey: "CurrentUser")
-                let vc : LoginNav = AppDelegate.storyboard.instanceVC()
-                let appDelegate = UIApplication.shared.delegate
-                appDelegate?.window??.rootViewController = vc
-                appDelegate?.window??.makeKeyAndVisible()
+                self.showIndicator()
+
+                MyApi.api.Logout(){(response, err) in
+                    if((err) == nil)
+                        
+                    {
+                        if let JSON = response.result.value as? NSDictionary
+                        {
+
+                            let  status = JSON["status"] as? Bool
+                            if (status == true)
+                            {
+                                self.hideIndicator()
+
+                                let ns = UserDefaults.standard
+                                ns.removeObject(forKey: "CurrentUser")
+                                let vc : LoginNav = AppDelegate.storyboard.instanceVC()
+                                let appDelegate = UIApplication.shared.delegate
+                                appDelegate?.window??.rootViewController = vc
+                                appDelegate?.window??.makeKeyAndVisible()
+
+                                
+                                
+                            }
+                            else
+                            {
+                                self.hideIndicator()
+                                self.showOkAlert(title: "Error".localized, message: "An Error occurred".localized)
+
+                            }
+                        }
+                    }
+                    else{
+                        
+                    }
+                }
             }
         }
     }

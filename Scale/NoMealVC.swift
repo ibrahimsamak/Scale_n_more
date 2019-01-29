@@ -9,9 +9,11 @@
 import UIKit
 
 class NoMealVC: UIViewController {
+    @IBOutlet weak var lblTitle: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.lblTitle.text =  MyTools.tools.getConfigString("how_it_work")
 
       
     }
@@ -24,6 +26,7 @@ class NoMealVC: UIViewController {
     {
     
         let vc:SAContactUs = AppDelegate.storyboard.instanceVC()
+        vc.type = 1
         self.navigationController?.pushViewController(vc, animated: true)
     }
 

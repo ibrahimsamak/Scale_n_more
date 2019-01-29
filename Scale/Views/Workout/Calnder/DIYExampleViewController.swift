@@ -215,7 +215,19 @@ class DIYExampleViewController: UIViewController, FSCalendarDataSource, FSCalend
                             if (status == true)
                             {
                                 self.hideIndicator()
-                                self.showOkAlert(title: "Success".localized, message: JSON["message"] as? String ?? "")
+//                                self.showOkAlert(title: "Success".localized, message: JSON["message"] as? String ?? "")
+                                let items = JSON["items"] as! NSDictionary
+                                
+                                let link = items["link"] as? String ?? ""
+                                guard let url = URL(string: link) else {
+                                    return
+                                }
+                                if #available(iOS 10.0, *) {
+                                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                                } else {
+                                    UIApplication.shared.openURL(url)
+                                }
+
                             }
                             else
                             {

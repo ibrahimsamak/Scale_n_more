@@ -211,10 +211,14 @@ class MyTools{
     
     func getMyToken() -> String
     {
+        if ((UserDefaults.standard.object(forKey: "CurrentUser")) != nil)
+    {
         let ns = UserDefaults.standard
         let dict = ns.value(forKey: "CurrentUser") as! NSDictionary
         let access_token = dict.value(forKey: "access_token") as! String
         return access_token
+    }
+        return ""
     }
     func getDeviceToken() -> String? {
         

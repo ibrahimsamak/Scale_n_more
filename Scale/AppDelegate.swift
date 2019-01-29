@@ -21,6 +21,7 @@ import BRYXBanner
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
     let gcmMessageIDKey = "gcm.message_id"
+    var timerTest : Timer?
 
     public var mainRootNav: UINavigationController?
     static let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
@@ -28,13 +29,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
     var entries : NSDictionary!
     
     
-    override init()
-    {
-        super.init()
-        UIApplication.shared.registerForRemoteNotifications()
-        FirebaseApp.configure()
-        //Database.database().isPersistenceEnabled = false
-    }
+//    override init()
+//    {
+//        super.init()
+//        UIApplication.shared.registerForRemoteNotifications()
+//        FirebaseApp.configure()
+//        //Database.database().isPersistenceEnabled = false
+//    }
     
     
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
@@ -62,10 +63,51 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
         return true
     }
     
-
+    @objc func update() {
+        let deviceToken = MyTools.tools.getDeviceToken()
+        if ((UserDefaults.standard.object(forKey: "CurrentUser")) == nil)
+        {
+            print("")
+            return
+        }
+        if MyTools.tools.connectedToNetwork()
+        {
+            MyApi.api.PostFcmToken(token: deviceToken ?? "", type: "ios")
+            { (response, err) in
+                if((err) == nil)
+                {
+                    if let JSON = response.result.value as? NSDictionary
+                    {
+                        let  status = JSON["status"] as? Bool
+                        if (status == true)
+                        {
+                            print("PostFcmToken")
+                            self.timerTest?.invalidate()
+                            self.timerTest = nil
+                            
+                        }
+                        else
+                        {
+                        }
+                    }
+                }
+                else
+                {                }
+            }
+            
+        }
+        else
+        {
+        }
+        
+    }
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
-        
+        UIApplication.shared.registerForRemoteNotifications()
+        FirebaseApp.configure()
+        connectToFcm()
+        timerTest = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(AppDelegate.update), userInfo: nil, repeats: true)
+
         Localizer.DoTheExchange()
         Fabric.with([Crashlytics.self])
         Fabric.with([TWTRTwitter.self])
@@ -257,7 +299,7 @@ extension AppDelegate : MessagingDelegate {
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         Messaging.messaging().apnsToken = deviceToken
         Messaging.messaging().subscribe(toTopic: "/topics/scalenmore")
-        
+         connectToFcm()
         if InstanceID.instanceID().token() != nil
         {
             let fcmToken = InstanceID.instanceID().token() as! String
@@ -265,7 +307,19 @@ extension AppDelegate : MessagingDelegate {
             print(fcmToken)
         }
     }
-    
+    func connectToFcm() {
+        Messaging.messaging().connect { (error) in
+            if (error != nil) {
+                print("Unable to connect with FCM. \(String(describing: error))")
+            } else {
+                print("Connected to FCM.")
+                let refreshedToken = InstanceID.instanceID().token()
+                print("InstanceID token12: \(String(describing: refreshedToken))")
+                UserDefaults.standard.set(refreshedToken, forKey: "deviceToken") //setObject
+                
+            }
+        }
+    }
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
         print("Firebase registration token: \(fcmToken)")
         //        Messaging.messaging().subscribe(toTopic: "/topics/testTopic")

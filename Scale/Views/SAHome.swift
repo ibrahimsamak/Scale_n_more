@@ -23,6 +23,43 @@ class SAHome: UIViewController {
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)
+        
+        MyApi.api.GetProfile(){(response, err) in
+            if((err) == nil)
+                
+            {
+                if let JSON = response.result.value as? NSDictionary
+                {
+                    let  status = JSON["status"] as? Bool
+                    if (status == true)
+                    {
+                        print("success")
+                        let UserArray = JSON["items"] as? NSDictionary
+                        let ns = UserDefaults.standard
+                        
+                        let CurrentUser:NSDictionary =
+                            [
+                                "id":UserArray?.value(forKey: "id") as! Int,
+                                "access_token":UserArray?.value(forKey: "access_token") as! String,
+                                "name":UserArray?.value(forKey: "name") as! String,
+                                "check_meal": UserArray?.value(forKey: "check_meal") as! Int
+                        ]
+                        
+                        ns.setValue(CurrentUser, forKey: "CurrentUser")
+                        ns.synchronize()
+                        
+                        
+                    }
+                    else
+                    {
+                    }
+                }
+            }
+            else{
+                
+            }
+        }
+
         self.navigationController?.navigationBar.isHidden = true
     }
     
@@ -45,7 +82,7 @@ class SAHome: UIViewController {
         {
             let checkMealPackage = MyTools.tools.checkMealPackage()
             if(checkMealPackage == 0){
-                let vc:SAResturantPackages = AppDelegate.storyboard.instanceVC()
+                let vc:NoMealVC = AppDelegate.storyboard.instanceVC()
                 self.navigationController?.pushViewController(vc, animated: true)
             }
             else{
