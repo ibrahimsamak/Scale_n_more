@@ -19,7 +19,11 @@ class SAHome: UIViewController {
     {
         super.didReceiveMemoryWarning()
     }
-    
+    @IBAction func btnHome(_ sender: UIButton)
+    {
+        self.navigationController?.popToRoot(animated: true)
+    }
+
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)

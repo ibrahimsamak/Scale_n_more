@@ -19,7 +19,7 @@ class SAContactUs: UIViewController,MFMessageComposeViewControllerDelegate ,MFMa
     @IBOutlet weak var txtName: UITextField!
     @IBOutlet weak var lblAddress: UILabel!
     @IBOutlet weak var txtEmail: UITextField!
-    @IBOutlet weak var txtMobile: UITextField!
+    @IBOutlet weak var txtMobile: MaxLengthTextField!
 
     @IBOutlet weak var txtMsg: UITextView!
     
@@ -64,7 +64,11 @@ class SAContactUs: UIViewController,MFMessageComposeViewControllerDelegate ,MFMa
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+    @IBAction func btnHome(_ sender: UIButton)
+    {
+        self.navigationController?.popToRoot(animated: true)
+    }
+
 
     @IBAction func btnBack(_ sender: UIButton)
     {
@@ -75,20 +79,29 @@ class SAContactUs: UIViewController,MFMessageComposeViewControllerDelegate ,MFMa
     {
         if MyTools.tools.connectedToNetwork()
         {
+            guard txtMobile.text!.count >= 8 else {
+                self.showOkAlert(title: "Error".localized, message: "Please enter your phone number".localized)
+                return
+            }
             if txtName.text?.count == 0
             {
                 self.showOkAlert(title: "Error".localized, message: "Please enter your name".localized)
             }
-            else if txtMobile.text?.count == 0{
-                self.showOkAlert(title: "Error".localized, message: "Please enter your phone number".localized)
-            }
-            if (txtMobile.text?.count)! > 16 {
-                self.showOkAlert(title: "Error".localized, message: "please enter phone number between 8 and 16 in the field".localized)
-            }
-            if (txtMobile.text?.count)! < 8 {
-                self.showOkAlert(title: "Error".localized, message: "please enter phone number between 8 and 16 in the field".localized)
-            }
-                
+//            else if (txtMobile.text?.count)!  >= 8{
+//                self.showOkAlert(title: "Error".localized, message: "Please enter your phone number".localized)
+//            }
+
+//            else if txtMobile.text?.count == 0{
+//                self.showOkAlert(title: "Error".localized, message: "Please enter your phone number".localized)
+//            }
+//            if (txtMobile.text?.count)! > 16 {
+//                self.showOkAlert(title: "Error".localized, message: "please enter phone number between 8 and 16 in the field".localized)
+//            }
+//
+//            if (txtMobile.text?.count)! < 8 {
+//                self.showOkAlert(title: "Error".localized, message: "please enter phone number between 8 and 16 in the field".localized)
+//            }
+//
                 
             else if txtEmail.text?.count == 0{
                 self.showOkAlert(title: "Error".localized, message: "Please enter your email address".localized)
@@ -110,7 +123,7 @@ class SAContactUs: UIViewController,MFMessageComposeViewControllerDelegate ,MFMa
                             if(status == true)
                             {
                                 self.hideIndicator()
-                                self.showOkAlertWithComp(title: "Success".localized, message:  JSON["message"] as? String ?? "", completion: { (Success) in
+                self.showOkAlertWithComp(title: "Success".localized, message:  JSON["message"] as? String ?? "", completion: { (Success) in
                                     if(Success){
                                         self.navigationController?.pop(animated: true)
                                     }

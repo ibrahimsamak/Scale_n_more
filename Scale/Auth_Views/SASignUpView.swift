@@ -39,7 +39,7 @@ class SASignUpView: UIViewController, CategoryProtocol,SCPopDatePickerDelegate
     
     @IBOutlet weak var txtPassword: UITextField!
     @IBOutlet weak var txtDob: UITextField!
-    @IBOutlet weak var txtPhone: UITextField!
+    @IBOutlet weak var txtPhone: MaxLengthTextField!
     @IBOutlet weak var txtEmail: UITextField!
     @IBOutlet weak var txtCountry: UITextField!
     @IBOutlet weak var txtName: UITextField!
@@ -171,6 +171,10 @@ class SASignUpView: UIViewController, CategoryProtocol,SCPopDatePickerDelegate
     {
         if MyTools.tools.connectedToNetwork()
         {
+            guard txtPhone.text!.count >= 8 else {
+                                self.showOkAlert(title: "Error".localized, message: "Please enter your phone number".localized)
+                                return
+                            }
             if(txtName.text?.count == 0  || txtEmail.text?.count == 0 || txtPassword.text?.count == 0 )
             {
                 self.showOkAlert(title: "Error".localized, message: "All fields are required".localized)
@@ -179,9 +183,16 @@ class SASignUpView: UIViewController, CategoryProtocol,SCPopDatePickerDelegate
             {
                 self.showOkAlert(title: "Error".localized, message: "Please enter your name".localized)
             }
-//            else if txtPhone.text?.count == 0{
+//            else if (txtPhone.text?.count)!  == 0 {
 //                self.showOkAlert(title: "Error".localized, message: "Please enter your phone number".localized)
 //            }
+//
+//            else if (txtPhone.text?.count)!  >= 8{
+//                self.showOkAlert(title: "Error".localized, message: "Please enter your phone number".localized)
+//            }
+//
+
+                
             else if txtEmail.text?.count == 0{
                 self.showOkAlert(title: "Error".localized, message: "Please enter your email address".localized)
             }
@@ -219,13 +230,13 @@ class SASignUpView: UIViewController, CategoryProtocol,SCPopDatePickerDelegate
                                 let ns = UserDefaults.standard
                                 let CurrentUser:NSDictionary =
                                     [
-                                        "id":UserArray?.value(forKey: "id") as! Int,
-                                        "access_token":UserArray?.value(forKey: "access_token") as! String,
-                                        "name":UserArray?.value(forKey: "name") as! String,
-                                        "check_meal": UserArray?.value(forKey: "check_meal") as! Int
+    "id":UserArray?.value(forKey: "id") as! Int,
+    "access_token":UserArray?.value(forKey: "access_token") as! String,
+    "name":UserArray?.value(forKey: "name") as! String,
+    "check_meal": UserArray?.value(forKey: "check_meal") as! Int
                                     ]
                                 
-                                ns.setValue(CurrentUser, forKey: "CurrentUser")
+            ns.setValue(CurrentUser, forKey: "CurrentUser")
                                 ns.synchronize()
                                 
                                 let deviceToken = MyTools.tools.getDeviceToken()

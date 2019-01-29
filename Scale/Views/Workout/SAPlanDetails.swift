@@ -4,7 +4,8 @@
 //
 //  Created by ibrahim M. samak on 8/7/18.
 //  Copyright © 2018 ibrahim M. samak. All rights reserved.
-//
+
+//rr
 
 import UIKit
 import ActionCell
@@ -118,7 +119,11 @@ class SAPlanDetails: UIViewController, UITableViewDelegate , UITableViewDataSour
         self.tableView.reloadData()
         self.tableView.tableFooterView = UIView()
     }
-    
+    @IBAction func btnHome(_ sender: UIButton)
+    {
+        self.navigationController?.popToRoot(animated: true)
+    }
+
     override func didReceiveMemoryWarning()
     {
         super.didReceiveMemoryWarning()

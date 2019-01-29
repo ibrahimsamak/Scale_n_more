@@ -11,9 +11,11 @@ import Foundation
 import FSCalendar
 import BIZPopupView
 import APJTextPickerView
+import SafariServices
+import MessageUI
 
 
-class DIYExampleViewController: UIViewController, FSCalendarDataSource, FSCalendarDelegate ,CodeProtocol , APJTextPickerViewDelegate , APJTextPickerViewDataSource {
+class DIYExampleViewController: UIViewController, FSCalendarDataSource, FSCalendarDelegate ,CodeProtocol , APJTextPickerViewDelegate , APJTextPickerViewDataSource ,MFMessageComposeViewControllerDelegate ,MFMailComposeViewControllerDelegate{
     func SendCode(Code: String) {
         self.code = Code
     }
@@ -51,6 +53,8 @@ class DIYExampleViewController: UIViewController, FSCalendarDataSource, FSCalend
 //    let datePicker = SCPopDatePicker()
     let date = Date()
     var code = ""
+    let emailcontact = MyTools.tools.getConfigString("info_email")
+
     var dt = ""
     var selectedDay = ""
     var type = 1
@@ -121,6 +125,30 @@ class DIYExampleViewController: UIViewController, FSCalendarDataSource, FSCalend
             
         }    }
     
+    
+    @objc func sendEmail()
+    {
+        if MFMailComposeViewController.canSendMail() {
+            let mail = MFMailComposeViewController()
+            mail.mailComposeDelegate = self
+            mail.setToRecipients([self.emailcontact])
+            mail.setMessageBody("<p></p>", isHTML: true)
+            
+            present(mail, animated: true)
+        }
+        else {
+            
+        }
+    }
+    
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+        
+    }
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true)
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
@@ -184,11 +212,13 @@ class DIYExampleViewController: UIViewController, FSCalendarDataSource, FSCalend
     
     @IBAction func btnCall(_ sender: UIButton)
     {
-        let number = MyTools.tools.getConfigString("mobile")
-        if let url = URL(string: "tel://\([number)")
-        {
-            UIApplication.shared.openURL(url)
-        }
+        self.sendEmail()
+
+        //        let number = MyTools.tools.getConfigString("mobile")
+//        if let url = URL(string: "tel://\([number)")
+//        {
+//            UIApplication.shared.openURL(url)
+//        }
     }
     
     @IBAction func btnPay(_ sender: UIButton)

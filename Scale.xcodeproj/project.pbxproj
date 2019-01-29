@@ -134,6 +134,8 @@
 		6071DFF6F7E90DA149DE4EAA /* Pods_Scale.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEEC259155C4400CCF02CF06 /* Pods_Scale.framework */; };
 		BB7408D621E4756B009F9830 /* NoMealVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7408D521E4756B009F9830 /* NoMealVC.swift */; };
 		BBC3E98021B541A00062CCFF /* NSZoomImg.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC3E97F21B541A00062CCFF /* NSZoomImg.swift */; };
+		BBE3305022004BD90057D8EE /* VCformassege.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE3304F22004BD90057D8EE /* VCformassege.swift */; };
+		BBE33052220050A90057D8EE /* MaxLengthTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE33051220050A90057D8EE /* MaxLengthTextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -297,6 +299,8 @@
 		20FF85B7212ABC8D000A20F9 /* SAResturantPackageDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SAResturantPackageDetails.swift; sourceTree = "<group>"; };
 		BB7408D521E4756B009F9830 /* NoMealVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoMealVC.swift; sourceTree = "<group>"; };
 		BBC3E97F21B541A00062CCFF /* NSZoomImg.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSZoomImg.swift; sourceTree = "<group>"; };
+		BBE3304F22004BD90057D8EE /* VCformassege.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCformassege.swift; sourceTree = "<group>"; };
+		BBE33051220050A90057D8EE /* MaxLengthTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaxLengthTextField.swift; sourceTree = "<group>"; };
 		C2841EDD6B2884A7AC6A5B56 /* Pods-Scale.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Scale.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Scale/Pods-Scale.debug.xcconfig"; sourceTree = "<group>"; };
 		FEEC259155C4400CCF02CF06 /* Pods_Scale.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Scale.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -363,6 +367,7 @@
 				2073289E2115B3B900E542FF /* rootNavigation.swift */,
 				20286A0A211F3BB0003F4F0F /* SARootBegin.swift */,
 				BB7408D521E4756B009F9830 /* NoMealVC.swift */,
+				BBE3304F22004BD90057D8EE /* VCformassege.swift */,
 				2016A1F321139A8D00F3234B /* AppDelegate.swift */,
 				2016A1F521139A8D00F3234B /* ViewController.swift */,
 				20175B7821402FE500CF4BA7 /* LoginNav.swift */,
@@ -504,6 +509,7 @@
 				20E772A32143F2A70050CD4E /* SACustomButton.swift */,
 				207328992115B3B900E542FF /* MyTools.swift */,
 				2073289A2115B3B900E542FF /* Extension.swift */,
+				BBE33051220050A90057D8EE /* MaxLengthTextField.swift */,
 				2073289B2115B3B900E542FF /* MyApi.swift */,
 				2073289C2115B3B900E542FF /* MyDateAgo.swift */,
 			);
@@ -937,6 +943,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB7408D621E4756B009F9830 /* NoMealVC.swift in Sources */,
+				BBE33052220050A90057D8EE /* MaxLengthTextField.swift in Sources */,
 				2041BB1021235375007D6F23 /* SAAddPlan.swift in Sources */,
 				2024E1E92135DF28001C3143 /* customRoundedView.swift in Sources */,
 				20696A132136675B00AF282A /* SAPopUp.swift in Sources */,
@@ -962,6 +969,7 @@
 				202C51972135AA9C0024B99B /* PreviewtxtDaycell.swift in Sources */,
 				205370F4211DD1B6006A5AD5 /* SAPremuimPlan.swift in Sources */,
 				202C518C2135A9950024B99B /* SAPreviewPlan.swift in Sources */,
+				BBE3305022004BD90057D8EE /* VCformassege.swift in Sources */,
 				205370FB211DD386006A5AD5 /* SAContactUs.swift in Sources */,
 				20D1EDBD211DB990004591DE /* SMRippleView.swift in Sources */,
 				202C51952135AA9C0024B99B /* PreviewDayCollection.swift in Sources */,

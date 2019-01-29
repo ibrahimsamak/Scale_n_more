@@ -110,11 +110,11 @@ class SAMealCalender: UIViewController, FSCalendarDataSource, FSCalendarDelegate
     
         print("did select date \(self.formatter.string(from: date))")
         self.selectedDay = self.formatter.string(from: date)
+
         //self.configureVisibleCells()
     }
     
     func calendar(_ calendar: FSCalendar, didDeselect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        
         let index = self.selectedDateString.index(of: self.formatter.string(from: date))
         if(index != nil)
         {
@@ -133,8 +133,12 @@ class SAMealCalender: UIViewController, FSCalendarDataSource, FSCalendarDelegate
             popupViewController?.showDismissButton = true
             popupViewController?.enableBackgroundFade = true
             self.present(popupViewController!, animated: true, completion: nil)
+
         }
-        self.calendar.reloadData()
+        DispatchQueue.main.async {
+        self.calendar(calendar, didSelect: date, at: monthPosition)
+        }
+  //  self.calendar.reloadData()
          //self.configureVisibleCells()
     }
     
@@ -219,6 +223,7 @@ class SAMealCalender: UIViewController, FSCalendarDataSource, FSCalendarDelegate
 
                             }
                             
+                            
                             self.calendar.isHidden = false
                             self.calendar.dataSource = self
                             self.calendar.delegate = self
@@ -226,6 +231,8 @@ class SAMealCalender: UIViewController, FSCalendarDataSource, FSCalendarDelegate
                             
                             self.calendar.backgroundColor = UIColor.clear
                             self.calendar.calendarHeaderView.backgroundColor = UIColor.clear
+                            
+                            
                             self.calendar.calendarWeekdayView.backgroundColor = UIColor.clear
                             self.calendar.appearance.eventSelectionColor = UIColor.white
                             self.calendar.appearance.eventDefaultColor = UIColor.white

@@ -9,8 +9,10 @@
 import UIKit
 import BIZPopupView
 import DLRadioButton
+import SafariServices
+import MessageUI
 
-class SAResturantPackages: UIViewController,CodeProtocol , UICollectionViewDelegate , UICollectionViewDelegateFlowLayout ,  UICollectionViewDataSource,UIScrollViewDelegate {
+class SAResturantPackages: UIViewController,CodeProtocol , UICollectionViewDelegate , UICollectionViewDelegateFlowLayout ,  UICollectionViewDataSource,UIScrollViewDelegate ,MFMessageComposeViewControllerDelegate ,MFMailComposeViewControllerDelegate{
     func SendCode(Code: String) {
         self.code = Code
     }
@@ -27,6 +29,8 @@ class SAResturantPackages: UIViewController,CodeProtocol , UICollectionViewDeleg
    
     var code = ""
     var paymentType = "Cash"
+    let emailcontact = MyTools.tools.getConfigString("info_email")
+
     var selectedPackage = 0
     var TItems :NSArray = []
     var selectedCategory : NSMutableArray = []
@@ -65,7 +69,29 @@ class SAResturantPackages: UIViewController,CodeProtocol , UICollectionViewDeleg
         }
     }
     
+    @objc func sendEmail()
+    {
+        if MFMailComposeViewController.canSendMail() {
+            let mail = MFMailComposeViewController()
+            mail.mailComposeDelegate = self
+            mail.setToRecipients([self.emailcontact])
+            mail.setMessageBody("<p></p>", isHTML: true)
+            
+            present(mail, animated: true)
+        }
+        else {
+            
+        }
+    }
     
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+        
+    }
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true)
+    }
+
     override func didReceiveMemoryWarning()
     {
         super.didReceiveMemoryWarning()
@@ -209,11 +235,14 @@ class SAResturantPackages: UIViewController,CodeProtocol , UICollectionViewDeleg
     
     @IBAction func btnCall(_ sender: UIButton)
     {
-        let number = MyTools.tools.getConfigString("mobile")
-        if let url = URL(string: "tel://\([number)")
-        {
-            UIApplication.shared.openURL(url)
-        }
+        
+        self.sendEmail()
+
+//        let number = MyTools.tools.getConfigString("mobile")
+//        if let url = URL(string: "tel://\([number)")
+//        {
+//            UIApplication.shared.openURL(url)
+//        }
     }
     
     func loadDate()

@@ -42,6 +42,11 @@ class SAWorkout: UIViewController {
         self.navigationController?.pushViewController(vc, animated: true)
         
     }
+    @IBAction func btnHome(_ sender: UIButton)
+    {
+        self.navigationController?.popToRoot(animated: true)
+    }
+
     
     @IBAction func btnWorkoutPlan(_ sender: UIButton)
     {

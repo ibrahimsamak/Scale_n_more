@@ -55,14 +55,14 @@ class SAAboutUs: UIViewController {
                                     let content = translations[1] as! NSDictionary
                                     let title = content.value(forKey: "title") as! String
                                     let desc = content.value(forKey: "description") as! String
-                                    self.lblTitle.text = title
+                                    self.lblTitle.text = "من نحن"
                                     self.webView.loadHTMLString(desc, baseURL: nil)
                                 }
                                 else{
                                     let content = translations[0] as! NSDictionary
                                     let title = content.value(forKey: "title") as! String
                                     let desc = content.value(forKey: "description") as! String
-                                    self.lblTitle.text = title
+                                    self.lblTitle.text = "About us"
                                     self.webView.loadHTMLString(desc, baseURL: nil)
                                 }
                             }
@@ -75,14 +75,16 @@ class SAAboutUs: UIViewController {
                                     let content = translations[1] as! NSDictionary
                                     let title = content.value(forKey: "title") as! String
                                     let desc = content.value(forKey: "description") as! String
-                                    self.lblTitle.text = title
+                                    self.lblTitle.text = "الشروط والأحكام"
+
                                     self.webView.loadHTMLString(desc, baseURL: nil)
                                 }
                                 else{
                                     let content = translations[0] as! NSDictionary
                                     let title = content.value(forKey: "title") as! String
                                     let desc = content.value(forKey: "description") as! String
-                                    self.lblTitle.text = title
+                                    self.lblTitle.text = "Terms & conditions"
+
                                     self.webView.loadHTMLString(desc, baseURL: nil)
                                 }
                             }
@@ -94,14 +96,14 @@ class SAAboutUs: UIViewController {
                                     let content = translations[1] as! NSDictionary
                                     let title = content.value(forKey: "title") as! String
                                     let desc = content.value(forKey: "description") as! String
-                                    self.lblTitle.text = title
+                                    self.lblTitle.text = "سياسة الخصوصية"
                                     self.webView.loadHTMLString(desc, baseURL: nil)
                                 }
                                 else{
                                     let content = translations[0] as! NSDictionary
                                     let title = content.value(forKey: "title") as! String
                                     let desc = content.value(forKey: "description") as! String
-                                    self.lblTitle.text = title
+                                    self.lblTitle.text = "privacy Policy"
                                     self.webView.loadHTMLString(desc, baseURL: nil)
                                 }
                             }

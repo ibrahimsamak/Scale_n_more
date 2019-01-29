@@ -20,7 +20,11 @@ class SAWorkoutPlan: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+    @IBAction func btnHomeN(_ sender: UIButton)
+    {
+        self.navigationController?.popToRoot(animated: true)
+    }
+
 
     override func viewWillAppear(_ animated: Bool)
     {

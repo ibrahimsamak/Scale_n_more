@@ -57,10 +57,18 @@ class SAPlanDetailsNew: UIViewController ,UIScrollViewDelegate,ActionCellDelegat
         }
     }
     
+    @IBOutlet weak var btnDone: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupView()
     }
+    
+    @IBAction func btndo(_ sender: Any) {
+        self.navigationController?.popToRoot(animated: true)
+
+    }
+    
     func setupView()
     {
         self.col.contentInset = UIEdgeInsets(top: 23, left: 5, bottom: 10, right: 5)

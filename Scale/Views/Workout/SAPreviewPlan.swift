@@ -38,6 +38,11 @@ class SAPreviewPlan: UIViewController,UITableViewDelegate , UITableViewDataSourc
         self.tbl.tableFooterView = UIView()
         
     }
+    @IBAction func btnHome(_ sender: UIButton)
+    {
+        self.navigationController?.popToRoot(animated: true)
+    }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         if(self.isSelect)
@@ -49,6 +54,10 @@ class SAPreviewPlan: UIViewController,UITableViewDelegate , UITableViewDataSourc
         }
     }
     
+    @IBAction func btnDone(_ sender: Any) {
+        self.navigationController?.popToRoot(animated: true)
+
+    }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         

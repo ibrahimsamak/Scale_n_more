@@ -61,7 +61,11 @@ class SAAddPlan: UIViewController,UITableViewDelegate , UITableViewDataSource,  
         self.tableView.register(UINib(nibName: "PlanCell", bundle: nil), forCellReuseIdentifier: "PlanCell")
         self.tableView.tableFooterView = UIView()
     }
-    
+    @IBAction func btnHome(_ sender: UIButton)
+    {
+        self.navigationController?.popToRoot(animated: true)
+    }
+
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)

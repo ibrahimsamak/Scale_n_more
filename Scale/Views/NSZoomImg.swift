@@ -29,6 +29,13 @@ class NSZoomImg: UIViewController , UIScrollViewDelegate {
         scrollView.contentSize = .init(width: 2000, height: 2000)
         updateZoomFor(size: view.bounds.size)
     }
+    
+    @IBAction func btnDis(_ sender: UIButton)
+    {
+self.dismiss(animated: true, completion: nil)
+    }
+
+    
         func viewForZooming(in scrollView: UIScrollView) -> UIView? {
             return showImage
         }

@@ -9,8 +9,10 @@
 import UIKit
 import BIZPopupView
 import DLRadioButton
+import SafariServices
+import MessageUI
 
-class SAPackages: UIViewController,CodeProtocol , UICollectionViewDelegate , UICollectionViewDelegateFlowLayout ,  UICollectionViewDataSource,UIScrollViewDelegate {
+class SAPackages: UIViewController,CodeProtocol , UICollectionViewDelegate , UICollectionViewDelegateFlowLayout ,  UICollectionViewDataSource,UIScrollViewDelegate,MFMessageComposeViewControllerDelegate ,MFMailComposeViewControllerDelegate  {
     func SendCode(Code: String) {
         self.code = Code
     }
@@ -21,6 +23,8 @@ class SAPackages: UIViewController,CodeProtocol , UICollectionViewDelegate , UIC
     @IBOutlet weak var col: UICollectionView!
     @IBOutlet weak var scroll: UIScrollView!
     var code = ""
+    let emailcontact = MyTools.tools.getConfigString("info_email")
+
     var paymentType = "Cash"
     var selectedPackage = 0
     var TItems :NSArray = []
@@ -28,13 +32,36 @@ class SAPackages: UIViewController,CodeProtocol , UICollectionViewDelegate , UIC
     var type = 0
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         self.col.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         self.col.register(UINib(nibName: "PackageCell", bundle: nil), forCellWithReuseIdentifier: "PackageCell")
         
         self.cash.isSelected = true
         self.loadDate()
     }
+    @objc func sendEmail()
+    {
+        if MFMailComposeViewController.canSendMail() {
+            let mail = MFMailComposeViewController()
+            mail.mailComposeDelegate = self
+            mail.setToRecipients([self.emailcontact])
+            mail.setMessageBody("<p></p>", isHTML: true)
+            
+            present(mail, animated: true)
+        }
+        else {
+            
+        }
+    }
+    
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+        
+    }
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true)
+    }
+
 
     @objc @IBAction private func logSelectedButton(radioButton : DLRadioButton) {
         if (radioButton.isMultipleSelectionEnabled) {
@@ -147,11 +174,14 @@ class SAPackages: UIViewController,CodeProtocol , UICollectionViewDelegate , UIC
     
     @IBAction func btnCall(_ sender: UIButton)
     {
-        let number = MyTools.tools.getConfigString("mobile")
-        if let url = URL(string: "tel://\([number)")
-        {
-            UIApplication.shared.openURL(url)
-        }
+        self.sendEmail()
+
+        
+//        let number = MyTools.tools.getConfigString("mobile")
+//        if let url = URL(string: "tel://\([number)")
+//        {
+//            UIApplication.shared.openURL(url)
+//        }
     }
     
     func loadDate()
@@ -235,7 +265,12 @@ class SAPackages: UIViewController,CodeProtocol , UICollectionViewDelegate , UIC
                                 if(self.type == 0)
                                 {
                                     self.hideIndicator()
-                                    self.showOkAlert(title: "Success".localized, message: JSON["message"] as? String ?? "")
+                  //  self.showOkAlert(title: "Success".localized, message: JSON["message"] as? String ?? "")
+                               
+                  //  self.navigationController?.pop(animated: true)
+            let vc: VCformassege = AppDelegate.storyboard.instanceVC()
+                self.navigationController?.pushViewController(vc, animated: true)
+
                                 }
                                 else{
                                     //online link
@@ -294,7 +329,11 @@ class SAPackages: UIViewController,CodeProtocol , UICollectionViewDelegate , UIC
         popupViewController?.enableBackgroundFade = true
         self.present(popupViewController!, animated: true, completion: nil)
     }
-    
+    @IBAction func btnHomev(_ sender: UIButton)
+    {
+        self.navigationController?.popToRoot(animated: true)
+    }
+
     
     @IBAction func btnHome(_ sender: UIButton)
     {

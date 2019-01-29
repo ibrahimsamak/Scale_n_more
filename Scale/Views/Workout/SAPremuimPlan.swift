@@ -15,6 +15,11 @@ class SAPremuimPlan: UIViewController {
 
         // Do any additional setup after loading the view.
     }
+    @IBAction func btnHome(_ sender: UIButton)
+    {
+        self.navigationController?.popToRoot(animated: true)
+    }
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

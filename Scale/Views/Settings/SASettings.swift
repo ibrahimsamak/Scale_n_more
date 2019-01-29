@@ -72,7 +72,11 @@ class SASettings: UIViewController {
             break
         }
     }
-    
+    @IBAction func btnHome(_ sender: UIButton)
+    {
+        self.navigationController?.popToRoot(animated: true)
+    }
+
     @IBAction func btnLanguage(_ sender: UIButton)
     {
         if(sender.tag == 0)
