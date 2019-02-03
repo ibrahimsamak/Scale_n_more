@@ -797,6 +797,27 @@ class MyApi
         }
     }
     
+  //  getAvailableTime
+    func getAvailableTime(type:Int,completion:((DataResponse<Any>,Error?)->Void)!)
+    {
+        let headers: HTTPHeaders = [
+            "Accep": "application/json",
+            "Accept-Language" :  MyTools.tools.getMyLang(),
+            "Authorization" :  "Bearer "+MyTools.tools.getMyToken()
+        ]
+        
+        Alamofire.request(String(format:"%@%@",MyApi.apiMainURL,"getAvailableTime?type="+String(type)), method: .get,encoding: JSONEncoding.default , headers:headers).responseJSON { response in
+            if(response.result.isSuccess)
+            {
+                completion(response,nil)
+            }
+            else
+            {
+                completion(response,response.result.error)
+            }
+        }
+    }
+
     func GetPlanDays(plan_id:Int,completion:((DataResponse<Any>,Error?)->Void)!)
     {
         let headers: HTTPHeaders = [

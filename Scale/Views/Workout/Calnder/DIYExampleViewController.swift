@@ -42,7 +42,9 @@ class DIYExampleViewController: UIViewController, FSCalendarDataSource, FSCalend
     @IBOutlet weak var txtTime: APJTextPickerView!
     @IBOutlet weak var calendar: FSCalendar!
     fileprivate let gregorian = Calendar(identifier: .gregorian)
-    var arrayTimes = ["13:00", "13:30", "14:00", "14:30", "15:00", "15:30" ,"16:00", "16:30", "17:00", "17:30", "18:00", "18:30","19:00", "19:30", "20:00", "20:30", "21:00", "21:30","22:00", "22:30", "23:00", "23:30", "24:00", "01:00","01:30", "02:00", "02:30", "03:00", "03:30", "04:00","04:30", "05:00", "05:30", "06:00", "06:30", "07:00","07:30", "08:00", "08:30", "09:00", "09:30", "10:00","10:30", "11:00", "11:30", "12:00"]
+   // var arrayTimes = ["13:00", "13:30", "14:00", "14:30", "15:00", "15:30" ,"16:00", "16:30", "17:00", "17:30", "18:00", "18:30","19:00", "19:30", "20:00", "20:30", "21:00", "21:30","22:00", "22:30", "23:00", "23:30", "24:00", "01:00","01:30", "02:00", "02:30", "03:00", "03:30", "04:00","04:30", "05:00", "05:30", "06:00", "06:30", "07:00","07:30", "08:00", "08:30", "09:00", "09:30", "10:00","10:30", "11:00", "11:30", "12:00"]
+    var TItems : NSArray = []
+
     fileprivate let formatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
@@ -91,17 +93,17 @@ class DIYExampleViewController: UIViewController, FSCalendarDataSource, FSCalend
 //        self.datePicker.showCornerRadius = false
 //        self.datePicker.delegate = self
         
-        
+        loadData()
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
-        for (index,time) in arrayTimes.enumerated() {
+        for (index,time) in TItems.enumerated() {
             dateFormatter.dateFormat = "H:mm"
-            if let inDate = dateFormatter.date(from: time) {
+            if let inDate = dateFormatter.date(from: time as! String) {
                 dateFormatter.dateFormat = "h:mm a"
                 let outTime = dateFormatter.string(from:inDate)
                 print("in \(time)")
                 print("out \(outTime)")
-                arrayTimes[index] = outTime
+             //   TItems[index] = outTime
             }
         }
         
@@ -209,7 +211,46 @@ class DIYExampleViewController: UIViewController, FSCalendarDataSource, FSCalend
         self.navigationController?.popToRoot(animated: true)
     }
     
-    
+    func loadData(){
+        if MyTools.tools.connectedToNetwork()
+        {
+            self.showIndicator()
+            MyApi.api.getAvailableTime(type: self.type)
+            { (response, err) in
+                if((err) == nil)
+                {
+                    if let JSON = response.result.value as? NSDictionary
+                    {
+                        let  status = JSON["status"] as? Bool
+                        if (status == true)
+                        {
+                            self.hideIndicator()
+                            self.TItems = (JSON["items"] as! NSArray).mutableCopy() as! NSMutableArray
+                            
+//                            self.tableView.delegate = self
+//                            self.tableView.dataSource = self
+//                            self.tableView.reloadData()
+                        }
+                        else
+                        {
+                            self.hideIndicator()
+                            self.showOkAlert(title: "Error".localized, message: JSON["message"] as? String ?? "")
+                        }
+                        self.hideIndicator()
+                    }
+                }
+                else
+                {
+                    self.hideIndicator()
+                    self.showOkAlert(title: "Error".localized, message: "An Error occurred".localized)
+                }
+            }
+        }
+        else
+        {
+            self.showOkAlert(title: "Error".localized, message: "No Internet Connection".localized)
+        }
+    }
     @IBAction func btnCall(_ sender: UIButton)
     {
         self.sendEmail()
@@ -407,17 +448,17 @@ class DIYExampleViewController: UIViewController, FSCalendarDataSource, FSCalend
     
     func textPickerView(_ textPickerView: APJTextPickerView, didSelectString row: Int)
     {
-            self.dt = MyTools.tools.timeFormatter(date: self.arrayTimes[row])
-            self.txtTime.text = self.arrayTimes[row]
+        self.dt = MyTools.tools.timeFormatter(date: self.TItems[row] as! String)
+        self.txtTime.text = self.TItems[row] as! String
     }
     
     func textPickerView(_ textPickerView: APJTextPickerView, titleForRow row: Int) -> String?
     {
-            return self.arrayTimes[row]
+        return self.TItems[row] as! String
     }
     
     func numberOfRows(in pickerView: APJTextPickerView) -> Int {
-            return self.arrayTimes.count
+            return self.TItems.count
     }
 }
 
