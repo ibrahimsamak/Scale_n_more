@@ -3,7 +3,7 @@ import Foundation
 import FSCalendar
 import BIZPopupView
 
-class SAMealCalender: UIViewController, FSCalendarDataSource, FSCalendarDelegate  {
+class SAMealCalender: UIViewController, FSCalendarDataSource, FSCalendarDelegate ,loadDataprotocal {
     
     @IBOutlet weak var txtTo: UILabel!
     @IBOutlet weak var txtFrom: UILabel!
@@ -23,15 +23,20 @@ class SAMealCalender: UIViewController, FSCalendarDataSource, FSCalendarDelegate
     var TItems:NSArray = []
     var dates : NSArray = []
     var selectedDate : [Date] = []
+    var selectedDateNew : [String:UIColor] = [:]
+    var selectedDateNewS : [String:String] = [:]
+   var palnId = 0
     var selectedDateString : [String] = []
     override func viewDidLoad() {
         super.viewDidLoad()
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
         self.calendar.register(DIYCalendarCell.self, forCellReuseIdentifier: "cell")
+    
         
         //        txtTime.addTarget(self, action:  #selector(DIYExampleViewController.myTargetFunction(textField:)), for: UIControlEvents.touchDown)
         
@@ -76,7 +81,11 @@ class SAMealCalender: UIViewController, FSCalendarDataSource, FSCalendarDelegate
         return cell
     }
     
+    
+
+    
     func calendar(_ calendar: FSCalendar, willDisplay cell: FSCalendarCell, for date: Date, at position: FSCalendarMonthPosition) {
+        
         self.configure(cell: cell, for: date, at: position)
     }
     
@@ -119,13 +128,18 @@ class SAMealCalender: UIViewController, FSCalendarDataSource, FSCalendarDelegate
         if(index != nil)
         {
             let dayObj = self.dates.object(at: index!) as AnyObject
-            let id = dayObj.value(forKey: "id") as! Int
+          //  let id = dayObj.value(forKey: "id") as! Int
             let date = dayObj.value(forKey: "date") as! String
-            
+            let pause = dayObj.value(forKey: "pause") as! String
+
             let vc:SAPopUp = AppDelegate.storyboard.instanceVC()
             vc.date = date
+            
             vc.day = "Day # ".localized+String(index!+1)
-            vc.id = id
+            vc.id = palnId
+            vc.pause = pause
+            vc.delegate = self
+
             let screenSize = UIScreen.main.bounds
             let screenWidth = screenSize.width
             let screenHeight = screenSize.height
@@ -154,6 +168,7 @@ class SAMealCalender: UIViewController, FSCalendarDataSource, FSCalendarDelegate
         calendar.visibleCells().forEach { (cell) in
             let date = calendar.date(for: cell)
             let position = calendar.monthPosition(for: cell)
+            
             self.configure(cell: cell, for: date!, at: position)
         }
     }
@@ -177,6 +192,22 @@ class SAMealCalender: UIViewController, FSCalendarDataSource, FSCalendarDelegate
                 return
             }
             diyCell.selectionLayer.isHidden = false
+            
+          //  diyCell.selectionLayer.fillColor = "9CC45D".color.cgColor
+            
+          //  diyCell.selectionLayer.fillColor = "C0C0C0".color.cgColor
+            let dateFormatter = DateFormatter()
+            dateFormatter.calendar = Calendar(identifier: Calendar.Identifier.gregorian)
+            dateFormatter.locale = Locale(identifier: "en-us")
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            let stringDate = dateFormatter.string(from: date)
+            if self.selectedDateNewS[stringDate] == "0" {
+                diyCell.selectionLayer.fillColor = "9CC45D".color.cgColor
+
+            }else{
+                diyCell.selectionLayer.fillColor = "C0C0C0".color.cgColor
+
+            }
             diyCell.selectionType = .single
             
         } else {
@@ -202,7 +233,13 @@ class SAMealCalender: UIViewController, FSCalendarDataSource, FSCalendarDelegate
                             self.hideIndicator()
                             self.TItems = JSON["items"] as! NSArray
                             let content = self.TItems.object(at: self.TItems.count-1) as AnyObject
+                            
                             self.dates = content.value(forKey: "days") as! NSArray
+                          
+                            let plan_id = content.value(forKey: "id") as! Int
+                          self.palnId = plan_id
+                            
+                            
                             let packageUnfo = content.value(forKey: "package") as! NSDictionary
                             self.txtFrom.text = packageUnfo.value(forKey: "date") as! String
                             self.txtTo.text = (packageUnfo.value(forKey: "Duration") as! String)+" Days".localized
@@ -211,6 +248,9 @@ class SAMealCalender: UIViewController, FSCalendarDataSource, FSCalendarDelegate
                             {
                                 let content = self.dates.object(at: index) as AnyObject
                                 let dateString = content.value(forKey: "date") as! String
+                                 let pauseString = content.value(forKey: "pause") as! String
+                                
+                                
                                 let dateStringConverter = MyTools.tools.convertDateFormater(date: dateString)
                                 let dateFormatter = DateFormatter()
                                 dateFormatter.calendar = Calendar(identifier: Calendar.Identifier.gregorian)
@@ -220,6 +260,9 @@ class SAMealCalender: UIViewController, FSCalendarDataSource, FSCalendarDelegate
                             
                                 self.selectedDate.append(date ?? Date())
                                 self.selectedDateString.append(dateString)
+                            
+                                self.selectedDateNewS[dateString] = pauseString
+                                
 
                             }
                             
@@ -240,7 +283,7 @@ class SAMealCalender: UIViewController, FSCalendarDataSource, FSCalendarDelegate
                             self.calendar.appearance.titleWeekendColor = UIColor.white
                             self.calendar.appearance.headerTitleColor = UIColor.white
                             self.calendar.appearance.weekdayTextColor = "9CC45D".color
-                            
+                           
                             self.calendar.appearance.eventOffset = CGPoint(x: 0, y: -7)
                             self.calendar.swipeToChooseGesture.isEnabled = true
                             self.calendar.today = nil
@@ -249,6 +292,9 @@ class SAMealCalender: UIViewController, FSCalendarDataSource, FSCalendarDelegate
                                 self.calendar.select(date, scrollToDate: true)
                             }
                             
+                           
+                           
+                           
                             print(self.selectedDate)
                             self.calendar.reloadData()
                         }
@@ -277,7 +323,13 @@ class SAMealCalender: UIViewController, FSCalendarDataSource, FSCalendarDelegate
             self.showOkAlert(title: "Error".localized, message: "No Internet Connection".localized)
         }
     }
-    
+    func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, fillSelectionColorFor date: Date) -> UIColor? {
+        let key = self.formatter.string(from: date)
+        if let color = self.selectedDateNew[key] {
+            return color
+        }
+        return appearance.selectionColor
+    }
     @IBAction func btnHome(_ sender: UIButton)
     {
         self.navigationController?.popToRoot(animated: true)

@@ -999,7 +999,7 @@ class MyApi
         }
     }
     
-    func PauseDay(date:String,pause:Int,completion:((DataResponse<Any>,Error?)->Void)!)
+    func PauseDay(date:String,pause:String,plan_id:Int,completion:((DataResponse<Any>,Error?)->Void)!)
     {
         let headers: HTTPHeaders = [
             "Accept": "application/json",
@@ -1007,7 +1007,7 @@ class MyApi
             "Authorization" :  "Bearer "+MyTools.tools.getMyToken()
         ]
         
-        Alamofire.request(String(format:"%@%@",MyApi.apiMainURL,"editPlanMeals"), method: .post, parameters:["date":date , "pause":pause],encoding: JSONEncoding.default , headers:headers).responseJSON { response in
+        Alamofire.request(String(format:"%@%@",MyApi.apiMainURL,"editPlanMeals"), method: .post, parameters:["date":date , "pause":pause,"plan_id":plan_id],encoding: JSONEncoding.default , headers:headers).responseJSON { response in
             if(response.result.isSuccess)
             {
                 completion(response,nil)

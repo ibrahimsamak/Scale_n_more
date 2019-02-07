@@ -5579,6 +5579,7 @@
                     </view>
                     <connections>
                         <outlet property="lblDate" destination="dth-Av-GgF" id="sn6-1G-Xay"/>
+                        <outlet property="lblpause" destination="7ON-uh-CPC" id="JPe-Ah-MiY"/>
                         <outlet property="txtDay" destination="MS7-8C-DEb" id="oHI-0w-trz"/>
                     </connections>
                 </viewController>

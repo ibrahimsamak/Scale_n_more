@@ -8,18 +8,34 @@
 
 import UIKit
 import BIZPopupView
+protocol loadDataprotocal {
+    func loadDate()
 
+
+}
 class SAPopUp: UIViewController {
     
     @IBOutlet weak var lblDate: UITextField!
     @IBOutlet weak var txtDay: UITextField!
     
+    @IBOutlet weak var lblpause: UILabel!
     var date = ""
     var day = ""
     var id = 0
-    
+    var pause = ""
+    var delegate: loadDataprotocal?
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if pause == "0"{
+          lblpause.text = "Pause"
+            pause = "1"
+        }else{
+            lblpause.text = "UnPause"
+            pause = "0"
+
+        }
         
         if(Language.currentLanguage().contains("ar"))
         {
@@ -43,6 +59,7 @@ class SAPopUp: UIViewController {
     @IBAction func btnClose(_ sender: UIButton)
     {
         self.dismiss(animated: true, completion: nil)
+        
     }
     
     @IBAction func btnView(_ sender: UIButton)
@@ -56,6 +73,8 @@ class SAPopUp: UIViewController {
     @IBAction func btnPause(_ sender: UIButton)
     {
         self.Pause()
+        self.delegate?.loadDate()
+
     }
     
     @IBAction func btnEdit(_ sender: UIButton)
@@ -86,7 +105,7 @@ class SAPopUp: UIViewController {
         if MyTools.tools.connectedToNetwork()
         {
             self.showIndicator()
-            MyApi.api.PauseDay(date: self.lblDate.text!, pause: 1)
+            MyApi.api.PauseDay(date: self.lblDate.text!, pause: pause,plan_id:id )
             { (response, err) in
                 if((err) == nil)
                 {
