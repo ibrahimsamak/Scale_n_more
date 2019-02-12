@@ -77,6 +77,14 @@ class SADayDetails: UIViewController ,UITableViewDelegate, UITableViewDataSource
                         self.IdArray.append(object.id!)
                     }
                 }
+                if self.isView {
+                var NewobjDataMael: [[AllMeal]] = []
+                for objDataM in self.objDataMael {
+                   NewobjDataMael.append(objDataM.filter{$0.selected == 1})
+                }
+                   self.objDataMael = NewobjDataMael
+                }
+                
            self.tbl.reloadData()
             } catch let jsonErr {
                 print("Error serializing  respone json", jsonErr)
@@ -272,9 +280,9 @@ class SADayDetails: UIViewController ,UITableViewDelegate, UITableViewDataSource
                     IdArray.remove(at: index)
                 }
             }else{
-                if IdArray.count == Int(maxS)
+                if IdArray.count > Int(maxS)!
                 {
-                    self.showOkAlert(title: "Error".localized, message: "The max selected meal\(maxS)".localized)
+                    self.showOkAlert(title: "Error".localized, message: "The max selected meals is  \(maxS)".localized)
 
                     return
                 }
