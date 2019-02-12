@@ -54,7 +54,7 @@ class SAAddExersise: UIViewController,UICollectionViewDelegate , UICollectionVie
             let muscale_id = self.content?.value(forKey: "muscale_id") as! String
             let submuscale_id = self.content?.value(forKey: "submuscale_id") as! String
             let submuscale = self.content?.value(forKey: "submuscale") as! NSDictionary
-            self.VideoName = submuscale.value(forKey: "title") as! String
+            self.VideoName = content?.value(forKey: "name") as! String
             self.VideoThumb = self.content?.value(forKey: "img_vedio") as? String ?? ""
             self.url = self.content?.value(forKey: "video") as! String
             

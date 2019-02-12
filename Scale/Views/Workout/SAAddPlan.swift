@@ -181,10 +181,14 @@ class SAAddPlan: UIViewController,UITableViewDelegate , UITableViewDataSource,  
         let content = self.TItems.object(at: indexPath.row) as AnyObject
         let name = content.value(forKey: "day_name") as! String
         let id = content.value(forKey: "id") as! Int
-        let note = content.value(forKey: "note") as! String
-        
-        
-        cell.lblDay.text = note
+       
+       // let note = content.value(forKey: "note") as? String
+//        if note == ""{
+//            cell.lblDay.text = "Exercise note"
+//        }else{
+//            cell.lblDay.text = note
+//
+//        }
         cell.lblPlanName.text = name
         
         let wrapper = ActionCell()

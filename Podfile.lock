@@ -73,6 +73,7 @@ PODS:
     - GoogleUtilities/Reachability (~> 5.2)
     - Protobuf (~> 3.1)
   - FSCalendar (2.8.0)
+  - FullMaterialLoader (0.2.3)
   - GoogleAppMeasurement (5.3.0):
     - GoogleUtilities/AppDelegateSwizzler (~> 5.2)
     - GoogleUtilities/MethodSwizzler (~> 5.2)
@@ -159,6 +160,7 @@ DEPENDENCIES:
   - Firebase/Database
   - Firebase/Messaging
   - FSCalendar
+  - FullMaterialLoader
   - GoogleSignIn
   - GSImageViewerController
   - IBAnimatable
@@ -171,7 +173,7 @@ DEPENDENCIES:
   - "UITextView+Placeholder"
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
     - ActionCell
     - Alamofire
     - APJTextPickerView
@@ -197,6 +199,7 @@ SPEC REPOS:
     - FirebaseInstanceID
     - FirebaseMessaging
     - FSCalendar
+    - FullMaterialLoader
     - GoogleAppMeasurement
     - GoogleSignIn
     - GoogleToolboxForMac
@@ -244,12 +247,13 @@ SPEC CHECKSUMS:
   FirebaseInstanceID: e2fa4cb35ef5558c200f7f0ad8a53e212215f93e
   FirebaseMessaging: 0f14a264b0d7f867e8eff5d3556bc5d0d4e57888
   FSCalendar: 3a5ed3636e2ba1b83ebebfcf0c2603105a6f5efe
+  FullMaterialLoader: e42901936b13600524f590e740ef359b72a4693f
   GoogleAppMeasurement: 5029d78f2b438bd30ffb44e6c558b57c21622727
   GoogleSignIn: 11183592dc63e105475c7305a325045ff95e02b7
   GoogleToolboxForMac: 91c824d21e85b31c2aae9bb011c5027c9b4e738f
   GoogleUtilities: abb092d2c12e817fa3e0e7b274987dd72fb86ec3
   GSImageViewerController: 2bf1a8b45e5923ff5957c78ace6778c0b50fea96
-  GTMOAuth2: c77fe325e4acd453837e72d91e3b5f13116857b2
+  GTMOAuth2: e8b6512c896235149df975c41d9a36c868ab7fba
   GTMSessionFetcher: 0c4baf0a73acd0041bf9f71ea018deedab5ea84e
   IBAnimatable: a46b835ec6875178516cf7e014a40194d6bfa3fc
   IQKeyboardManagerSwift: b07ccf9d8cafe993dcd6cb794eb4ba34611a0c4e
@@ -265,6 +269,6 @@ SPEC CHECKSUMS:
   TwitterKit: 5e4f41d70b9abdb41df5467f52d7aa2c0fd26ebb
   "UITextView+Placeholder": 0c3efd97f37ea64bde7f34cc6e90fe02e87b3909
 
-PODFILE CHECKSUM: f7dd5b477cd5bb0d27116b9c7e797e7c8b6ad445
+PODFILE CHECKSUM: f214f5755b08fccbb02bf933a8f4437d1e009561
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.6.0.beta.2

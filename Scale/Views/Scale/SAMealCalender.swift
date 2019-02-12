@@ -193,9 +193,7 @@ class SAMealCalender: UIViewController, FSCalendarDataSource, FSCalendarDelegate
             }
             diyCell.selectionLayer.isHidden = false
             
-          //  diyCell.selectionLayer.fillColor = "9CC45D".color.cgColor
-            
-          //  diyCell.selectionLayer.fillColor = "C0C0C0".color.cgColor
+          
             let dateFormatter = DateFormatter()
             dateFormatter.calendar = Calendar(identifier: Calendar.Identifier.gregorian)
             dateFormatter.locale = Locale(identifier: "en-us")
@@ -237,11 +235,14 @@ class SAMealCalender: UIViewController, FSCalendarDataSource, FSCalendarDelegate
                             self.dates = content.value(forKey: "days") as! NSArray
                           
                             let plan_id = content.value(forKey: "id") as! Int
-                          self.palnId = plan_id
+                            self.txtFrom.text = content.value(forKey: "start_date") as! String
+
+                        
+                            self.palnId = plan_id
                             
                             
                             let packageUnfo = content.value(forKey: "package") as! NSDictionary
-                            self.txtFrom.text = packageUnfo.value(forKey: "date") as! String
+                           // self.txtFrom.text = packageUnfo.value(forKey: "date") as! String
                             self.txtTo.text = (packageUnfo.value(forKey: "Duration") as! String)+" Days".localized
 
                             for index in 0..<self.dates.count
@@ -323,6 +324,7 @@ class SAMealCalender: UIViewController, FSCalendarDataSource, FSCalendarDelegate
             self.showOkAlert(title: "Error".localized, message: "No Internet Connection".localized)
         }
     }
+   
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, fillSelectionColorFor date: Date) -> UIColor? {
         let key = self.formatter.string(from: date)
         if let color = self.selectedDateNew[key] {

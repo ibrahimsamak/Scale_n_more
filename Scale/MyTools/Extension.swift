@@ -11,6 +11,7 @@ import Foundation
 import UIKit
 import SKActivityIndicatorView
 import PopupDialog
+import FullMaterialLoader
 
 extension Date
 {
@@ -21,7 +22,21 @@ extension Date
     init(milliseconds:Int) {
         self = Date(timeIntervalSince1970: TimeInterval(milliseconds / 1000))
     }
+    func isEqualTo(_ date: Date) -> Bool {
+        return self == date
+    }
+    
+    func isGreaterThan(_ date: Date) -> Bool {
+        return self > date
+    }
+    
+    func isSmallerThan(_ date: Date) -> Bool {
+        return self < date
+    }
+    
+    
 }
+var indicator: MaterialLoadingIndicator!
 
 extension String {
     var westernArabicNumeralsOnly: String {
@@ -92,6 +107,12 @@ extension UIView
 extension UIViewController
 {
     //simple alert
+    func alert(message: String, title: String = "") {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let OKAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(OKAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
     func showAlertWithCancel(title: String, message:String, okAction: String = "Done".localized, completion: ((UIAlertAction) -> Void)? = nil ) {
         
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -151,8 +172,28 @@ extension UIViewController
     {
         SKActivityIndicator.dismiss()
     }
+
+    func showIndicator2()
+    {
+        indicator = MaterialLoadingIndicator(frame: CGRect(x:0, y:0, width: 25, height: 25))
+        indicator.center = (self.view.center)
+        
+        indicator.indicatorColor = [UIColor.black.cgColor, UIColor.darkGray.cgColor]
+        self.view.addSubview(indicator)
+        indicator.startAnimating()
+    }
+    func RootViewController(viewController:UIViewController) {
+        guard let window = UIApplication.shared.keyWindow else { return }
+        window.rootViewController = viewController
+        window.makeKeyAndVisible()
+        UIView.transition(with: window, duration: 0.5, options: .transitionCrossDissolve, animations: nil, completion: nil)
+    }
     
-    
+    func hideIndicator2()
+    {
+        indicator.removeFromSuperview()
+        indicator.stopAnimating()
+    }
     
     func showOkAlert(title:String,message:String) {
         

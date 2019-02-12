@@ -1105,6 +1105,28 @@ class MyApi
     }
     
     
+    func getCategoryMeals2(date:String, completion:((DataResponse<Any>,Error?)->Void)!)
+    {
+        let headers: HTTPHeaders = [
+            "Accep": "application/json",
+            "Accept-Language" :  MyTools.tools.getMyLang(),
+            "Authorization" :  "Bearer "+MyTools.tools.getMyToken()
+        ]
+        
+        Alamofire.request(String(format:"%@%@",MyApi.apiMainURL,"getCategoryMeals2?date="+date), method: .get,encoding: JSONEncoding.default , headers:headers).responseJSON { response in
+            if(response.result.isSuccess)
+            {
+                completion(response,nil)
+            }
+            else
+            {
+                completion(response,response.result.error)
+            }
+        }
+    }
+    
+    
+    
     func GetPackages(ID:Int,completion:((DataResponse<Any>,Error?)->Void)!)
     {
         let headers: HTTPHeaders = [

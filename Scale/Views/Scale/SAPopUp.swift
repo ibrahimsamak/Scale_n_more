@@ -15,6 +15,7 @@ protocol loadDataprotocal {
 }
 class SAPopUp: UIViewController {
     
+    @IBOutlet weak var viewRate: UIView!
     @IBOutlet weak var lblDate: UITextField!
     @IBOutlet weak var txtDay: UITextField!
     
@@ -24,10 +25,14 @@ class SAPopUp: UIViewController {
     var id = 0
     var pause = ""
     var delegate: loadDataprotocal?
-
+    var hourString = ""
     override func viewDidLoad() {
         super.viewDidLoad()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        hourString = formatter.string(from: Date())
         
+
         if pause == "0"{
           lblpause.text = "Pause"
             pause = "1"
@@ -36,6 +41,14 @@ class SAPopUp: UIViewController {
             pause = "0"
 
         }
+        
+        if self.hourString == self.lblDate.text{
+            self.viewRate.isHidden = false
+        }else{
+            self.viewRate.isHidden = true
+            
+        }
+
         
         if(Language.currentLanguage().contains("ar"))
         {
@@ -72,8 +85,35 @@ class SAPopUp: UIViewController {
     
     @IBAction func btnPause(_ sender: UIButton)
     {
-        self.Pause()
-        self.delegate?.loadDate()
+        if pause == "1"{
+            self.showOkAlertWithComp(title: "Pause".localized, message: "Do you want to pause this day?".localized, completion: { (success) in
+                if(success)
+                {
+                    self.Pause()
+                    self.delegate?.loadDate()
+
+                    self.dismiss(animated: true, completion: nil)
+                }
+            })
+          //  lblpause.text = "Pause"
+            //pause = "1"
+            // هل ترغب في ايقاف هذا اليوم
+        }else{
+            self.showOkAlertWithComp(title: "Un Pause".localized, message: "Do you want to un pause this day?".localized, completion: { (success) in
+                if(success)
+                {
+                    self.Pause()
+                    self.delegate?.loadDate()
+
+                    self.dismiss(animated: true, completion: nil)
+                }
+            })
+           // lblpause.text = "UnPause"
+           // pause = "0"
+            
+        }
+
+        
 
     }
     
@@ -115,6 +155,7 @@ class SAPopUp: UIViewController {
                         if (status == 1)
                         {
                             self.hideIndicator()
+                            
                             self.showOkAlertWithComp(title: "Success".localized, message: JSON["message"] as? String ?? "", completion: { (success) in
                                 if(success)
                                 {

@@ -21,6 +21,8 @@ target 'Scale' do
     pod 'FSCalendar'
     pod 'ActionCell', '~> 2.0.0'
     pod 'CLImageViewPopup'
+    pod 'FullMaterialLoader'
+
 
     #notifications
     pod 'Firebase'

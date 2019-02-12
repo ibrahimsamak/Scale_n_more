@@ -132,6 +132,9 @@
 		20FF85B5212AB972000A20F9 /* RPackageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FF85B3212AB972000A20F9 /* RPackageCell.swift */; };
 		20FF85B8212ABC8D000A20F9 /* SAResturantPackageDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FF85B7212ABC8D000A20F9 /* SAResturantPackageDetails.swift */; };
 		6071DFF6F7E90DA149DE4EAA /* Pods_Scale.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEEC259155C4400CCF02CF06 /* Pods_Scale.framework */; };
+		BB019E762211654B00F83188 /* Catogries.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB019E752211654B00F83188 /* Catogries.swift */; };
+		BB019E78221165B200F83188 /* WebRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB019E77221165B100F83188 /* WebRequests.swift */; };
+		BB019E7A221165C500F83188 /* TAConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB019E79221165C400F83188 /* TAConstant.swift */; };
 		BB7408D621E4756B009F9830 /* NoMealVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7408D521E4756B009F9830 /* NoMealVC.swift */; };
 		BBC3E98021B541A00062CCFF /* NSZoomImg.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC3E97F21B541A00062CCFF /* NSZoomImg.swift */; };
 		BBE3305022004BD90057D8EE /* VCformassege.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE3304F22004BD90057D8EE /* VCformassege.swift */; };
@@ -297,6 +300,9 @@
 		20FF85B1212AAF82000A20F9 /* SAResturantPackages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SAResturantPackages.swift; sourceTree = "<group>"; };
 		20FF85B3212AB972000A20F9 /* RPackageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPackageCell.swift; sourceTree = "<group>"; };
 		20FF85B7212ABC8D000A20F9 /* SAResturantPackageDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SAResturantPackageDetails.swift; sourceTree = "<group>"; };
+		BB019E752211654B00F83188 /* Catogries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Catogries.swift; sourceTree = "<group>"; };
+		BB019E77221165B100F83188 /* WebRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebRequests.swift; sourceTree = "<group>"; };
+		BB019E79221165C400F83188 /* TAConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TAConstant.swift; sourceTree = "<group>"; };
 		BB7408D521E4756B009F9830 /* NoMealVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoMealVC.swift; sourceTree = "<group>"; };
 		BBC3E97F21B541A00062CCFF /* NSZoomImg.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSZoomImg.swift; sourceTree = "<group>"; };
 		BBE3304F22004BD90057D8EE /* VCformassege.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCformassege.swift; sourceTree = "<group>"; };
@@ -508,6 +514,8 @@
 			children = (
 				20E772A32143F2A70050CD4E /* SACustomButton.swift */,
 				207328992115B3B900E542FF /* MyTools.swift */,
+				BB019E79221165C400F83188 /* TAConstant.swift */,
+				BB019E77221165B100F83188 /* WebRequests.swift */,
 				2073289A2115B3B900E542FF /* Extension.swift */,
 				BBE33051220050A90057D8EE /* MaxLengthTextField.swift */,
 				2073289B2115B3B900E542FF /* MyApi.swift */,
@@ -533,6 +541,7 @@
 			isa = PBXGroup;
 			children = (
 				BBC3E97F21B541A00062CCFF /* NSZoomImg.swift */,
+				BB019E752211654B00F83188 /* Catogries.swift */,
 				20AD6DD72129CF3400EDAA58 /* HumanBody */,
 				205370F5211DD26C006A5AD5 /* Settings */,
 				205370EE211DD124006A5AD5 /* Scale */,
@@ -841,7 +850,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Scale/Pods-Scale-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Scale/Pods-Scale-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/APJTextPickerView/APJTextPickerView.framework",
 				"${BUILT_PRODUCTS_DIR}/ActionCell/ActionCell.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
@@ -856,6 +865,7 @@
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FSCalendar/FSCalendar.framework",
+				"${BUILT_PRODUCTS_DIR}/FullMaterialLoader/FullMaterialLoader.framework",
 				"${BUILT_PRODUCTS_DIR}/GSImageViewerController/GSImageViewerController.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
@@ -891,6 +901,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FSCalendar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FullMaterialLoader.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GSImageViewerController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
@@ -912,7 +923,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Scale/Pods-Scale-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Scale/Pods-Scale-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F24BCCB39CD59C01AFFA868E /* [CP] Copy Pods Resources */ = {
@@ -921,7 +932,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Scale/Pods-Scale-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Scale/Pods-Scale-resources.sh",
 				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework/TwitterKitResources.bundle",
 			);
@@ -932,7 +943,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Scale/Pods-Scale-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Scale/Pods-Scale-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -954,6 +965,7 @@
 				204E9711211A10A400C67A4F /* SAAddExersise.swift in Sources */,
 				207328C52115D93200E542FF /* SAPulsView.swift in Sources */,
 				2003F231211A020E003B6D41 /* txtExcersise.swift in Sources */,
+				BB019E7A221165C500F83188 /* TAConstant.swift in Sources */,
 				20AD6DE92129D1FF00EDAA58 /* SAHumanBodyDetails10.swift in Sources */,
 				20AD6DE22129D1FF00EDAA58 /* SAHumanBodyDetails7.swift in Sources */,
 				2016A1F621139A8D00F3234B /* ViewController.swift in Sources */,
@@ -1013,6 +1025,8 @@
 				205370F9211DD37B006A5AD5 /* SAAboutUs.swift in Sources */,
 				205370FF211DDAA1006A5AD5 /* SATrainingMeeting.swift in Sources */,
 				207328B12115B3BA00E542FF /* Extension.swift in Sources */,
+				BB019E762211654B00F83188 /* Catogries.swift in Sources */,
+				BB019E78221165B200F83188 /* WebRequests.swift in Sources */,
 				204E970E211A0E2C00C67A4F /* ExcersiseCell.swift in Sources */,
 				202C519B2135D5360024B99B /* SAResturantMeeting.swift in Sources */,
 				20FF85B8212ABC8D000A20F9 /* SAResturantPackageDetails.swift in Sources */,

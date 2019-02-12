@@ -50,3 +50,7 @@
 "Arrange meeting with dietitian" = "ترتيب لقاء مع اختصاصي تغذية";
 
 "Please enter plan name" = "الرجاء ادخال اسم الخطة";
+"Pause" = "تفعيل";
+"Un Pause" = "ايقاف";
+"Do you want to un pause this day?" = "هل ترغب بايقاف هذا اليوم" ;
+"Do you want to pause this day?" = "هل ترفب تفعيل هذا اليوم" ;

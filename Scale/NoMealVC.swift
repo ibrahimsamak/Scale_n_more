@@ -10,9 +10,9 @@ import UIKit
 
 class NoMealVC: UIViewController {
     @IBOutlet weak var lblTitle: UILabel!
-    let Myemail = MyTools.tools.getConfigString("info_email")
-    let MyPhone = MyTools.tools.getConfigString("mobile")
-    let MyName = MyTools.tools.getMyname()
+   // let Myemail = MyTools.tools.getMyemail()
+//    let MyPhone = MyTools.tools.getMymobile()
+   // let MyName = MyTools.tools.getMyname()
     var type = 1
 
     override func viewDidLoad() {
@@ -36,7 +36,7 @@ class NoMealVC: UIViewController {
         if ((UserDefaults.standard.object(forKey: "CurrentUser")) != nil)
         {
             self.showIndicator()
-            MyApi.api.PostContact(fullname: MyName, email: Myemail, comment: "meal", mobile: MyPhone, type:type) { (response, error) in
+            MyApi.api.PostContact(fullname: MyTools.tools.getMyname(), email: MyTools.tools.getMyemail(), comment: "meal", mobile:MyTools.tools.getMymobile() , type:type) { (response, error) in
                 if(response.result.value != nil)
                 {
                     if let JSON = response.result.value as? NSDictionary

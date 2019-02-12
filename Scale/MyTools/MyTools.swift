@@ -196,11 +196,30 @@ class MyTools{
     func getMyname() -> String
     {
         let ns = UserDefaults.standard
-        let dict = ns.value(forKey: "CurrentUser") as! NSDictionary
+        let dict = UserDefaults.standard.value(forKey: "CurrentUser") as! NSDictionary
         let name = dict.value(forKey: "name") as! String
         return name
     }
+    func getMymobile() -> String
+    {
+        let ns = UserDefaults.standard
+        let dict = ns.value(forKey: "CurrentUser") as! NSDictionary
+        
+        let mobile = dict.value(forKey: "mobile") as? String ?? ""
+//        if mobile == ""{
+//            return ""
+//        }
+        return mobile
+    }
+    func getMyemail() -> String
+    {
+        let ns = UserDefaults.standard
+        let dict = ns.value(forKey: "CurrentUser") as! NSDictionary
+        let email = dict.value(forKey: "email") as! String
+        return email
+    }
     
+
     func getMyId() -> String
     {
         let ns = UserDefaults.standard

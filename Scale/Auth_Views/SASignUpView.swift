@@ -171,10 +171,15 @@ class SASignUpView: UIViewController, CategoryProtocol,SCPopDatePickerDelegate
     {
         if MyTools.tools.connectedToNetwork()
         {
-            guard txtPhone.text!.count >= 8 else {
-                                self.showOkAlert(title: "Error".localized, message: "Please enter your phone number".localized)
-                                return
-                            }
+            
+            if txtPhone.text == ""{
+                
+            }else{
+                guard txtPhone.text!.count >= 8 else {
+                    self.showOkAlert(title: "Error".localized, message: "Please enter your phone number".localized)
+                    return
+                }}
+            
             if(txtName.text?.count == 0  || txtEmail.text?.count == 0 || txtPassword.text?.count == 0 )
             {
                 self.showOkAlert(title: "Error".localized, message: "All fields are required".localized)
@@ -183,15 +188,15 @@ class SASignUpView: UIViewController, CategoryProtocol,SCPopDatePickerDelegate
             {
                 self.showOkAlert(title: "Error".localized, message: "Please enter your name".localized)
             }
-//            else if (txtPhone.text?.count)!  == 0 {
-//                self.showOkAlert(title: "Error".localized, message: "Please enter your phone number".localized)
-//            }
-//
-//            else if (txtPhone.text?.count)!  >= 8{
-//                self.showOkAlert(title: "Error".localized, message: "Please enter your phone number".localized)
-//            }
-//
-
+                //            else if (txtPhone.text?.count)!  == 0 {
+                //                self.showOkAlert(title: "Error".localized, message: "Please enter your phone number".localized)
+                //            }
+                //
+                //            else if (txtPhone.text?.count)!  >= 8{
+                //                self.showOkAlert(title: "Error".localized, message: "Please enter your phone number".localized)
+                //            }
+                //
+                
                 
             else if txtEmail.text?.count == 0{
                 self.showOkAlert(title: "Error".localized, message: "Please enter your email address".localized)
@@ -228,22 +233,52 @@ class SASignUpView: UIViewController, CategoryProtocol,SCPopDatePickerDelegate
                                 let UserArray = JSON["items"] as? NSDictionary
                                 
                                 let ns = UserDefaults.standard
-                                let CurrentUser:NSDictionary =
-                                    [
-    "id":UserArray?.value(forKey: "id") as! Int,
-    "access_token":UserArray?.value(forKey: "access_token") as! String,
-    "name":UserArray?.value(forKey: "name") as! String,
-    "check_meal": UserArray?.value(forKey: "check_meal") as! Int
+                                if self.txtPhone.text == ""{
+                                    let CurrentUser:NSDictionary =
+                                        [
+                                            "id":UserArray?.value(forKey: "id") as! Int,
+                                            "access_token":UserArray?.value(forKey: "access_token") as! String,
+                                            "check_meal": UserArray?.value(forKey: "check_meal") as! Int,
+                                            "email":UserArray?.value(forKey: "email") as! String,
+                                            
+                                            
+                                            "name":UserArray?.value(forKey: "name") as! String
+                                            
                                     ]
+                                    ns.setValue(CurrentUser, forKey: "CurrentUser")
+                                    ns.synchronize()
+                                }else{
+                                    
+                                    let CurrentUser:NSDictionary =
+                                        [
+                                            "id":UserArray?.value(forKey: "id") as! Int,
+                                            "access_token":UserArray?.value(forKey: "access_token") as! String,
+                                            "check_meal": UserArray?.value(forKey: "check_meal") as! Int,
+                                            "email":UserArray?.value(forKey: "email") as! String,
+                                            
+                                            "mobile":UserArray?.value(forKey: "mobile") as! String,
+                                            "name":UserArray?.value(forKey: "name") as! String
+                                            
+                                    ]
+                                    ns.setValue(CurrentUser, forKey: "CurrentUser")
+                                    ns.synchronize()
+                                }
                                 
-            ns.setValue(CurrentUser, forKey: "CurrentUser")
-                                ns.synchronize()
+                                
+                                
+                                
                                 
                                 let deviceToken = MyTools.tools.getDeviceToken()
+                                let userEmail = MyTools.tools.getMyemail()
+                                let userMobile = MyTools.tools.getMymobile()
+                                let userName = MyTools.tools.getMyname()
+                                print(userEmail)
+                                print(userMobile)
+                                print(userName)
                                 
                                 self.PostFcmToken(token: deviceToken!,type: "ios")
                                 print(deviceToken)
-
+                                
                                 let vc : rootNavigation = AppDelegate.storyboard.instanceVC()
                                 let appDelegate = UIApplication.shared.delegate
                                 appDelegate?.window??.rootViewController = vc
@@ -274,34 +309,34 @@ class SASignUpView: UIViewController, CategoryProtocol,SCPopDatePickerDelegate
         
         if MyTools.tools.connectedToNetwork()
         {
-                self.showIndicator()
-                MyApi.api.PostFcmToken(token: token, type: "ios")
-                { (response, err) in
-                    if((err) == nil)
+            self.showIndicator()
+            MyApi.api.PostFcmToken(token: token, type: "ios")
+            { (response, err) in
+                if((err) == nil)
+                {
+                    if let JSON = response.result.value as? NSDictionary
                     {
-                        if let JSON = response.result.value as? NSDictionary
+                        let  status = JSON["status"] as? Bool
+                        if (status == true)
                         {
-                            let  status = JSON["status"] as? Bool
-                            if (status == true)
-                            {
-                                print("success")
-                                
-                                
-                            }
-                            else
-                            {
-                                self.hideIndicator()
-                                self.showOkAlert(title: "Error".localized, message: JSON["message"] as? String ?? "")
-                            }
-                            self.hideIndicator()
+                            print("success")
+                            
+                            
                         }
-                    }
-                    else
-                    {
+                        else
+                        {
+                            self.hideIndicator()
+                            self.showOkAlert(title: "Error".localized, message: JSON["message"] as? String ?? "")
+                        }
                         self.hideIndicator()
-                        self.showOkAlert(title: "Error".localized, message: "An Error occurred".localized)
                     }
                 }
+                else
+                {
+                    self.hideIndicator()
+                    self.showOkAlert(title: "Error".localized, message: "An Error occurred".localized)
+                }
+            }
             
         }
         else

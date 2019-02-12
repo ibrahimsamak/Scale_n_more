@@ -12,16 +12,16 @@ import SDWebImage
 class NSZoomImg: UIViewController , UIScrollViewDelegate {
  
     @IBOutlet weak var scrollView: UIScrollView!
-    var objPass3 : AnyObject!
+    var objPass3 = ""
     
     @IBOutlet weak var showImage: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let logo = objPass3.value(forKey: "logo") as? String ?? ""
-      let prefix = "http://scalenmore.com/"
-     showImage.sd_setImage(with: URL(string: prefix+logo), placeholderImage: UIImage(named: "10000-2")!, options: SDWebImageOptions.refreshCached)
+//    let logo = objPass3.value(forKey: "logo") as? String ?? ""
+//      let prefix = "http://scalenmore.com/"
+     showImage.sd_setImage(with: URL(string: objPass3), placeholderImage: UIImage(named: "10000-2")!, options: SDWebImageOptions.refreshCached)
         scrollView.delegate = self
         scrollView.minimumZoomScale = 1.0
         scrollView.maximumZoomScale = 5.0

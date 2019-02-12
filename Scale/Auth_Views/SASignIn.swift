@@ -98,6 +98,8 @@ class SASignIn: UIViewController , FBSDKLoginButtonDelegate, GIDSignInDelegate, 
                             {
                                 print("success")
                                 let UserArray = JSON["items"] as? NSDictionary
+                            
+                                
                                 let ns = UserDefaults.standard
                                 
                                 let CurrentUser:NSDictionary =
@@ -105,13 +107,18 @@ class SASignIn: UIViewController , FBSDKLoginButtonDelegate, GIDSignInDelegate, 
         "id":UserArray?.value(forKey: "id") as! Int,
         "access_token":UserArray?.value(forKey: "access_token") as! String,
             "name":UserArray?.value(forKey: "name") as! String,
-            "check_meal": UserArray?.value(forKey: "check_meal") as! Int
-                                    ]
+            "check_meal": UserArray?.value(forKey: "check_meal") as! Int,
+            "email":UserArray?.value(forKey: "email") as! String,
+         //   "mobile":UserArray?.value(forKey: "mobile") as! String
+                                ]
                                 
                                 ns.setValue(CurrentUser, forKey: "CurrentUser")
                                 ns.synchronize()
                 let deviceToken = MyTools.tools.getDeviceToken()
-                            
+                let userEmail = MyTools.tools.getMyemail()
+               // let userMobile = MyTools.tools.getMymobile()
+                let userName = MyTools.tools.getMyname()
+                    
                                 self.PostFcmToken(token: deviceToken!,type: "ios")
                                 print(deviceToken)
 

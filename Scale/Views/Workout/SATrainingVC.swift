@@ -83,7 +83,7 @@ class SATrainingVC: UIViewController, UITableViewDelegate , UITableViewDataSourc
         
         let content = self.TItems.object(at: indexPath.row) as AnyObject
         let submuscale = content.value(forKey: "submuscale") as! NSDictionary
-        let title = submuscale.value(forKey: "title") as! String
+        let title = content.value(forKey: "name") as! String
         let img = content.value(forKey: "img_vedio") as? String ?? ""
         
         cell.playBtn.tag = indexPath.row

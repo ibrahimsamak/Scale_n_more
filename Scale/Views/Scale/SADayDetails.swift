@@ -12,12 +12,17 @@ import BIZPopupView
 class SADayDetails: UIViewController ,UITableViewDelegate, UITableViewDataSource
 {
     @IBOutlet weak var tbl: UITableView!
-    @IBOutlet weak var btnSave: CustomeButton!
+    @IBOutlet weak var btnSave: UIButton!
     
     var isView = true
     var date  = ""
     var TCategory :NSArray = []
     var TMeals : NSArray = []
+    var TAllMeals : NSArray = []
+    var maxS = ""
+    var TItems :NSArray = []
+    var idS = 0
+   var IdArray = [Int]()
     var unSelectedMeals : NSMutableArray = []
     var SelectedMeals : NSMutableArray = []
     var TSelectedMeal : NSArray = []
@@ -25,17 +30,18 @@ class SADayDetails: UIViewController ,UITableViewDelegate, UITableViewDataSource
     var day_id = ""
     var meal_id = ""
     var category_id = ""
-    
-    var selectedCategory: AnyObject? = nil{
-        didSet{
-            self.getMealsOfSelectedCategory()
-        }
-    }
-    
+    var objData: [itemdata] = []
+    var objDataMael: [[AllMeal]] = []
+
+//    var selectedCategory: AnyObject? = nil{
+//        didSet{
+//            self.getMealsOfSelectedCategory()
+//        }
+//    }
+//
     override func viewDidLoad()
     {
         super.viewDidLoad()
-    
         self.tbl.register(UINib(nibName: "CategoryCell", bundle: nil), forCellReuseIdentifier: "CategoryCell")
         self.tbl.register(UINib(nibName: "MealsCell", bundle: nil), forCellReuseIdentifier: "MealsCell")
         
@@ -48,10 +54,35 @@ class SADayDetails: UIViewController ,UITableViewDelegate, UITableViewDataSource
         else{
             self.btnSave.isHidden = false
         }
-        
-        self.loadDate()
+        self.GetData()
+
+     //   self.loadDate2()
     }
     
+    func GetData(){
+
+        _ = WebRequests.setup(controller: self).prepare(query: "getCategoryMeals2?date=\(date)", method: HTTPMethod.get).start(){ (response, error) in
+            do {
+                let Status =  try JSONDecoder().decode(Catogries.self, from: response.data!)
+                self.objData = Status.categories!
+            
+    
+                var  i = 0
+                for _ in self.objData{
+                self.objDataMael.append(self.objData[i].allMeals!)
+                    i = i+1
+                }
+                for object in self.objDataMael[self.idS]{
+                    if object.selected == 1{
+                        self.IdArray.append(object.id!)
+                    }
+                }
+           self.tbl.reloadData()
+            } catch let jsonErr {
+                print("Error serializing  respone json", jsonErr)
+            }
+        }
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -93,12 +124,18 @@ class SADayDetails: UIViewController ,UITableViewDelegate, UITableViewDataSource
     {
         if(section == 0)
         {
-            return self.TCategory.count
-            
+        return self.objData.count
+           // return 3
         }
         else
         {
-            return self.TSelectedMeal.count
+           // return 3
+            if objDataMael.count == 0 {
+                return 0
+            }
+            let item = objDataMael[idS]
+
+           return item.count
         }
     }
     
@@ -108,73 +145,88 @@ class SADayDetails: UIViewController ,UITableViewDelegate, UITableViewDataSource
         if(indexPath.section == 0)
         {
             let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath) as! CategoryCell
-            let conent = self.TCategory.object(at:indexPath.row) as AnyObject
-            let title = conent.value(forKey: "title") as! String
-            let count =  conent.value(forKey: "count_meal") as! Int
-            let selecetedid = self.selectedCategory?.value(forKey: "id") as! Int
-            let id =  conent.value(forKey: "id") as! Int
-            cell.icon.isHidden = (selecetedid != id)
-            cell.lblTitle.text = title
-            cell.lblCount.text = String(count)
+            let item = objData[indexPath.row]
+            cell.lblTitle.text = item.title
+            let counts = objDataMael[indexPath.row]
+          
+            cell.lblCount.text = "\(counts.count ?? 0)"
+            maxS = item.maxSelected!
+
+            if indexPath.row == idS{
+                cell.icon.isHidden = false
+
+            }else{
+            cell.icon.isHidden = true
+            }
+         
 
             return cell
         }
         else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "MealsCell", for: indexPath) as! MealsCell
-            let conent = self.TSelectedMeal.object(at:indexPath.row) as AnyObject
-            let title = conent.value(forKey: "name") as! String
-            let category_id = conent.value(forKey: "category_id") as! String
-            let id = conent.value(forKey: "id") as! String
-            let logo = conent.value(forKey: "logo") as? String ?? ""
-            let prefix = "http://scalenmore.com/"
-         
-            cell.lblTitle.text = title
-           cell.img.sd_setImage(with: URL(string: prefix+logo), placeholderImage: UIImage(named: "10000-2")!, options: SDWebImageOptions.refreshCached)
-       
+            
+            let item = objDataMael[idS]
+        
+            cell.lblTitle.text = item[indexPath.row].name
+            self.category_id = item[indexPath.row].categoryID!
+//            if item[indexPath.row].selected == 1  && !IdArray.contains(item[indexPath.row].id!){
+//                IdArray.append(item[indexPath.row].id!)
+//            }else{
+//
+//            }
+            if  IdArray.contains(item[indexPath.row].id!)  {
+                cell.iconDon.isHidden = false
+            }else{
+                cell.iconDon.isHidden = true
+
+            }
+
+
+            cell.img.sd_setImage(with: URL(string: item[indexPath.row].logo!), placeholderImage: UIImage(named: "10000-2")!, options: SDWebImageOptions.refreshCached)
+            
             cell.btnZoom.tag = indexPath.row
             cell.btnZoom.addTarget(self, action: #selector(didZoomImg), for: .touchUpInside)
-            self.category_id = category_id
-            self.meal_id = id
+        
             
-            if(isView)
-            {
-                cell.img_circle.isHidden = true
-                cell.iconDon.isHidden = true
-            }
-            else
-            {
-                if(self.unSelectedMeals.contains(Int(id)))
-                {
-                    cell.img_circle.isHidden = false
-                    cell.iconDon.isHidden = true
-                }
-                else
-                {
-                    cell.img_circle.isHidden = false
-                    cell.iconDon.isHidden = false
-                }
-                
-//                if(self.selectedMealId != id)
-//                {
-//                    cell.img_circle.isHidden = false
-//                    cell.iconDon.isHidden = false
-//                }else{
-//                    cell.img_circle.isHidden = false
-//                    cell.iconDon.isHidden = true
-//                }
-            }
+            cell.img_circle.tag = indexPath.row
+          
+            
+//            if cell.img_circle.tag == idS{
+//             cell.iconDon.isHidden = true
+//            }else{
+//                cell.iconDon.isHidden = false
+//
+//            }
+            cell.img_circle.addTarget(self, action: #selector(didSelect), for: .touchUpInside)
+
+            
             
             return cell
         }
     }
-    
+    @objc func didSelect(_ sender: UIButton){
+//        let item = objDataMael[idS]
+//
+//
+//        if  IdArray.contains( item[sender.tag].id!){
+//            if let index = IdArray.index(of:item[sender.tag].id!) {
+//                IdArray.remove(at: index)
+//            }
+//        }else{
+//
+//        }
+        
+    }
     @objc func didZoomImg(_ sender: UIButton){
         
             let smallViewController = AppDelegate.storyboard.instantiateViewController(withIdentifier: "NSZoomImg") as! NSZoomImg
         
-        let conent = self.TSelectedMeal.object(at:sender.tag) as AnyObject
         
-        smallViewController.objPass3 = conent
+        
+        let item = objDataMael[idS]
+
+        
+        smallViewController.objPass3 = item[sender.tag].logo!
         
         let popupViewController = BIZPopupViewController(contentViewController: smallViewController, contentSize: CGSize(width: CGFloat(320), height: CGFloat(600)))
        
@@ -200,32 +252,39 @@ class SADayDetails: UIViewController ,UITableViewDelegate, UITableViewDataSource
     {
         if(indexPath.section == 0)
         {
-            let content = self.TCategory.object(at:indexPath.row) as AnyObject
-            self.selectedCategory = content
+            idS = indexPath.row
+            for object in self.objDataMael[idS]{
+                if object.selected == 1{
+                    IdArray.append(object.id!)
+                }
+            }
+            self.tbl.reloadData()
+
         }
         else{
-            if(!isView)
-            {
-                let content = self.TSelectedMeal.object(at:indexPath.row) as AnyObject
-                let id = content.value(forKey: "id") as! String
-                
-                
-                if(self.SelectedMeals.contains(Int(id)))
+            let itemdata = objData[idS]
+
+             let item = objDataMael[idS]
+            maxS = itemdata.maxSelected!
+          
+            if  IdArray.contains(item[indexPath.row].id!){
+                if let index = IdArray.index(of:item[indexPath.row].id!) {
+                    IdArray.remove(at: index)
+                }
+            }else{
+                if IdArray.count == Int(maxS)
                 {
-                    //exsist meal
-                    self.SelectedMeals.remove(Int(id))
-                    self.unSelectedMeals.add(Int(id))
+                    self.showOkAlert(title: "Error".localized, message: "The max selected meal\(maxS)".localized)
+
+                    return
                 }
-                else{
-                    self.unSelectedMeals.remove(Int(id))
-                    self.SelectedMeals.add(Int(id))
-                }
-                self.selectedMealId = id
-                print("selected items:\(self.SelectedMeals)")
-                print("unselected items:\(self.unSelectedMeals)")
-                self.tbl.reloadData()
+                IdArray.append(item[indexPath.row].id!)
+                
             }
+           
+           self.tbl.reloadData()
         }
+        
     }
     
     
@@ -234,95 +293,24 @@ class SADayDetails: UIViewController ,UITableViewDelegate, UITableViewDataSource
         self.dismiss(animated: true, completion: nil)
     }
     
-    func loadDate()
-    {
-        if MyTools.tools.connectedToNetwork()
-        {
-            self.showIndicator()
-            MyApi.api.getCategoryMeals(date: self.date){(response, err) in
-                if((err) == nil)
-                {
-                    if let JSON = response.result.value as? NSDictionary
-                    {
-                        let status = JSON["status"] as? Bool
-                        if (status == true)
-                        {
-                            self.hideIndicator()
-                            
-                            let items = JSON["items"] as! NSDictionary
-                            self.TCategory = items.value(forKey: "categories") as! NSArray
-                            self.TMeals = items.value(forKey: "meals") as! NSArray
-                            
-                            let conent = self.TCategory.firstObject as AnyObject
-                            self.selectedCategory  = conent
-                            
-                            self.tbl.delegate = self
-                            self.tbl.dataSource = self
-                            self.tbl.reloadData()
-                        }
-                        else
-                        {
-                            self.hideIndicator()
-                            self.showOkAlert(title: "Error".localized, message: JSON["message"] as? String ?? "")
-                            
-                        }
-                    }
-                    else
-                    {
-                        self.hideIndicator()
-                        self.showOkAlert(title: "Error".localized, message: "An Error occurred".localized)
-                    }
-                    
-                }
-                else
-                {
-                    self.hideIndicator()
-                    self.showOkAlert(title: "Error".localized, message: "An Error occurred".localized)
-                }
-            }
-        }
-        else
-        {
-            self.showOkAlert(title: "Error".localized, message: "No Internet Connection".localized)
-        }
-    }
-    
-    func getMealsOfSelectedCategory()
-    {
-        self.TSelectedMeal = self.TMeals.filter { (obj) -> Bool in
-            let object = obj as AnyObject
-            let category_id = object.value(forKey: "category_id") as! String
-            self.SelectedMeals = []
-            return category_id == String(self.selectedCategory?.value(forKey: "id") as! Int)
-            } as NSArray
-        
-        self.SelectedMeals = []
-        for index in 0..<self.TSelectedMeal.count
-        {
-            let conent = self.TSelectedMeal.object(at:index) as AnyObject
-            let id = conent.value(forKey: "id") as! String
-            let mealID = Int(id)
-            self.SelectedMeals.add(mealID!)
-        }
-        
-        self.tbl.reloadData()
-    }
-    
+
+
+//
     @IBAction func btnSaveAction(_ sender: UIButton)
     {
         if MyTools.tools.connectedToNetwork()
         {
             self.showIndicator()
-            var arrselected : [Int] = []
+//            var arrselected : [Int] = []
+//
+//            for index in 0..<self.SelectedMeals.count
+//            {
+//                let id = self.SelectedMeals.object(at: index) as! Int
+//                arrselected.append(id)
+//            }
             
-            for index in 0..<self.SelectedMeals.count
-            {
-                let id = self.SelectedMeals.object(at: index) as! Int
-                arrselected.append(id)
-            }
             
-            
-            MyApi.api.editPlanMeals(date: self.date, category_id: Int(self.category_id)!, meal_id: arrselected, pause: 0)
+            MyApi.api.editPlanMeals(date: self.date, category_id: Int(self.category_id)!, meal_id: IdArray, pause: 2)
             { (response, err) in
                 if((err) == nil)
                 {

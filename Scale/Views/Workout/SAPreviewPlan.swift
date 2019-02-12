@@ -113,12 +113,12 @@ class SAPreviewPlan: UIViewController,UITableViewDelegate , UITableViewDataSourc
                 let vedio_obj = content.value(forKey: "vedio_obj") as! NSDictionary
                 let img = vedio_obj.value(forKey: "img_vedio") as? String ?? ""
                 
-                let name = vedio_obj.value(forKey: "muscal_name") as! String
+                let name = vedio_obj.value(forKey: "name") as! String
                 let subName = vedio_obj.value(forKey: "submuscal_name") as! String
                 let url = vedio_obj.value(forKey: "video") as! String
                 
-                cell.lblFreq.text = fereq
-                cell.lblNumber.text = number
+                cell.lblFreq.text = "Frequency count \(fereq)"
+                cell.lblNumber.text = "Number of set \(number)"
                 cell.lblmuscle.text = name
                 cell.lblSubmuscle.text = subName
                 cell.img.sd_setImage(with: URL(string: img), placeholderImage: UIImage(named: "10000-2")!, options: SDWebImageOptions.refreshCached)

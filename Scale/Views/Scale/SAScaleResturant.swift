@@ -22,9 +22,15 @@ class SAScaleResturant: UIViewController {
     @IBOutlet weak var renwView: UIView!
 
     var TItems :NSArray = []
+    var hourString = ""
     var dict : NSDictionary!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+         hourString = formatter.string(from: Date())
         
         if(Language.currentLanguage().contains("ar"))
         {
@@ -85,9 +91,15 @@ class SAScaleResturant: UIViewController {
                             self.lblDate.text = self.dict.value(forKey: "date") as! String
                             self.lblCount.text = String(self.dict.value(forKey: "count") as! Int)
                             let count = self.dict.value(forKey: "count") as! Int
-                            if count == 0{
+                            //let isEqual = date1.isEqualTo(date2)
+                           
+                            if self.hourString == self.lblDate.text{
+                                self.renwView.isHidden = false
+                            }else{
                                 self.renwView.isHidden = true
+
                             }
+                            
                         }
                         else
                         {
