@@ -62,11 +62,9 @@
 "5TB-Fb-wi9.text" = "مرحبا بك في SCALE N MORE";
 
 /* Class = "UIButton"; normalTitle = "Call Us"; ObjectID = "6D6-fY-vOb"; */
-"6D6-fY-vOb.normalTitle" = "تواصل معنا";
+"6D6-fY-vOb.normalTitle" = "اتصل بنا";
 "b0S-6N-qfR.text" = "تواصل معنا";
 "n6N-7C-x5L.text" = "الحصول عل خطة مدفوعه";
-
-"ZJK-4U-an8.text" = "شكرًا لك تم إرسال طلبك ، سنتواصل معك خلال 48 ساعة";
 
 /* Class = "UILabel"; text = "Plan Details"; ObjectID = "6PL-3h-zsr"; */
 "6PL-3h-zsr.text" = "تفاصيل الخطة";
@@ -94,9 +92,6 @@
 
 /* Class = "UIButton"; normalTitle = " Register Now"; ObjectID = "9f4-1e-KuL"; */
 "9f4-1e-KuL.normalTitle" = " سجل من هنــا ";
-"7n0-lV-vXY.normalTitle" = "موافق"
-"Y1a-27-w9g.normalTitle" = "موافق"
-
 
 /* Class = "UILabel"; text = "Workout"; ObjectID = "AIV-Nq-pmP"; */
 "AIV-Nq-pmP.text" = "التدريب";
@@ -216,7 +211,7 @@
 "Miq-U3-ddn.normalTitle" = "حجز موعد مع خبير تغذية";
 
 /* Class = "UIButton"; normalTitle = "Call Us"; ObjectID = "MlN-0x-hyt"; */
-"MlN-0x-hyt.normalTitle" = "تواصل معنا";
+"MlN-0x-hyt.normalTitle" = "اتصل بنا";
 
 /* Class = "UIButton"; normalTitle = "Discount Code"; ObjectID = "N3k-qI-7ii"; */
 "N3k-qI-7ii.normalTitle" = "كود الخصم";
@@ -265,7 +260,7 @@
 "THn-7i-fcd.text" = "Shulder";
 
 /* Class = "UIButton"; normalTitle = "Call Us"; ObjectID = "Tbr-81-mGd"; */
-"Tbr-81-mGd.normalTitle" = "تواصل معنا";
+"Tbr-81-mGd.normalTitle" = "اتصل بنا";
 
 /* Class = "UIButton"; normalTitle = "PAY"; ObjectID = "Tpp-aZ-12X"; */
 "Tpp-aZ-12X.normalTitle" = "ادفع";
@@ -421,7 +416,7 @@
 "mPs-Pe-4hW.text" = "من نحن";
 
 /* Class = "UILabel"; text = "Workout Library"; ObjectID = "mQs-3b-YBD"; */
-"mQs-3b-YBD.text" = "فيديوهات التدريب";
+"mQs-3b-YBD.text" = "مكتبة التدريب";
 
 /* Class = "UILabel"; text = "Forgot Password"; ObjectID = "mTJ-x9-gwy"; */
 "mTJ-x9-gwy.text" = "نسيت كلمة المرور";
@@ -451,7 +446,7 @@
 "pdy-wX-y9X.text" = "خطة مدفوعه";
 
 /* Class = "UILabel"; text = "Total Fees"; ObjectID = "qJJ-7t-ctO"; */
-"qJJ-7t-ctO.text" = "سعر الحجز لليوم";
+"qJJ-7t-ctO.text" = "المبلغ الاجمالي";
 
 /* Class = "UILabel"; text = "EN"; ObjectID = "qdE-kz-Tat"; */
 "qdE-kz-Tat.text" = "EN";

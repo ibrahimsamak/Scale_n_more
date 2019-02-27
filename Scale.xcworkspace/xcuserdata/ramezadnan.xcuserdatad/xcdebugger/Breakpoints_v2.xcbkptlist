@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Scale/Views/Scale/SADayDetails.swift"
-            timestampString = "571665665.580573"
+            timestampString = "572176400.191936"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "322"
-            endingLineNumber = "322"
+            startingLineNumber = "364"
+            endingLineNumber = "364"
             landmarkName = "btnSaveAction(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -42,107 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Scale/Views/Scale/SADayDetails.swift"
-            timestampString = "571665665.581174"
+            timestampString = "572176400.1926579"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "327"
-            endingLineNumber = "327"
-            landmarkName = "btnSaveAction(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Scale/Views/Scale/SADayDetails.swift"
-            timestampString = "571665665.581585"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "331"
-            endingLineNumber = "331"
-            landmarkName = "btnSaveAction(_:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Alamofire.DataResponse&lt;Any&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Scale.SADayDetails.btnSaveAction(__C.UIButton) -&gt; ()"
-                  moduleName = "Scale"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ramezadnan/Scale_n_more/Scale/Views/Scale/SADayDetails.swift"
-                  timestampString = "571665173.992951"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "331"
-                  endingLineNumber = "331"
-                  offsetFromSymbolStart = "1044">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Bool) -&gt; () in closure #1 (Alamofire.DataResponse&lt;Any&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Scale.SADayDetails.btnSaveAction(__C.UIButton) -&gt; ()"
-                  moduleName = "Scale"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ramezadnan/Scale_n_more/Scale/Views/Scale/SADayDetails.swift"
-                  timestampString = "571665173.99628"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "332"
-                  endingLineNumber = "332"
-                  offsetFromSymbolStart = "32">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Scale/Views/Scale/SADayDetails.swift"
-            timestampString = "571665665.58197"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "325"
-            endingLineNumber = "325"
-            landmarkName = "btnSaveAction(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Scale/Views/Scale/SADayDetails.swift"
-            timestampString = "571665665.5823489"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "347"
-            endingLineNumber = "347"
-            landmarkName = "btnSaveAction(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Scale/Views/Scale/SADayDetails.swift"
-            timestampString = "571665665.5827219"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "354"
-            endingLineNumber = "354"
+            startingLineNumber = "371"
+            endingLineNumber = "371"
             landmarkName = "btnSaveAction(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -154,7 +58,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Scale/MyTools/MyApi.swift"
-            timestampString = "571651750.698426"
+            timestampString = "572089658.6122169"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1051"
@@ -170,7 +74,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Scale/MyTools/MyApi.swift"
-            timestampString = "571651750.698489"
+            timestampString = "572089658.612329"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1035"
@@ -186,7 +90,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Scale/MyTools/MyApi.swift"
-            timestampString = "571651750.698547"
+            timestampString = "572089658.612388"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1053"
@@ -202,7 +106,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Scale/MyTools/MyApi.swift"
-            timestampString = "571651750.698607"
+            timestampString = "572089658.6124409"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1057"
@@ -218,7 +122,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Scale/MyTools/MyApi.swift"
-            timestampString = "571651750.69867"
+            timestampString = "572089658.612493"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1060"
@@ -234,12 +138,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Scale/Views/Scale/SADayDetails.swift"
-            timestampString = "571665665.5833631"
+            timestampString = "572176400.1933399"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "71"
-            endingLineNumber = "71"
-            landmarkName = "GetData()"
+            startingLineNumber = "295"
+            endingLineNumber = "295"
+            landmarkName = "tableView(_:didSelectRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -250,76 +154,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Scale/Views/Scale/SADayDetails.swift"
-            timestampString = "571665665.5839"
+            timestampString = "572176400.193779"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "76"
-            endingLineNumber = "76"
-            landmarkName = "GetData()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Scale/Views/Scale/SADayDetails.swift"
-            timestampString = "571665665.584229"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
-            landmarkName = "GetData()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Alamofire.DataResponse&lt;Any&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Scale.SADayDetails.GetData() -&gt; ()"
-                  moduleName = "Scale"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ramezadnan/Scale_n_more/Scale/Views/Scale/SADayDetails.swift"
-                  timestampString = "571665174.079658"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "83"
-                  endingLineNumber = "83"
-                  offsetFromSymbolStart = "3432">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Scale.AllMeal) -&gt; Swift.Bool in closure #1 (Alamofire.DataResponse&lt;Any&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Scale.SADayDetails.GetData() -&gt; ()"
-                  moduleName = "Scale"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ramezadnan/Scale_n_more/Scale/Views/Scale/SADayDetails.swift"
-                  timestampString = "571665174.083581"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "83"
-                  endingLineNumber = "83"
-                  offsetFromSymbolStart = "24">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Scale/Views/Scale/SADayDetails.swift"
-            timestampString = "571665665.584547"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "67"
-            endingLineNumber = "67"
-            landmarkName = "GetData()"
+            startingLineNumber = "285"
+            endingLineNumber = "285"
+            landmarkName = "tableView(_:didSelectRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

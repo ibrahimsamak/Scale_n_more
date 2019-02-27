@@ -22,10 +22,14 @@ class MealsCell: UITableViewCell {
         if(Language.currentLanguage().contains("ar"))
         {
             self.lblTitle.textAlignment = .right
+            self.lblDesc.textAlignment = .right
+
         }
         else
         {
             self.lblTitle.textAlignment = .left
+            self.lblDesc.textAlignment = .left
+
         }
         
     }

@@ -18,6 +18,10 @@ class MyApi
 
     func PostEditUser(name:String,email:String ,mobile:String,image:Data,
                       civil_id:String,images:[UIImage],is_24:String,video:Data , company_name:String,category_id:[Int], completion:((DataResponse<Any>,Error?)->Void)!) {
+        
+        
+        
+        
         let headers: HTTPHeaders =
             [
                 "Accept": "application/json",

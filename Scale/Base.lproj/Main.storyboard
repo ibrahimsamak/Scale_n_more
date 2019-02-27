@@ -5581,6 +5581,9 @@
                         <outlet property="lblDate" destination="dth-Av-GgF" id="sn6-1G-Xay"/>
                         <outlet property="lblpause" destination="7ON-uh-CPC" id="JPe-Ah-MiY"/>
                         <outlet property="txtDay" destination="MS7-8C-DEb" id="oHI-0w-trz"/>
+                        <outlet property="viewEditemeal" destination="VMn-IV-w4j" id="P0G-3B-dVu"/>
+                        <outlet property="viewMeals" destination="Uuw-wI-1uR" id="i4W-jJ-jUo"/>
+                        <outlet property="viewPuse" destination="zVp-KF-DM3" id="zdG-vn-fTw"/>
                         <outlet property="viewRate" destination="khY-ga-3qm" id="PwY-NQ-xsQ"/>
                     </connections>
                 </viewController>

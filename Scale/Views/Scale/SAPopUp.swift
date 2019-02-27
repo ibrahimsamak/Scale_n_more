@@ -19,6 +19,9 @@ class SAPopUp: UIViewController {
     @IBOutlet weak var lblDate: UITextField!
     @IBOutlet weak var txtDay: UITextField!
     
+    @IBOutlet weak var viewMeals: UIView!
+    @IBOutlet weak var viewEditemeal: UIView!
+    @IBOutlet weak var viewPuse: UIView!
     @IBOutlet weak var lblpause: UILabel!
     var date = ""
     var day = ""
@@ -28,26 +31,100 @@ class SAPopUp: UIViewController {
     var hourString = ""
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.lblDate.text = self.date
+        self.txtDay.text = self.day
+        
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
         hourString = formatter.string(from: Date())
         
 
         if pause == "0"{
-          lblpause.text = "Pause"
-            pause = "1"
+            if(Language.currentLanguage().contains("ar")){
+                lblpause.text = "ايقاف"
+                pause = "1"
+            }else{
+                lblpause.text = "Pause"
+                pause = "1"
+            }
+          
         }else{
-            lblpause.text = "UnPause"
-            pause = "0"
+            
+            if(Language.currentLanguage().contains("ar")){
+                lblpause.text = "الغاء الايقاف"
+                pause = "0"
+            }else{
+                lblpause.text = "UnPause"
+                pause = "0"
+            }
+           
+
+        }
+       
+        
+//        if hourString.compare(lblDate.text!) == .orderedDescending {
+//            print("First Date is greater then second date")
+//            self.viewMeals.isHidden = true
+//            self.viewPuse.isHidden = true
+//            self.viewEditemeal.isHidden = true
+//            self.viewRate.isHidden = false
+//        }else{
+//            print("First Date is not greater then second date")
+//
+//        }
+
+        
+
+        
+          //  let date = Date(timeIntervalSinceNow: 172800)
+        let date2 = Date(timeIntervalSinceNow: 86400)
+
+
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+       // let dateString = dateFormatter.string(from: date)
+        let dateString2 = dateFormatter.string(from: date2)
+//
+        if dateString2 == lblDate.text {
+            self.viewMeals.isHidden = false
+            self.viewPuse.isHidden = true
+            self.viewEditemeal.isHidden = true
+            self.viewRate.isHidden = true
+        }else if hourString == lblDate.text{
+            self.viewMeals.isHidden = false
+            self.viewPuse.isHidden = true
+            self.viewEditemeal.isHidden = true
+            self.viewRate.isHidden = true
+        }else if hourString.compare(lblDate.text!) == .orderedDescending{
+            self.viewMeals.isHidden = true
+            self.viewPuse.isHidden = true
+            self.viewEditemeal.isHidden = true
+            self.viewRate.isHidden = false
+        }else{
+                        self.viewMeals.isHidden = false
+                        self.viewPuse.isHidden = false
+                        self.viewEditemeal.isHidden = false
+                        self.viewRate.isHidden = true
 
         }
         
-        if self.hourString == self.lblDate.text{
-            self.viewRate.isHidden = false
-        }else{
-            self.viewRate.isHidden = true
-            
-        }
+        
+//        if dateString2 == lblDate.text || hourString == lblDate.text {
+//            self.viewMeals.isHidden = false
+//            self.viewPuse.isHidden = true
+//            self.viewEditemeal.isHidden = true
+//            self.viewRate.isHidden = true
+//
+//        }else{
+//            self.viewMeals.isHidden = false
+//            self.viewPuse.isHidden = false
+//            self.viewEditemeal.isHidden = false
+//            self.viewRate.isHidden = true
+//
+//        }
+//
+        
 
         
         if(Language.currentLanguage().contains("ar"))
@@ -61,8 +138,7 @@ class SAPopUp: UIViewController {
             self.txtDay.textAlignment = .left
         }
         
-        self.lblDate.text = self.date
-        self.txtDay.text = self.day
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -86,30 +162,49 @@ class SAPopUp: UIViewController {
     @IBAction func btnPause(_ sender: UIButton)
     {
         if pause == "1"{
-            self.showOkAlertWithComp(title: "Pause".localized, message: "Do you want to pause this day?".localized, completion: { (success) in
+            self.showCustomAlert(okFlag: false, title: "Pause".localized, message: "Do you want to pause this day?".localized, okTitle: "Yes".localized, cancelTitle: "No".localized)
+            {(success) in
                 if(success)
                 {
                     self.Pause()
                     self.delegate?.loadDate()
-
+                    
                     self.dismiss(animated: true, completion: nil)
-                }
-            })
+                }}
+//            self.showOkAlertWithComp(title: "Pause".localized, message: "Do you want to pause this day?".localized, completion: { (success) in
+//                if(success)
+//                {
+//                    self.Pause()
+//                    self.delegate?.loadDate()
+//
+//                    self.dismiss(animated: true, completion: nil)
+//                }
+//            })
           //  lblpause.text = "Pause"
             //pause = "1"
             // هل ترغب في ايقاف هذا اليوم
         }else{
-            self.showOkAlertWithComp(title: "Un Pause".localized, message: "Do you want to un pause this day?".localized, completion: { (success) in
+            
+            
+            self.showCustomAlert(okFlag: false, title: "Un Pause".localized, message: "Do you want to un pause this day?".localized, okTitle: "Yes".localized, cancelTitle: "No".localized)
+            {(success) in
                 if(success)
                 {
                     self.Pause()
                     self.delegate?.loadDate()
-
+                    
                     self.dismiss(animated: true, completion: nil)
-                }
-            })
-           // lblpause.text = "UnPause"
-           // pause = "0"
+                }}
+//            self.showOkAlertWithComp(title: "Un Pause".localized, message: "Do you want to un pause this day?".localized, completion: { (success) in
+//                if(success)
+//                {
+//                    self.Pause()
+//                    self.delegate?.loadDate()
+//
+//                    self.dismiss(animated: true, completion: nil)
+//                }
+//            })
+//
             
         }
 

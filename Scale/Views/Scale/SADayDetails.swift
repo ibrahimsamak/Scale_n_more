@@ -47,7 +47,8 @@ class SADayDetails: UIViewController ,UITableViewDelegate, UITableViewDataSource
         
         let nib = UINib(nibName: "SACategoryHeader", bundle: nil)
         self.tbl.register(nib, forHeaderFooterViewReuseIdentifier: "SACategoryHeader")
-        
+        tbl.rowHeight = UITableViewAutomaticDimension
+        tbl.estimatedRowHeight = 90
         if(isView){
             self.btnSave.isHidden = true
         }
@@ -174,8 +175,11 @@ class SADayDetails: UIViewController ,UITableViewDelegate, UITableViewDataSource
             let cell = tableView.dequeueReusableCell(withIdentifier: "MealsCell", for: indexPath) as! MealsCell
             
             let item = objDataMael[idS]
-        
+            
+            
             cell.lblTitle.text = item[indexPath.row].name
+            cell.lblDesc.text = item[indexPath.row].description
+
             self.category_id = item[indexPath.row].categoryID!
 //            if item[indexPath.row].selected == 1  && !IdArray.contains(item[indexPath.row].id!){
 //                IdArray.append(item[indexPath.row].id!)
@@ -252,7 +256,7 @@ class SADayDetails: UIViewController ,UITableViewDelegate, UITableViewDataSource
             return 70.0
         }
         else{
-            return 90.0
+            return UITableViewAutomaticDimension
         }
     }
     
@@ -266,21 +270,34 @@ class SADayDetails: UIViewController ,UITableViewDelegate, UITableViewDataSource
                     IdArray.append(object.id!)
                 }
             }
+            
             self.tbl.reloadData()
 
         }
+            
         else{
+            if self.isView {
+                
+            }else{
             let itemdata = objData[idS]
 
              let item = objDataMael[idS]
             maxS = itemdata.maxSelected!
-          
+//                if IdArray.count >= Int(maxS)!
+//                {
+//                    self.showOkAlert(title: "Error".localized, message: "The max selected meals is  \(maxS)".localized)
+//                    
+//                    return
+//                }
+
             if  IdArray.contains(item[indexPath.row].id!){
                 if let index = IdArray.index(of:item[indexPath.row].id!) {
                     IdArray.remove(at: index)
                 }
+                
+
             }else{
-                if IdArray.count > Int(maxS)!
+                if IdArray.count >= Int(maxS)!
                 {
                     self.showOkAlert(title: "Error".localized, message: "The max selected meals is  \(maxS)".localized)
 
@@ -288,7 +305,7 @@ class SADayDetails: UIViewController ,UITableViewDelegate, UITableViewDataSource
                 }
                 IdArray.append(item[indexPath.row].id!)
                 
-            }
+                }}
            
            self.tbl.reloadData()
         }
