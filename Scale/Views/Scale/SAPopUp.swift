@@ -79,11 +79,8 @@ class SAPopUp: UIViewController {
         
           //  let date = Date(timeIntervalSinceNow: 172800)
         let date2 = Date(timeIntervalSinceNow: 86400)
-
-
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
-       // let dateString = dateFormatter.string(from: date)
         let dateString2 = dateFormatter.string(from: date2)
 //
         if dateString2 == lblDate.text {
